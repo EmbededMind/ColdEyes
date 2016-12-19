@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{8184e270-29db-4a58-a2e4-f04e7fe129d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Wnd">
+      <UniqueIdentifier>{e05c193f-5604-4703-bcd2-10188d99112c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Control">
+      <UniqueIdentifier>{3c713c32-c12a-4375-98f0-473ab0fb78c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{d751a37b-6a22-476a-8717-e9f1975b0cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Com">
+      <UniqueIdentifier>{4c4e988b-2d9b-489b-b258-8888984ef4e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pattern">
+      <UniqueIdentifier>{243edc83-3142-4cf8-92b5-d77e9576cc3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{b409f76b-df79-4b1b-ba43-736960577724}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ColdEyes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ColdEyesDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\MainWindow.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\XUIControl.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\Camera.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\CameraManager.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\DeviceScanner.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\DeviceDetecter.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Com\Router.h">
+      <Filter>Com</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\Port.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\PortManager.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Pattern\IDataHandler.h">
+      <Filter>Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Com\SerialPort.h">
+      <Filter>Com</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ColdEyes.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ColdEyesDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\MainWindow.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\XUIControl.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\Camera.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\CameraManager.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\DeviceScanner.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\DeviceDetecter.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Com\Router.cpp">
+      <Filter>Com</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\Port.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\PortManager.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Com\SerialPort.cpp">
+      <Filter>Com</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ColdEyes.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\ColdEyes.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\ColdEyes.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

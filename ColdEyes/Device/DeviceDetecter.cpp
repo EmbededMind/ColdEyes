@@ -206,7 +206,7 @@ void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 					// 新插入的摄像头在已扫描到的结果中不存在，则重新扫描。
 					SDK_CONFIG_NET_COMMON_V2* pNetConfig  = FindDevice(mPendedMac[pos - 1]);
 					if (pNetConfig == NULL) {
-						PostThreadMessage(mLoginThreadPid, USER_MSG_SCAN_DEV, pos, 0);
+						PostThreadMessage(mLoginThreadPid, USER_MSG_SCAN_DEV, pos, (LPARAM)mPendedMac[pos-1]);
 					}
 					else {
 						CPort* pPort  = CPortManager::GetInstance()->GetPortAt(pos);
