@@ -203,6 +203,7 @@ BEGIN_MESSAGE_MAP(CColdEyesDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_WM_SIZE()
+	ON_MESSAGE(USER_MSG_FIND_DEV, &CColdEyesDlg::OnUserMsgFindDev)
 END_MESSAGE_MAP()
 
 
@@ -304,4 +305,16 @@ void CColdEyesDlg::OnSize(UINT nType, int cx, int cy)
 
 	// TODO: 在此处添加消息处理程序代码
 	UpdateLayout();
+}
+
+
+afx_msg LRESULT CColdEyesDlg::OnUserMsgFindDev(WPARAM wParam, LPARAM lParam)
+{
+	if (wParam) {
+		Print("OnFindDevice true");
+	}
+	else {
+		Print("OnFindDevice false");
+	}
+	return 0;
 }

@@ -17,8 +17,36 @@ UINT __stdcall LoginThread(PVOID pM)
 		switch (msg.message)
 		{
 			case USER_MSG_SCAN_DEV:
-				Print("Searching mac %s", pThis->mPendedMac[msg.wParam-1]);
+				{
+					Print("Searching mac %s", pThis->mPendedMac[msg.wParam - 1]);
+					char* sMac  = (char*)msg.lParam;
+					int    retByteLength;
+					BOOL ret  = H264_DVR_SearchDevice( (char*)pThis->mDeviceNetConfig, 10, &retByteLength, 5000);
 
+					if (ret) {
+						pThis->mLastScanedDeviceNumber  = retByteLength / sizeof(SDK_CONFIG_NET_COMMON_V2);
+						Print("Search %d device", pThis->mLastScanedDeviceNumber);
+
+						SDK_CONFIG_NET_COMMON_V2* pConfig  = pThis->FindDevice(sMac);
+						if ( pConfig != NULL) {
+							CCamera* pNewCamera  = new CCamera();
+							pNewCamera->SetCommonNetConfig(pConfig);
+							CPort* pPort  = CPortManager::GetInstance()->GetPortAt(msg.wParam);
+							if (pPort) {
+								if (pPort->GetBindedCamera() == NULL) {
+									pPort->BindCamera(pNewCamera);
+									PostMessage(AfxGetMainWnd()->m_hWnd, USER_MSG_FIND_DEV, true, (LPARAM)pPort);
+								}
+								else {
+									Print("Port at %d has camera", msg.wParam);
+								}
+							}
+						}
+					}
+					else {
+						Print("Search failed. Error code:%d", H264_DVR_GetLastError());
+					}
+				}								
 				break;
 			//--------------------------------------------
 		}
@@ -209,13 +237,14 @@ void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 						PostThreadMessage(mLoginThreadPid, USER_MSG_SCAN_DEV, pos, (LPARAM)mPendedMac[pos-1]);
 					}
 					else {
+						Print("Device exist :%s", mPendedMac[pos-1]);
 						CPort* pPort  = CPortManager::GetInstance()->GetPortAt(pos);
 						if (pPort) {
 							if (pPort->GetBindedCamera() == NULL) {
 								CCamera* pNewCamera  = new CCamera();
 								pNewCamera->SetCommonNetConfig(pNetConfig);
 								pPort->BindCamera(pNewCamera);
-								PostMessage(AfxGetMainWnd()->m_hWnd, USER_MSG_FIND_DEV, 0, (LPARAM)pPort);
+								PostMessage(AfxGetMainWnd()->m_hWnd, USER_MSG_FIND_DEV, true, (LPARAM)pPort);
 							}
 						}
 					}

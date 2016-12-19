@@ -24,21 +24,26 @@ private :
 
 
 public:
-
-	DeviceState  mDevicesState[PORT_MAX_NUM];
-	char         mPendedMac[PORT_MAX_NUM][40];
+	SDK_CONFIG_NET_COMMON_V2   mDeviceNetConfig[10];
+	DeviceState                mDevicesState[PORT_MAX_NUM];
+	int                        mLastScanedDeviceNumber;
+	char                       mPendedMac[PORT_MAX_NUM][40];
 
     static CDeviceDetecter* GetInstance();
 
 
-	virtual void HandleData(UINT8* pData, size_t length);
-
 	bool         CreateDetectionThread();
 	bool         CreateLoginThread();
 
+	SDK_CONFIG_NET_COMMON_V2*         FindDevice(char* mac);
+
+	virtual void HandleData(UINT8* pData, size_t length);
+
+
+
 	void         PendPortState();
 
-	SDK_CONFIG_NET_COMMON_V2*         FindDevice(char* mac);
+
 
 	bool         StartDetect();
 
@@ -75,8 +80,8 @@ private:
 	HANDLE       mLoginEventArray[2];
 
 	char         mCachedMac[40];
-	int          mLastScanedDeviceNumber;
-	SDK_CONFIG_NET_COMMON_V2 mDeviceNetConfig[10];
+
+
 
 
 	int          mCurrentPortId;

@@ -58,4 +58,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+protected:
+	afx_msg LRESULT OnUserMsgFindDev(WPARAM wParam, LPARAM lParam);
 };
