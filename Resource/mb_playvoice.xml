@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="960,469" roundcorner="10,10">
+
+	<Font shared="true" id="0" name="方正兰亭中黑_GBK" size="32"/>
+	<Font shared="true" id="1" name="方正兰亭中黑_GBK" size="30"/>
+	
+	<Default shared="true" name="Button" value="float=&quot;true&quot; font=&quot;0&quot; bkcolor=&quot;#FFACACAC&quot; focusedimage=&quot;file='image/按钮-选中.png'&quot; borderround=&quot;6,6&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default shared="true" name="Text" value="float=&quot;true&quot; font=&quot;1&quot; textcolor=&quot;#FF333333&quot; " />
+	
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<Text name="title" text="录制报警音" pos="401,40,0,0" width="200" height="30"/>
+		<Text name="contain" text="是否确认创建该录音？" pos="330,100,0,0" width="350" height="42"/>
+		<Button name="ok_btn" text="确定" pos="85,325,0,0" width="250" height="94"/>
+		<Button name="cancel_btn" text="取消" pos="355,325,0,0" width="250" height="94"/>
+		<Button name="record_btn" text="重录" pos="625,325,0,0" width="250" height="94"/>
+		<Slider name="voice_slider" float="true" pos="121,202,0,0" width="719" height="41" bkimage="file='image/mb_bkimage.png' mask='#FFE97FFF'" foreimage="file='image/mb_fore.png' mask='#FFE97FFF'" thumbsize="41,41" thumbimage="file='image/mb_thumb.png'" max="100" step="1" />
+	</VerticalLayout>
+</Window>

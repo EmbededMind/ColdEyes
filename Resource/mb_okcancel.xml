@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="610,375" roundcorner="10,10">
+
+	<Font shared="true" id="0" name="方正兰亭中黑_GBK" size="32"/>
+	
+	<Default shared="true" name="Button" value="float=&quot;true&quot; font=&quot;0&quot; bkcolor=&quot;#FFACACAC&quot; focusedimage=&quot;file='image/按钮-选中.png'&quot; borderround=&quot;6,6&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default shared="true" name="Text" value="float=&quot;true&quot; font=&quot;0&quot; textcolor=&quot;#FF333333&quot; " />
+	
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<Text name="Text1" pos="45,91,0,0" width="520" height="40"/>
+		<Text name="Text2" pos="45,131,0,0" width="520" height="40"/>
+		<Button name="ok_btn" text="确定" pos="45,251,0,0" width="250" height="94"/>
+		<Button name="cancel_btn" text="取消" pos="315,251,0,0" width="250" height="94" />
+	</VerticalLayout>
+</Window>

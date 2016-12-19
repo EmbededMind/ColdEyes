@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window  size="1600,1200">
+	<Font share="true" id="0" name="方正兰亭中黑_GBK" size="32"/>
+	<Font share="true" id="1" name="方正兰亭中黑_GBK" size="20"/>
+	<Font share="true" id="2" name="方正兰亭中黑_GBK" size="30"/>
+	<Font share="true" id="3" name="方正兰亭中黑_GBK" size="28"/>
+	<Default shared="true" name="MyButton" value="height=&quot;106&quot; textcolor=&quot;#FF666666&quot; focusedtextcolor=&quot;#FFFFFFFF&quot; font=&quot;0&quot; bkcolor=&quot;#FFFFFFFF&quot; "/>
+	<Default shared="true" name="BalloonTip" value="font=&quot;0&quot;"/>
+	
+	<Style name="treenode_folder_style" value="height=&quot;65&quot; selitemtextcolor=&quot;#FFFFFFFF&quot; itemtextcolor=&quot;#FF333333&quot;" /> 
+	<Style name="treeview_style" value="padding=&quot;24,30,25,0&quot; " />
+	
+	<HorizontalLayout name="root" >
+		<VerticalLayout bkcolor="FF4A607F">
+			<HorizontalLayout height="100" bkimage="file='Button/Title.png'">
+				<Label name="date" font="0" text="2016-07-08 10:30" textcolor="#FFFFFFFF" float="true" pos="38,36,383,64"/>
+				<Label text="自动看船开启" float="true" pos="700,36,892,66" textcolor="#FFFFFFFFF" font="0"/>
+				<Label text="已开启回家看船" float="true" pos="1226,36,1452,66" textcolor="#FF7ED321" font="0"/>
+			</HorizontalLayout>
+			<!--
+			<HorizontalLayout height="62" bkimage="file='Button/menubk.png'">
+				<Label name="menu" font="0" text="菜单" textcolor="#FFFFFFFF" float="true" pos="766,13,830,47"/>
+			</HorizontalLayout>
+			-->
+		</VerticalLayout>
+	</HorizontalLayout>
+</Window>

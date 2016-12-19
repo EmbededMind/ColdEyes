@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Window caption="0,0,0,97" size="186,86" layered="true">
+  
+  <Font shared="true" id="0" name="方正兰亭中黑_GBK" size="32"/>
+  
+  <Default shared="true" name="Button" value="float=&quot;true&quot; height=&quot;86&quot; pos=&quot;0,0,186,86&quot; font=&quot;0&quot; textpadding=&quot;110,20,20,21&quot; textcolor=&quot;#FFFFFFFF&quot; "/>
+  <VerticalLayout >
+	<Button name="bt_slow" bkimage="file='image/mark_slow.png'" />
+	<Button name="bt_fast" bkimage="file='image/mark_fast.png'" />
+  </VerticalLayout>
+</Window>

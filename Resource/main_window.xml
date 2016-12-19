@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Window size ="1440, 1080">
+  <Font share ="true" id="0" name ="黑体" size="32"/>
+
+  <VerticalLayout name="root" bkcolor="#FFF5F5F5">
+
+    
+    
+    <HorizontalLayout name="title" bkcolor="#FFDCDCDC" height="100">
+
+    </HorizontalLayout>
+
+
+
+    <HorizontalLayout name="wall" bkcolor="#FFBEBEBE">
+
+    </HorizontalLayout>
+    
+    
+    
+  </VerticalLayout>
+</Window>

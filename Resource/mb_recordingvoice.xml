@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="800,500" roundcorner="10,10">
+
+	<Font shared="true" id="0" name="方正兰亭中黑_GBK" size="28"/>
+	<Font shared="true" id="1" name="方正兰亭中黑_GBK" size="30"/>
+	<Font shared="true" id="2" name="方正兰亭中黑_GBK" size="32"/>
+	<Font shared="true" id="3" name="方正兰亭中黑_GBK" size="40"/>
+	
+	<Default shared="true" name="Button" value="float=&quot;true&quot; font=&quot;0&quot; bkcolor=&quot;#FF4198FE&quot; borderround=&quot;6,6&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default shared="true" name="Text" value="float=&quot;true&quot; font=&quot;0&quot; textcolor=&quot;#FF333333&quot; " />
+	
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<Text name="Text1" text="录制报警音" font="1" pos="321,40,0,0" width="200" height="30"/>
+		<Text name="Text2" text="按下          按键，开始录制。" pos="221,411,0,0" width="400" height="39"/>
+		<Text name="Text3" text="PPT" pos="285,411,0,0" width="200" height="39" textcolor="#FF4198FE"/>
+		<Text name="recordtime" pos="379,198,0,0" width="71" height="42" />
+		<Recordvoice name="image" float="true" pos="325,115,0,0" width="150" height="250" font="1" text="60&quot;" textpadding="54,83,0,0" valign="vtop" bkimage="file='image/recordvoice.png'" recordingimage="file='image/Oval.png' dest='65,33,85,53'"/>
+	</VerticalLayout>
+</Window>

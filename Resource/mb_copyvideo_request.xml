@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="610,375" roundcorner="10,10">
+
+	<Font shared="true" id="0" name="方正兰亭中黑_GBK" size="30"/>
+	<Font shared="true" id="1" name="方正兰亭中黑_GBK" size="32"/>
+	<Font shared="true" id="2" name="方正兰亭中黑_GBK" size="40"/>
+	
+	<Default shared="true" name="Button" value="float=&quot;true&quot; font=&quot;1&quot; bkcolor=&quot;#FF4198FE&quot; borderround=&quot;6,6&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default shared="true" name="Text" value="float=&quot;true&quot; font=&quot;0&quot; textcolor=&quot;#FF333333&quot; " />
+	
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<Text name="Text1" text="确定将:" pos="47,68,0,0" width="520" height="40"/>
+		<Text name="Text2" pos="48,120,0,0" width="520" height="40" textcolor="#FF4198FE" align="center"/>
+		<Text name="Text3" text="视频复制到U盘？" pos="47,175,0,0" width="520" height="40"/>
+		<Button name="ok_btn" text="确定" pos="180,231,0,0" width="250" height="94"/>
+	</VerticalLayout>
+</Window>

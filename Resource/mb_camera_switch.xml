@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="610,375" roundcorner="10,10">
+
+	<Font shared="true" id="0" name="方正兰亭中黑_GBK" size="32"/>
+	<Font shared="true" id="1" name="方正兰亭中黑_GBK" size="40"/>
+	
+	<Default shared="true" name="Button" value="float=&quot;true&quot; font=&quot;0&quot; bkcolor=&quot;#FFACACAC&quot; focusedimage=&quot;file='image/按钮-选中.png'&quot; borderround=&quot;6,6&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default shared="true" name="Text" value="float=&quot;true&quot; font=&quot;0&quot; textcolor=&quot;#FF333333&quot; " />
+	
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<Text name="title" text="您将关闭这台摄像机，在摄像机关闭期间：" pos="45,44,0,0" width="520" height="80"/>
+		<Text name="contain" text="1.您将无法查看摄像机;2.摄像机无法帮你看船。" pos="129,139,0,0" width="362" height="80"/>
+		<Button name="ok_btn" text="关闭摄像机" pos="45,251,0,0" width="250" height="94"/>
+		<Button name="cancel_btn" text="暂不关闭" pos="315,251,0,0" width="250" height="94"/>
+	</VerticalLayout>
+</Window>

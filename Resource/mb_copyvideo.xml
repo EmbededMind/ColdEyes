@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="610,414" roundcorner="10,10">
+
+	<Font shared="true" id="0" name="方正兰亭中黑_GBK" size="28"/>
+	<Font shared="true" id="1" name="方正兰亭中黑_GBK" size="30"/>
+	<Font shared="true" id="1" name="方正兰亭中黑_GBK" size="32"/>
+	
+	<Default shared="true" name="Button" value="float=&quot;true&quot; font=&quot;0&quot; bkcolor=&quot;#FF4198FE&quot; borderround=&quot;6,6&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default shared="true" name="Text" value="float=&quot;true&quot; font=&quot;0&quot; textcolor=&quot;#FF333333&quot; " />
+	
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<Text name="title" pos="250,30,0,0" width="150" height="40" font="1"/>
+		<Text name="subtitle" text="视频复制进度" pos="221,96,0,0" width="200" height="39" textcolor="#FF666666"/>
+		<Progress name="copy_progress" float="true" pos="56,170,0,0" width="500" height="60" bkcolor="#FFC4C4C4" foreimage="file='image/progressbk.png'" min="0" max="100" font="0" textcolor="#FF333333" valign="vcenter"/>
+		<Button name="cancel_copy" text="取消" pos="180,290,0,0" width="250" height="94"/>
+	</VerticalLayout>
+</Window>

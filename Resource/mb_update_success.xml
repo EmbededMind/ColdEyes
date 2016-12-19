@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="610,375" roundcorner="10,10">
+
+	<Font shared="true" id="0" name="方正兰亭中黑_GBK" size="32"/>
+	<Font shared="true" id="1" name="方正兰亭中黑_GBK" size="40"/>
+	
+	<Default shared="true" name="Button" value="float=&quot;true&quot; font=&quot;0&quot; bkcolor=&quot;#FF4198FE&quot; borderround=&quot;6,6&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default shared="true" name="Text" value="float=&quot;true&quot; font=&quot;0&quot; textcolor=&quot;#FF333333&quot; " />
+	
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<Text name="Text1" pos="166,140,0,0" width="300" height="40"/>
+		<Text name="Text2" text="更新成功！" pos="226,193,0,0" width="200" height="40" textcolor="#FF4198FE" />
+	</VerticalLayout>
+</Window>

@@ -1,0 +1,18 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<Window size = "800, 600" mininfo = "600,400" caption = "0, 0, 0, 32" sizebox = "4,4,4,4">
+
+<!-- 	<Style name="style_surface" value="float=&quot;true&quot; text=&quot;GGGGG&quot; pos=&quot;100,100,200,200&quot; textcolor=&quot;#FFFF0010&quot;" /> -->
+	<VerticalLayout  bkcolor = "#FFC1C1C1" bkcolor2 = "#FFAAAAAA">
+		<!--Title area-->
+		<HorizontalLayout name = "hlTitle" height = "32" bkcolor = "#FFD1EEEE">
+<!-- 			<Button name = "btnSysDateTime"     text = "1992-11-11 10:30:02" align = "center"/>
+			<Button name = "btnAutoWatchStatus" text = "自动看船开启" align = "center"/>
+		    <Button name = "btnHomeWatchStatus" text = "已开启回家看船" align = "center"/>
+		    <Button name = "btnFlashStatus"	    text = "U盘插入" align = "center"/> -->
+		</HorizontalLayout>
+
+        <HorizontalLayout name = "hlWall" bkcolor = "#FFFFBBFF">	
+           <!--  <Surface name = "mySurface" /> -->
+        </HorizontalLayout>
+  </VerticalLayout>
+</Window>

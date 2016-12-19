@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Tag 'Window' for CWallWnd -->
+<Window>
+    <!-- Root layout of CWallWnd -->
+	<VerticalLayout name = "vlSurface" bkColor = "#FF9ACD32" bkColor2 = "#FF96CDCD">
+
+
+	</VerticalLayout>
+
+</Window>

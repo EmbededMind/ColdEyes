@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="610,375" roundcorner="10,10">
+
+	<Font shared="true" id="0" name="方正兰亭中黑_GBK" size="32"/>
+	<Font shared="true" id="1" name="方正兰亭中黑_GBK" size="40"/>
+	
+	<Default shared="true" name="Button" value="float=&quot;true&quot; font=&quot;0&quot; bkcolor=&quot;#FFACACAC&quot; borderround=&quot;6,6&quot; focusedimage=&quot;file='image/按钮-选中.png'&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default shared="true" name="Text" value="float=&quot;true&quot; font=&quot;0&quot; textcolor=&quot;#FF333333&quot;" />
+	
+	<VerticalLayout bkcolor="#FFFFFFFF">
+		<Text text="软件版本              正在更新" pos="113,66,0,0" width="400" height="40"/>
+		<Text name="Text1" pos="250,66,0,0" width="115" height="40" textcolor="#FF4198FE" />
+		<Text name="Text2" text="更新成功，将重新启动主机。" pos="98,260,0,0" width="500" height="54" textcolor="#FF666666" />
+		<Progress name="update_progress" float="true" pos="56,170,0,0" width="500" height="60" bkcolor="#FFC4C4C4" foreimage="file='image/progressbk.png'" max="100" min="0" font="0" valign="vcenter" textcolor="#FF333333" text="0%"/>
+	</VerticalLayout>
+</Window>
