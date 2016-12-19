@@ -90,6 +90,27 @@
     <ClInclude Include="Com\SerialPort.h">
       <Filter>Com</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Control\KeyBoardUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\LabelExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\MenuItemUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\SliderExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\SubMenuItemUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\TimeSpanPickerUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\EditExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp">
@@ -130,6 +151,27 @@
     </ClCompile>
     <ClCompile Include="Com\SerialPort.cpp">
       <Filter>Com</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\KeyBoardUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\LabelExUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\MenuItemUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\SliderExUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\SubMenuItemUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\TimeSpanPickerUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\EditExUI.cpp">
+      <Filter>UI\Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
