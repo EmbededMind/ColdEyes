@@ -82,8 +82,9 @@
  **********************************************************************/
 #define USER_MSG_SCAN_DEV                (WM_USER + 100)
 
+#define USER_MSG_FIND_DEV                (WM_USER + 110)
 #define USER_MSG_LOGIN                   (WM_USER + 111)
-#define USER_MSG_LOGOUT                  (WM_USER + 110)
+#define USER_MSG_LOGOUT                  (WM_USER + 112)
 
 
 

@@ -15,6 +15,20 @@ CPort::~CPort()
 
 
 
+void  CPort::BindCamera(CCamera* pCamera)
+{
+	this->mCamera  = pCamera;
+}
+
+
+
+CCamera* CPort::GetBindedCamera()
+{
+	return this->mCamera;
+}
+
+
+
 UINT16 CPort::GetId()
 {
 	return this->mId;
