@@ -6,6 +6,8 @@
 #include "ColdEyes.h"
 #include "ColdEyesDlg.h"
 
+#include "NetSdk\netsdk.h"
+
 #include "DuiLib\UIlib.h"
 
 #include "MainWindow.h"
@@ -29,6 +31,11 @@ void InitConsoleWindow()
 }
 #endif
 
+
+void NetSdkInit()
+{
+
+}
 
 // CColdEyesApp
 

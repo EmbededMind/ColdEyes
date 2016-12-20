@@ -4,6 +4,12 @@
 
 #pragma once
 
+#include "WallDlg.h"
+
+//#include "UI\Wnd\WallWindow.h"
+
+
+#define GetWallWnd()     (& ((CColdEyesDlg*)AfxGetMainWnd())->mWall)
 
 // CColdEyesDlg ¶Ô»°¿ò
 class CColdEyesDlg : public CDialogEx
@@ -14,9 +20,7 @@ public:
 
 
 public:
-	
-
-
+	CWallDlg    mWall;
 
 	
 private:

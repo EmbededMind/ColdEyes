@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+#include "ColdEyesDlg.h"
+
 #include "Device\DeviceDetecter.h"
 #include "Device\PortManager.h"
 #include "Device\Camera.h"
@@ -92,30 +94,7 @@ bool CDeviceDetecter::CreateDetectionThread()
 
 bool CDeviceDetecter::CreateLoginThread()
 {
-	//if (mScanDevEvent != NULL) {
-	//	ResetEvent(mScanDevEvent);
-	//}
-	//else {
-	//	mScanDevEvent  = CreateEvent(NULL, TRUE, FALSE, NULL);
-	//}
-
-	//if (mLoginDevEvent != NULL)
-	//{
-	//	ResetEvent(mLoginDevEvent);
-	//}
-	//else {
-	//	mLoginDevEvent  = CreateEvent(NULL, TRUE, FALSE, NULL);
-	//}
-
-
-	//mLoginEventArray[0]  = mLoginEndEvent;
-	//mLoginEventArray[1]  = mLoginDevEvent;
-	//mLoginEventArray[2]  = mScanDevEvent;
-
-	//mLoginThread  = AfxBeginThread(LoginThread, this);
-	//return (mLoginThread != NULL);
-
-	mLoginThread  = (HANDLE)_beginthreadex(NULL, 0, LoginThread, NULL, 0, &mLoginThreadPid);
+	mLoginThread  = (HANDLE)_beginthreadex(NULL, 0, LoginThread, (LPVOID)this, 0, &mLoginThreadPid);
 
 	return (mLoginThread != 0);
 }
@@ -229,6 +208,7 @@ void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 			if (pos > 0 && pos <= 6) {
 				if (mDevicesState[pos - 1] == DevState_PendMac) {
 					MacNumberToStr(&pData[3], mPendedMac[pos-1]);
+					Print("Mac:%s", mPendedMac[pos-1]);
 					mDevicesState[pos-1]  = DevState_PendCamera;
 
 					// 新插入的摄像头在已扫描到的结果中不存在，则重新扫描。
@@ -244,7 +224,8 @@ void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 								CCamera* pNewCamera  = new CCamera();
 								pNewCamera->SetCommonNetConfig(pNetConfig);
 								pPort->BindCamera(pNewCamera);
-								PostMessage(AfxGetMainWnd()->m_hWnd, USER_MSG_FIND_DEV, true, (LPARAM)pPort);
+								/*PostMessage(AfxGetMainWnd()->m_hWnd, USER_MSG_FIND_DEV, true, (LPARAM)pPort);*/
+								PostMessage(GetWallWnd()->m_hWnd, USER_MSG_FIND_DEV, true, (LPARAM)pPort);
 							}
 						}
 					}
@@ -354,6 +335,8 @@ bool  CDeviceDetecter::StartDetect()
 		Print("Create tick timer failed");
 		return false;
 	}
+
+	return true;
 }
 
 

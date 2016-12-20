@@ -8,6 +8,8 @@
 #include "ColdEyesDlg.h"
 #include "afxdialogex.h"
 
+
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -92,6 +94,9 @@ void  CColdEyesDlg::UpdateLayout()
 	mTitleRect.bottom= titleHeight;
 
 	LayoutTitle(mTitleRect);
+
+	mWall.SetWindowPos(NULL, rClient.left, rClient.top + titleHeight,
+					rClient.Width(), rClient.Height() - titleHeight, SWP_NOZORDER);
 }
 
 
@@ -240,6 +245,15 @@ BOOL CColdEyesDlg::OnInitDialog()
 
 	// TODO: 在此添加额外的初始化代码
 
+
+	mWall.Create(IDD_WALL, this);
+	mWall.ShowWindow(SW_SHOW);
+
+	//pWallWindow  = new CWallWindow();
+	//pWallWindow->Create(NULL, NULL, UI_WNDSTYLE_CHILD | UI_WNDSTYLE_DIALOG, 0);
+	//pWallWindow->ShowWindow(SW_SHOW);
+
+
 	CRect r;
 	GetAdaptablePos(r);
 	SetWindowPos(NULL, r.left, r.top, r.Width(), r.Height(), 0);
@@ -304,7 +318,9 @@ void CColdEyesDlg::OnSize(UINT nType, int cx, int cy)
 	CDialogEx::OnSize(nType, cx, cy);
 
 	// TODO: 在此处添加消息处理程序代码
-	UpdateLayout();
+	if (IsWindow(mWall)) {
+		UpdateLayout();
+	}		
 }
 
 
