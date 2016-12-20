@@ -90,6 +90,7 @@
     <ClInclude Include="Com\SerialPort.h">
       <Filter>Com</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="WallDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -104,6 +105,28 @@
     </ClInclude>
     <ClInclude Include="SurfaceFrame.h">
       <Filter>源文件</Filter>
+=======
+    <ClInclude Include="UI\Control\KeyBoardUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\LabelExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\MenuItemUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\SliderExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\SubMenuItemUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\TimeSpanPickerUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\EditExUI.h">
+      <Filter>UI\Control</Filter>
+>>>>>>> dcad2a52dd72b53f5143b0c78e211da4d900ae16
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +169,7 @@
     <ClCompile Include="Com\SerialPort.cpp">
       <Filter>Com</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="WallDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -157,6 +181,28 @@
     </ClCompile>
     <ClCompile Include="SurfaceFrame.cpp">
       <Filter>源文件</Filter>
+=======
+    <ClCompile Include="UI\Control\KeyBoardUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\LabelExUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\MenuItemUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\SliderExUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\SubMenuItemUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\TimeSpanPickerUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\EditExUI.cpp">
+      <Filter>UI\Control</Filter>
+>>>>>>> dcad2a52dd72b53f5143b0c78e211da4d900ae16
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

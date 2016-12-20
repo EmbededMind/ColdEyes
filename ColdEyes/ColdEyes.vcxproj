@@ -217,6 +217,13 @@
     <ClInclude Include="SurfaceFrame.h" />
     <ClInclude Include="SurfaceWrapper.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UI\Control\EditExUI.h" />
+    <ClInclude Include="UI\Control\KeyBoardUI.h" />
+    <ClInclude Include="UI\Control\LabelExUI.h" />
+    <ClInclude Include="UI\Control\MenuItemUI.h" />
+    <ClInclude Include="UI\Control\SliderExUI.h" />
+    <ClInclude Include="UI\Control\SubMenuItemUI.h" />
+    <ClInclude Include="UI\Control\TimeSpanPickerUI.h" />
     <ClInclude Include="UI\Control\XUIControl.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -247,8 +254,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="SurfaceFrame.cpp" />
+
+    <ClCompile Include="UI\Control\EditExUI.cpp" />
+    <ClCompile Include="UI\Control\KeyBoardUI.cpp" />
+    <ClCompile Include="UI\Control\LabelExUI.cpp" />
+    <ClCompile Include="UI\Control\MenuItemUI.cpp" />
+    <ClCompile Include="UI\Control\SliderExUI.cpp" />
+    <ClCompile Include="UI\Control\SubMenuItemUI.cpp" />
+    <ClCompile Include="UI\Control\TimeSpanPickerUI.cpp" />
+
     <ClCompile Include="UI\Control\XUIControl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
