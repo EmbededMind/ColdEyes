@@ -1,5 +1,11 @@
-/Bin
 /*
+!/ColdEyes/Com
+!/ColdEyes/Device
+!/ColdEyes/Pattern
+!/ColdEyes/UI
+!/ColdEyes/*.cpp
+!/ColdEyes/*.h
+/Bin
 /Debug/*
 /ipch/*
 /Release/*
@@ -8,6 +14,7 @@
 /ColdEyes/Release/*
 /ColdEyes/res/*
 /ColdEyes/ReadMe.txt
+
 /Libs/DuiLib/*
 !/Libs/DuiLib/lib
 !/Libs/DuiLib/UIlib.h
