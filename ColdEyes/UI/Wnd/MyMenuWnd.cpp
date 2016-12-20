@@ -88,7 +88,10 @@ void CMyMenuWnd::AddAtLayout(LPCTSTR xmlName, CContainerUI* ParentLayout, UINT8 
 
 void CMyMenuWnd::SetSubMenuParent(LPCTSTR sSubMenuName, LPCTSTR sParentName)
 {
-	static_cast<CSubMenuItemUI*>(m_pm.FindControl(sSubMenuName))->SetParentMenuItem(sParentName);
+	
+	if (m_pm.FindControl(sSubMenuName)) {
+		static_cast<CSubMenuItemUI*>(m_pm.FindControl(sSubMenuName))->SetParentMenuItem(sParentName);
+	}
 }
 
 void CMyMenuWnd::MakeItemsDelegate()

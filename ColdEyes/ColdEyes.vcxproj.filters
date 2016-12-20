@@ -114,6 +114,9 @@
     <ClInclude Include="UI\Wnd\MyMenuWnd.h">
       <Filter>UI\Wnd</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Control\SwitchExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp">
@@ -178,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="UI\Wnd\MyMenuWnd.cpp">
       <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\SwitchExUI.cpp">
+      <Filter>UI\Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

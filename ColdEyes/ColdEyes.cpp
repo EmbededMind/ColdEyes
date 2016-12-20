@@ -114,7 +114,17 @@ BOOL CColdEyesApp::InitInstance()
 	using namespace DuiLib;
 
 	CPaintManagerUI::SetInstance(AfxGetInstanceHandle());
-	CPaintManagerUI::SetResourcePath(_T("..\\Resource"));
+	CPaintManagerUI::SetResourcePath(_T(UI_RESOURCE_PATH));
+
+	
+	REGIST_DUICONTROL(CMenuItemUI);
+	REGIST_DUICONTROL(CSubMenuItemUI);
+	REGIST_DUICONTROL(CKeyBoardUI);
+	REGIST_DUICONTROL(CSliderExUI);
+	REGIST_DUICONTROL(CLabelExUI);
+	REGIST_DUICONTROL(CTimeSpanPickerUI);
+	REGIST_DUICONTROL(CSwitchExUI);
+	REGIST_DUICONTROL(CEditExUI);
 
 	//CMainWindow* pMainWindow  = new CMainWindow();
 	//pMainWindow->Create(NULL, NULL, UI_WNDSTYLE_DIALOG, 0);

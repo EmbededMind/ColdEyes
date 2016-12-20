@@ -30,7 +30,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -76,6 +76,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Bin\</OutDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -218,6 +219,7 @@
     <ClInclude Include="UI\Control\MenuItemUI.h" />
     <ClInclude Include="UI\Control\SliderExUI.h" />
     <ClInclude Include="UI\Control\SubMenuItemUI.h" />
+    <ClInclude Include="UI\Control\SwitchExUI.h" />
     <ClInclude Include="UI\Control\TimeSpanPickerUI.h" />
     <ClInclude Include="UI\Control\XUIControl.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -252,6 +254,7 @@
     <ClCompile Include="UI\Control\MenuItemUI.cpp" />
     <ClCompile Include="UI\Control\SliderExUI.cpp" />
     <ClCompile Include="UI\Control\SubMenuItemUI.cpp" />
+    <ClCompile Include="UI\Control\SwitchExUI.cpp" />
     <ClCompile Include="UI\Control\TimeSpanPickerUI.cpp" />
     <ClCompile Include="UI\Control\XUIControl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

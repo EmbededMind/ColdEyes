@@ -2,7 +2,7 @@
 
 <Window>
 	<VerticalLayout >
-		<Edit name="edit_host_name" height="100" width="300" />
+		<EditEx name="edit_host_name" height="100" width="300" />
 		<KeyBoard name="keyboard" width="640" height="313" bkcolor="#FFECECEC" bindshowstring="edit_host_name" layoutsize="640,313" itembkimage="file='image/keyboard1.png'" itemfocusedimage="file='image/keyboard2.png'" itembkimage="#1,9 file='image/deleteall1.png'" itemfocusedimage="#1,9 file='image/deleteall2.png'" itembkimage="#2,9 file='image/deleteall1.png'" itemfocusedimage="#2,9 file='image/deleteall2.png'" itembkimage="#3,9 file='image/deleteall1.png'" itemfocusedimage="#3,9 file='image/deleteall2.png'" itembkimage="#3,8 file='image/delete1.png'" itemfocusedimage="#3,8 file='image/delete2.png'" itemfont="0"/> 			
 	</VerticalLayout>
 </Window>

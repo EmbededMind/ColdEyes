@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "MyMenuWnd.h"
 
 // CColdEyesDlg ¶Ô»°¿ò
 class CColdEyesDlg : public CDialogEx
@@ -14,7 +14,7 @@ public:
 
 
 public:
-	
+	CMyMenuWnd* mMenu;
 
 
 

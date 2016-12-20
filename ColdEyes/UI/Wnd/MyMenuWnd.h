@@ -9,6 +9,7 @@
 #include "UI\Control\SliderExUI.h"
 #include "UI\Control\LabelExUI.h"
 #include "UI\Control\TimeSpanPickerUI.h"
+#include "UI\Control\SwitchExUI.h"
 
 //	Parent MenuItem
 const TCHAR* const kMenuItemAlarmVideoName = _T("parent_menu_alarm_video");

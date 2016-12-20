@@ -72,8 +72,8 @@
 				<VerticalLayout	width="343" >
 					<SubMenuItem name="aw_time"			text="看船时间"			bindtablayoutname="body_auto_watch" 	bindtabindex="0" 	/>
 					<SubMenuItem name="alarm_voice"		text="报警音" 			bindtablayoutname="body_auto_watch" 	bindtabindex="1" 	/>
-					<SubMenuItem name="alarm_light" 	text="警告灯光"	 		bindtablayoutname="body_auto_watch"	bindtabindex="3"	/>
-					<SubMenuItem name="aw_on_off_record" text="看船开关记录"	bindtablayoutname="body_auto_watch"	bindtabindex="4"	/>
+					<SubMenuItem name="alarm_light" 	text="警告灯光"	 		bindtablayoutname="body_auto_watch"		bindtabindex="2"	/>
+					<SubMenuItem name="aw_on_off_record" text="看船开关记录"	bindtablayoutname="body_auto_watch"		bindtabindex="3"	/>
 				</VerticalLayout>
 				
 				<TabLayout name="body_auto_watch">

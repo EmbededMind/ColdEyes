@@ -87,6 +87,11 @@
 #define USER_MSG_LOGOUT                  (WM_USER + 112)
 
 
+ /*****************************************
+ *            Direction define            *
+ ******************************************/
+#define UI_RESOURCE_PATH           "..\\Resource"
+
 
 // Function declartion
 void IPNumberToStr(UINT8* pData, char* ip);
