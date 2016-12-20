@@ -34,6 +34,9 @@
     <Filter Include="Util">
       <UniqueIdentifier>{b409f76b-df79-4b1b-ba43-736960577724}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CRITICAL_SECTION">
+      <UniqueIdentifier>{1b6ed083-be13-4de6-9c0d-9e63a47f3538}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

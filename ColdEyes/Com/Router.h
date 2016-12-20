@@ -19,6 +19,8 @@ public:
 
 	void    AttachSender(CSerialPort* pSender);
 
+	uint32_t CRC32Software(uint8_t *pData, uint16_t Length);
+	bool CheckCRC32(uint8_t *pData, uint16_t Length);
 private:	
     CSerialPort*    mSender;
 	IDataHandler*   mHandleres[10];
@@ -28,4 +30,6 @@ private:
 
 	UINT16  mTxCursor;
 	UINT16  mRxCursor;
+
+	CRITICAL_SECTION mCS;
 };
