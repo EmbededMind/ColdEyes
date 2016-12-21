@@ -123,14 +123,6 @@ BOOL CColdEyesApp::InitInstance()
 	CPaintManagerUI::SetInstance(AfxGetInstanceHandle());
 	CPaintManagerUI::SetResourcePath(_T("..\\Resource"));
 
-	//CMainWindow* pMainWindow  = new CMainWindow();
-	//pMainWindow->Create(NULL, NULL, UI_WNDSTYLE_DIALOG, 0);
-	//pMainWindow->CenterWindow();
-	////pMainWindow->ShowWindow(SW_SHOW);
-	//pMainWindow->ShowModal();
-
-	//delete pMainWindow;
-
 	CColdEyesDlg dlg;
 	m_pMainWnd = &dlg;
 	pSerialPort->AttachWindow(m_pMainWnd);

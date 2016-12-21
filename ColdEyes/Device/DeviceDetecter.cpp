@@ -1,5 +1,6 @@
 #include "stdafx.h"
 
+#include "ColdEyes.h"
 #include "ColdEyesDlg.h"
 
 #include "Device\DeviceDetecter.h"
@@ -23,8 +24,8 @@ UINT __stdcall LoginThread(PVOID pM)
 					Print("Searching mac %s", pThis->mPendedMac[msg.wParam - 1]);
 					char* sMac  = (char*)msg.lParam;
 					int    retByteLength;
-					BOOL ret  = H264_DVR_SearchDevice( (char*)pThis->mDeviceNetConfig, 10, &retByteLength, 5000);
 
+					BOOL ret  = H264_DVR_SearchDevice( (char*)pThis->mDeviceNetConfig, sizeof(SDK_CONFIG_NET_COMMON_V2)*10, &retByteLength, 5000);
 					if (ret) {
 						pThis->mLastScanedDeviceNumber  = retByteLength / sizeof(SDK_CONFIG_NET_COMMON_V2);
 						Print("Search %d device", pThis->mLastScanedDeviceNumber);
@@ -34,23 +35,53 @@ UINT __stdcall LoginThread(PVOID pM)
 							CCamera* pNewCamera  = new CCamera();
 							pNewCamera->SetCommonNetConfig(pConfig);
 							CPort* pPort  = CPortManager::GetInstance()->GetPortAt(msg.wParam);
-							if (pPort) {
+							if (pPort)  {
 								if (pPort->GetBindedCamera() == NULL) {
 									pPort->BindCamera(pNewCamera);
-									PostMessage(AfxGetMainWnd()->m_hWnd, USER_MSG_FIND_DEV, true, (LPARAM)pPort);
+
+									CWnd* pMain  = ((CColdEyesApp*)AfxGetApp())->m_pMainWnd;
+									HWND  hWall  = ((CColdEyesDlg*)pMain)->mWall;
+
+									if (hWall) {
+										PostMessage(hWall, USER_MSG_FIND_DEV, true, (LPARAM)pPort);
+									}
+									else {
+										Print("Wallgg");
+									}																				
 								}
 								else {
 									Print("Port at %d has camera", msg.wParam);
 								}
 							}
 						}
+						else {
+							Print("Have no matched mac");
+						}
 					}
 					else {
 						Print("Search failed. Error code:%d", H264_DVR_GetLastError());
 					}
-				}								
+				}
 				break;
-			//--------------------------------------------
+				//-----------------------------------------------------------
+			case USER_MSG_LOGIN: 
+				{
+					HWND hWnd  = (HWND)msg.wParam;
+					CPort* pPort  = (CPort*)msg.lParam;
+					CCamera* pCamera  = pPort->GetBindedCamera();
+
+					ASSERT(pCamera != NULL);
+
+					if (pCamera->Login()) {
+						PostMessage(hWnd, USER_MSG_LOGIN, true, msg.lParam);
+					}
+					else {
+						PostMessage(hWnd, USER_MSG_LOGIN, false, msg.lParam);
+					}
+				}
+
+				break;	
+				//-----------------------------------------------------------						
 		}
 		DispatchMessage(&msg);
 	}
@@ -63,6 +94,9 @@ CDeviceDetecter::CDeviceDetecter()
 {	
 	memset(mDevicesState, 0, sizeof(mDevicesState));
 	mLiDueTime.QuadPart  = -10000000 * TICK_ELAPSE_SEC;
+
+	mDevicesState[0]  = DevState_PendMac;
+	strcpy_s(mPendedMac[0], "00:12:16:7a:6c:a9");
 }
 
 
@@ -151,6 +185,13 @@ CDeviceDetecter* CDeviceDetecter::GetInstance()
 
 
 
+UINT CDeviceDetecter::GetLoginThreadPid()
+{
+	return this->mLoginThreadPid;
+}
+
+
+
 void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 {
 	if (mIsNeedAck) {
@@ -161,6 +202,7 @@ void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 	int cmd  = pData[0];
 	int param  = pData[1];
 
+	Print("Detecter get data, param:%d", param) ;
 	// 
 	if (cmd == 0x05) {
 		// 端口状态信息
@@ -207,9 +249,20 @@ void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 			int pos  = pData[2];
 			if (pos > 0 && pos <= 6) {
 				if (mDevicesState[pos - 1] == DevState_PendMac) {
-					MacNumberToStr(&pData[3], mPendedMac[pos-1]);
-					Print("Mac:%s", mPendedMac[pos-1]);
-					mDevicesState[pos-1]  = DevState_PendCamera;
+					//MacNumberToStr(&pData[3], mPendedMac[pos-1]);
+			
+					//mDevicesState[pos-1]  = DevState_PendCamera;
+					Print("Mac:%s", mPendedMac[pos - 1]);
+					CPort* pPort = CPortManager::GetInstance()->GetPortAt(pos);
+					if (pPort->GetId() == 0) {
+						pPort->SetId(CPortManager::GetInstance()->AllocId());
+						if (pPort->GetId() == 0) {
+							Print("Port id alloc failed");
+						}
+						else {
+							Print("Alloc %d for port as id", pPort->GetId());
+						}
+					}
 
 					// 新插入的摄像头在已扫描到的结果中不存在，则重新扫描。
 					SDK_CONFIG_NET_COMMON_V2* pNetConfig  = FindDevice(mPendedMac[pos - 1]);
@@ -218,14 +271,14 @@ void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 					}
 					else {
 						Print("Device exist :%s", mPendedMac[pos-1]);
-						CPort* pPort  = CPortManager::GetInstance()->GetPortAt(pos);
+						
 						if (pPort) {
 							if (pPort->GetBindedCamera() == NULL) {
 								CCamera* pNewCamera  = new CCamera();
 								pNewCamera->SetCommonNetConfig(pNetConfig);
 								pPort->BindCamera(pNewCamera);
-								/*PostMessage(AfxGetMainWnd()->m_hWnd, USER_MSG_FIND_DEV, true, (LPARAM)pPort);*/
-								PostMessage(GetWallWnd()->m_hWnd, USER_MSG_FIND_DEV, true, (LPARAM)pPort);
+								
+								PostMessage(GetWallWnd->m_hWnd, USER_MSG_FIND_DEV, true, (LPARAM)pPort);
 							}
 						}
 					}
@@ -235,43 +288,6 @@ void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 	}
 }
 
-
-
-
-/*
-UINT CDeviceDetecter::LoginThread(LPVOID p)
-{
-	CDeviceDetecter* pThis  = (CDeviceDetecter*)p;
-
-	pThis->mIsLoginThreadAlive  = true;
-
-	DWORD Event  = 0;
-
-	for (;;) {
-	   Event  = WaitForMultipleObjects(2, pThis->mLoginEventArray, FALSE, INFINITE);
-	   switch (Event) {
-			case 0: 
-			break;
-
-			case 1: 
-			break;
-
-			case 2: 
-			{
-			
-				for (int i = 0; i < PORT_MAX_NUM; i++) {
-					if (pThis->mDevicesState[i] == DevState_PendCamera) {
-
-					}
-				}
-			}
-			break;
-	   }
-	}
-
-	return 0;
-}
-*/
 
 
 void CDeviceDetecter::PendPortState()
@@ -287,6 +303,9 @@ SDK_CONFIG_NET_COMMON_V2* CDeviceDetecter::FindDevice(char* mac)
 	for (int i = 0; i < mLastScanedDeviceNumber; i++) {
 		if (strcmp(mDeviceNetConfig[i].sMac, mac) == 0) {
 			return &mDeviceNetConfig[i];
+		}
+		else {
+			Print("Cmp mac %s", mDeviceNetConfig[i].sMac);
 		}
 	}
 

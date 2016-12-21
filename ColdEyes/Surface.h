@@ -4,6 +4,8 @@
 
 #include "Device\Port.h"
 
+#include "NetSdk\H264Play.h"
+
 class CSurface : public CWnd
 {
 	DECLARE_DYNAMIC(CSurface)
@@ -15,17 +17,33 @@ public:
 
 public:
 	void            BindPort(CPort* pPort);
+	bool            IsRealPlaying();
+	long            GetPlayPort();
+	void            OnCameraLogin();
 	void            SetPos();
 	void            SetPos(CRect& r);
 
 protected:
-	CSurfaceFrame   mFrame;
-	bool            mIsLargeMode;
-	CRect           mSplitPos;
+	H264_DVR_CLIENTINFO mClientInfo;
+	bool                mHaveConnectRealPlay;
+	bool                mIsLargeMode;
+	bool                mIsRealPlaying;
+	CPort*              mPort;
+	CSurfaceFrame       mFrame;
+	OSD_INFO_TXT        mOsdText;
+	int                 mOsdTextIndex;
+	long                mPlayPort;
+	CRect               mSplitPos;
+
+	long                mRealPlayHandle;
+
+	bool            ConnectRealPlay();
+	bool            DisconnectRealPlay();
+
+
 
 	BOOL            RegisterWindowClass(HINSTANCE hInstance = NULL);
 
-private:
-	CPort*          mPort;
-
+	bool            StartRealPlay();
+	bool            StopRealPlay();
 };

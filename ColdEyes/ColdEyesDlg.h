@@ -9,7 +9,7 @@
 //#include "UI\Wnd\WallWindow.h"
 
 
-#define GetWallWnd()     (& ((CColdEyesDlg*)AfxGetMainWnd())->mWall)
+#define GetWallWnd      (&(((CColdEyesDlg*)AfxGetMainWnd())->mWall))
 
 // CColdEyesDlg ¶Ô»°¿ò
 class CColdEyesDlg : public CDialogEx

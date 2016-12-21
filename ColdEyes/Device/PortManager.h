@@ -13,6 +13,8 @@ private:
 public:
 	static CPortManager* GetInstance();
 
+
+	UINT16 AllocId();
 	CPort* GetPortAt(int pos);
 
 
