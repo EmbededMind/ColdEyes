@@ -217,6 +217,7 @@
     <ClInclude Include="UI\Control\KeyBoardUI.h" />
     <ClInclude Include="UI\Control\LabelExUI.h" />
     <ClInclude Include="UI\Control\MenuItemUI.h" />
+    <ClInclude Include="UI\Control\OptionExUI.h" />
     <ClInclude Include="UI\Control\SliderExUI.h" />
     <ClInclude Include="UI\Control\SubMenuItemUI.h" />
     <ClInclude Include="UI\Control\SwitchExUI.h" />
@@ -252,6 +253,7 @@
     <ClCompile Include="UI\Control\KeyBoardUI.cpp" />
     <ClCompile Include="UI\Control\LabelExUI.cpp" />
     <ClCompile Include="UI\Control\MenuItemUI.cpp" />
+    <ClCompile Include="UI\Control\OptionExUI.cpp" />
     <ClCompile Include="UI\Control\SliderExUI.cpp" />
     <ClCompile Include="UI\Control\SubMenuItemUI.cpp" />
     <ClCompile Include="UI\Control\SwitchExUI.cpp" />

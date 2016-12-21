@@ -29,6 +29,15 @@ DECLARE_DUICONTROL(CTimeSpanPickerUI)
 	void SetTime(DWORD beginTime, DWORD endTime);
 	void GetTime(DWORD* pBegining, DWORD* pEnd);
 
+	template <class O, class T>
+	void ItemMakeDelegate(O* pObject, bool (T::* pFn)(void*))
+	{
+		pBeginHour->OnEvent += MakeDelegate(pObject, pFn);
+		pEndHour->OnEvent += MakeDelegate(pObject, pFn);
+		pBeginMinute->OnEvent += MakeDelegate(pObject, pFn);
+		pEndMinute->OnEvent += MakeDelegate(pObject, pFn);
+	}
+
 private:
 	int mFocusedIndex;
 

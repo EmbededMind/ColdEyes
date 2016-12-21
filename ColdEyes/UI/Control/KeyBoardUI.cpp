@@ -113,7 +113,12 @@ void CKeyBoardUI::DoEvent(TEventUI & event)
 		break;
 
 	case UIEVENT_SETFOCUS:
+		m_focusInx = 0;
 		m_pKeyElement[0]->SetFocus();
+		break;
+
+	case UIEVENT_KILLFOCUS:
+		Print("kill focus");
 		break;
 	}
 	__super::DoEvent(event);
@@ -277,6 +282,7 @@ bool CKeyBoardUI::OnKeyClickedListener(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
 	CButtonUI* pSender = (CButtonUI*)pMsg->pSender;
+	if (!pSender) return false;
 	CDuiString text = pSender->GetText();
 	switch (pMsg->Type) {
 	case UIEVENT_BUTTONDOWN:
@@ -328,6 +334,9 @@ bool CKeyBoardUI::OnKeyClickedListener(void * param)
 			}
 			break;
 		case VK_BACK:
+			m_pShowControl->SetFocus();
+			SetVisible(false);
+			return false;
 			break;
 		default:
 			break;

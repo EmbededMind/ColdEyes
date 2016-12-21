@@ -125,6 +125,7 @@ BOOL CColdEyesApp::InitInstance()
 	REGIST_DUICONTROL(CTimeSpanPickerUI);
 	REGIST_DUICONTROL(CSwitchExUI);
 	REGIST_DUICONTROL(CEditExUI);
+	REGIST_DUICONTROL(COptionExUI);
 
 	//CMainWindow* pMainWindow  = new CMainWindow();
 	//pMainWindow->Create(NULL, NULL, UI_WNDSTYLE_DIALOG, 0);

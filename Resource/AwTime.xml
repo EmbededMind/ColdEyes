@@ -4,7 +4,7 @@
 	<VerticalLayout >
 		<Label text="看船时间段" font="3" height="80" textpadding="325,21,325,20" bkcolor="#FFE5E3E3" textcolor="FF333333" />
 		<Text text="看船时间段" font="3" textpadding="45,20,0,0" textcolor="#FF666666"/>
-		<TimeSpanPicker float="true" pos="58,229,0,0" height="174" width="674" bkcolor="#FF556677" itemfocusedimage="file='image/Group.png'" itemfont="4" focusedtextcolor="#FFFFFFFFF"/>
+		<TimeSpanPicker name="time_span_picker_aw" float="true" pos="58,229,0,0" height="174" width="674" bkcolor="#FF556677" itemfocusedimage="file='image/Group.png'" itemfont="4" focusedtextcolor="#FFFFFFFFF"/>
 		<Text text="本时间段开启报警" font="2" textpadding="283,139,0,0" textcolor="#FF9B9B9B" />
 		<Label name="morrow" visible="false" float="true" pos="588,404,0,0" width="89" height="45" borderround="4,4" bkcolor="#FFFF0000" font="3" textcolor="#FFFFFFFF" align="center" text="次日"/>
 	</VerticalLayout>

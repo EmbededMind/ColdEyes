@@ -16,9 +16,23 @@ void CSwitchExUI::DoEvent(TEventUI & event)
 {
 	switch (event.Type)
 	{
-	case UIEVENT_KEYDOWN:
-		//m_pManager->SendNotify(this,DUI_MSGTYPE_SWITCH,event.wParam,event.lParam);
-		break;
+	//case UIEVENT_KEYDOWN:
+	//	switch (event.wParam) {
+	//	case VK_LEFT:
+	//		if (mValue == true) {
+	//			mValue = false;
+	//			Invalidate();
+	//		}
+	//		break;
+
+	//	case VK_RIGHT:
+	//		if (mValue == false) {
+	//			mValue = true;
+	//			Invalidate();
+	//		}
+	//		break;
+	//	}
+	//	break;
 
 	case UIEVENT_SETFOCUS:
 		SetBkColor(0xFF4198FE);

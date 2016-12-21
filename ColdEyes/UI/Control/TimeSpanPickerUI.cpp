@@ -94,6 +94,7 @@ void CTimeSpanPickerUI::DoEvent(TEventUI & event)
 		mFocusedIndex = GetItemIndex(m_pManager->GetFocus());
 		switch (event.wParam) {
 		case VK_LEFT:
+			Print("left");
 			if (mFocusedIndex > 0) {
 				mFocusedIndex -= 2;
 				GetItemAt(mFocusedIndex)->SetFocus();
@@ -105,6 +106,10 @@ void CTimeSpanPickerUI::DoEvent(TEventUI & event)
 				mFocusedIndex += 2;
 				GetItemAt(mFocusedIndex)->SetFocus();
 			}
+			break;
+
+		default:
+			__super::DoEvent(event);
 			break;
 		}
 		break;
@@ -292,3 +297,4 @@ void CTimeSpanPickerUI::GetTime(DWORD * pBegining, DWORD * pEnd)
 	*pBegining = tBegin;
 	*pEnd = tEnd;
 }
+

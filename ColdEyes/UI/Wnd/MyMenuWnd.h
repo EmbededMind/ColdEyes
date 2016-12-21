@@ -10,6 +10,7 @@
 #include "UI\Control\LabelExUI.h"
 #include "UI\Control\TimeSpanPickerUI.h"
 #include "UI\Control\SwitchExUI.h"
+#include "UI\Control\OptionExUI.h"
 
 //	Parent MenuItem
 const TCHAR* const kMenuItemAlarmVideoName = _T("parent_menu_alarm_video");
@@ -38,6 +39,26 @@ const TCHAR* const kBodyLayoutVideoObtain = _T("body_video_obtain");
 const TCHAR* const kEditCtlHostNameName = _T("edit_host_name");
 const TCHAR* const kKeyboardName = _T("keyboard");
 
+//auot time
+const TCHAR* const kTimeSpanPickerAwName = _T("time_span_picker_aw");
+
+//sysset
+const TCHAR* const kSysBrightName = _T("sysset_brightness");
+const TCHAR* const kSysVolumeName = _T("sysset_volume");
+const TCHAR* const kSysVersionName = _T("sysset_version");
+const TCHAR* const kSysFactoryName = _T("sysset_factory");
+const TCHAR* const kSysHostModelName = _T("sysset_host_model");
+const TCHAR* const kSysSerialNumberName = _T("sysset_host_series_number");
+
+//alarm voice
+const TCHAR* const kSwitchAlarmVoiceName = _T("switch_alarm_voice");
+const TCHAR* const kOptionAlarmVoiceDefaultName = _T("voice_default");
+const TCHAR* const kOptionAlarmVoiceRecordName = _T("voice_record");
+const TCHAR* const kBtAlarmVoiceRecordName = _T("record_btn");
+const TCHAR* const kAlarmVoiceGroupName = _T("grop_alarm_voice");
+
+//alarm light
+const TCHAR* const kAlarmLightName = _T("switch_alarm_light");
 
 using namespace DuiLib;
 
@@ -63,8 +84,36 @@ public:
 	void MakeItemsDelegate();	//控件委托函数初始化
 	void SubMenuMakeDelegate(const TCHAR* const Name);	//二级子控件委托
 
-	// item Delegate
+	/************ Delegate Functions****************/
 	bool OnSubMenuItem(void*param);
+	bool OnHostName(void* param);
+
+	bool OnAlarmFileList(void* param);
+	bool OnNormalFileList(void* param);
+
+	bool OnCameraName(void* param);
+	bool OnCameraVolume(void* param);
+	bool OnCameraSwitch(void* param);
+	bool OnCameraStore(void* param);
+	bool OnCameraAutoWatch(void* param);
+
+	bool OnSysBrightness(void* param);
+	bool OnSysVolume(void* param);
+	bool OnSysVersion(void* param);
+	bool OnFactorySet(void* param);
+	bool OnSysHostModel(void* parma);
+	bool OnSysSerialNumber(void* param);
+
+	bool OnAwTime(void* param);
+	bool OnAlarmVoiceSwitch(void* param);
+	bool OnAlarmVoiceOption(void* param);
+	bool OnAlarmVoiceRecord(void* param);
+	bool OnAlarmLight(void* param);
+	bool OnRecords(void* param);
+	bool OnHome(void* param);
+
+	
+
 
 	//Add SubMenuItem
 	void  AddAlarmMenuItem();		//报警视频
@@ -75,6 +124,9 @@ public:
 	void  DeleteAlarmMenuItem();
 	void  DeleteVideoObtainMenuItem();
 	void  DeletePortConfigMenuItem();
+
+	//Sets is change
+	bool AlarmVoideIsChange();
 
 private:
 	int mDPI;

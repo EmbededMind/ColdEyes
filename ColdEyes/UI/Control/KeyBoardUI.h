@@ -49,6 +49,7 @@ DECLARE_DUICONTROL(CKeyBoardUI)
 	void SetShowStringControlText(CDuiString text);
 
 	bool OnKeyClickedListener(void* param);
+	
 
 private:
 	SIZE m_Size;

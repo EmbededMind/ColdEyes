@@ -9,7 +9,7 @@
 	<Font shared="true" id="3" name="方正兰亭中黑_GBK" size="28"/>
 	<Font shared="true" id="4" name="方正兰亭中黑_GBK" size="64"/>
 	<Font shared="true" id="5" name="方正兰亭中黑_GBK" size="36"/>
-	
+	<Font shared="true" id="6" name="方正兰亭中黑_GBK" size="24"/>
 	
 	<Default shared="true" name="MenuItem" value="height=&quot;106&quot; focusedbkcolor=&quot;#FF4198FE&quot; textcolor=&quot;#FF666666&quot; focusedtextcolor=&quot;#FFFFFFFF&quot; font=&quot;0&quot; bkcolor=&quot;#FFFFFFFF&quot; " />
 	<Default shared="true" name="SubMenuItem" value="height=&quot;106&quot; focusedbkcolor=&quot;#FF4198FE&quot; textcolor=&quot;#FF666666&quot; focusedtextcolor=&quot;#FFFFFFFF&quot; font=&quot;0&quot; bkcolor=&quot;#FFFFFFFF&quot; " />
@@ -17,10 +17,12 @@
 	<Default shared="true" name="Control" value="height=&quot;2&quot; bkcolor=&quot;#FFBABABA&quot;" />  
 	<Default shared="true"  name="LabelEx" value="float=&quot;true&quot; textpadding=&quot;45,0,0,0&quot; font=&quot;3&quot; align=&quot;left&quot; bkcolor=&quot;#FFF3F3F3&quot; focusbkcolor=&quot;#FF4198FE&quot; textcolor=&quot;#FF666666&quot; focusedtextcolor=&quot;#FFFFFFFF&quot; statetextcolor=&quot;#FF4198FE&quot; statetextfocuscolor=&quot;#FFFFFFFF&quot;"/>
 	<Default shared="true" name="TimeSpanPicker" value="width=&quot;91&quot; focusedimage=&quot;file='image/Group.png'&quot; font=&quot;4&quot; textpadding=&quot;2,0,0,0&quot;" />
+	<Default shared="true" name="OptionEx" value="font=&quot;6&quot; group=&quot;grop_alarm_voice&quot; foucsedselimage=&quot;file='image/alarm_voice_focused_sel.png'&quot; focusedunselimage=&quot;file='image/alarm_voice_focused_unsel.png'&quot; nofocusedselimage=&quot;file='image/alarm_voice_nofocused_sel.png'&quot; nofocusedunselimage=&quot;file='image/alarm_voice_nofocused_unsel.png'&quot; " />
 	
 	<Style name="key_board_childlayout" value="padding=&quot;20,0,0,0&quot; height=&quot;67&quot; "/>
 	<Style name="key_board_key" value="height=&quot;67&quot; width=&quot;60&quot; font=&quot;0&quot; focusedtextcolor=&quot;#FFFFFFFF&quot; focusedimage=&quot;file='image/keyboard2.png'&quot; normalimage=&quot;file='image/keyboard1.png'&quot;  bkcolor=&quot;#FFECECEC&quot; "/>
 	<Style name="time_span_picker" value="width=&quot;91&quot; " />
+	<Style name="style_alarm_voice" value="height=&quot;80&quot; normalimage=&quot;&quot; focusedimage=&quot;&quot; selectedimage=&quot;&quot; " />
 	
 	
 	<HorizontalLayout name="root">

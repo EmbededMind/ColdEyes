@@ -4,14 +4,16 @@
 	<VerticalLayout>	
 		<Label text="系统设置" font="3" height="80" textpadding="339,21,339,20" bkcolor="#FFE5E3E3" textcolor="#FF333333" />
 		<Label text="亮度调节" font="3" height="68" textpadding="45,20,633,10" bkcolor="#FFF3F3F3" textcolor="#FF666666"/>
-		<SliderEx name="sysset_light" float="true" pos="178,176,0,0" bkimage="file='image/slider_bk.png' dest='102,7,682,75' " bkimagerect="580,68" invalidrect="790,80" focusedbkcolor="#FF4198FE" />
-		<Control float="true" pos="45,246,745,248" />
+		<Label name="bk_light" float="true" pos="0,148,790,80" bkimage="file='image/slider_light_bk.png'" height="80" /> 
+		<SliderEx name="sysset_brightness" enabled="false" pos="174,174,0,0"  bindbk="bk_light" bindbkimage="file='image/slider_light_bk.png'" focusedbkimage="file='image/slider_light_focusedbk.png'"/>
+		<Control float="true" pos="45,246,745,248" /> 
 		<Label text="音量调节" font="3" float="true" pos="45,268,157,307"  bkcolor="#FFF3F3F3" textcolor="#FF666666"/>
-		<SliderEx name="sysset_voice" float="true" pos="178,344,0,0" bkimage="file='image/volumbk.png' dest='102,7,682,75' " focusedbkcolor="#FF4198FE"  />
+		<Label name="bk_volume" float="true" pos="0,320,790,80" bkimage="file='image/slider_volum_bk.png'" height="80" />
+		<SliderEx name="sysset_volume"  pos="178,344,0,0" bindbk="bk_volume" bindbkimage="file='image/slider_volum_bk.png'" min="0" max="10" focusedbkimage="file='image/slider_volum_focusedbk.png'"  />
 		<Control float="true" pos="45,414,745,416" />
 		<LabelEx name="sysset_version" pos="0,426,790,506" text="软件版本：V1.0.0"  statedisabletext="更新"/>
 		<Control float="true" pos="45,516,745,518" />
-		<LabelEx name="sysset_reset" pos="0,528,790,608" text="恢复出厂设置"  statedisabletext="开启"/>
+		<LabelEx name="sysset_factory" pos="0,528,790,608" text="恢复出厂设置"  statedisabletext="开启"/>
 		<Control float="true" pos="45,618,745,620" />
 		<LabelEx name="sysset_host_model" pos="0,630,790,710" text="主机型号"/>
 		<Control float="true" pos="45,720,745,722" />
