@@ -190,9 +190,9 @@ bool CSurface::StartRealPlay()
 
 		mIsRealPlaying  = true;
 	}
-	else {		
-		return false;
-	}
+		
+	return false;
+
 }
 
 

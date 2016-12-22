@@ -17,6 +17,11 @@
 #include "Com\SerialPort.h"
 #include "Device\DeviceDetecter.h"
 
+
+#include "Database\DBHelper.h"
+
+#include "Config\SystemConfig.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -100,6 +105,11 @@ BOOL CColdEyesApp::InitInstance()
 	InitConsoleWindow();
 #endif
 
+	CDBHelper& DBHelper  = CDBHelper::GetInstance();
+	if(DBHelper.OpenDatabase("cold_eyes.db")){
+		CSystemConfig& config  = CSystemConfig::GetInstance();
+		config.CommitUpdate();
+	}
 	
 	CSerialPort* pSerialPort  = CSerialPort::GetInstance(COM_103);
 
