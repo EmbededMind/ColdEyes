@@ -34,6 +34,9 @@
     <Filter Include="Util">
       <UniqueIdentifier>{b409f76b-df79-4b1b-ba43-736960577724}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CRITICAL_SECTION">
+      <UniqueIdentifier>{1b6ed083-be13-4de6-9c0d-9e63a47f3538}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -90,6 +93,12 @@
     <ClInclude Include="Com\SerialPort.h">
       <Filter>Com</Filter>
     </ClInclude>
+    <ClInclude Include="Talk\Talk.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Talk\IState.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp">
@@ -130,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="Com\SerialPort.cpp">
       <Filter>Com</Filter>
+    </ClCompile>
+    <ClCompile Include="Talk\Talk.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Talk\IState.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
