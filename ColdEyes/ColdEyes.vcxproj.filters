@@ -28,6 +28,7 @@
     <ClCompile Include="Database\DBHelper.cpp" />
     <ClCompile Include="Database\SQLiteWrapper.cpp" />
     <ClCompile Include="Config\SystemConfig.cpp" />
+    <ClCompile Include="Config\PortConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ColdEyes.h" />
@@ -62,6 +63,7 @@
     <ClInclude Include="Database\DBHelper.h" />
     <ClInclude Include="Database\sqlitewrapper.h" />
     <ClInclude Include="Config\SystemConfig.h" />
+    <ClInclude Include="Config\PortConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ColdEyes.rc" />

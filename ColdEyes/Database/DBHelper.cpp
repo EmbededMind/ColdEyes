@@ -91,6 +91,19 @@ void CDBHelper::Update(char* tab, char* context)
 
 
 
+void CDBHelper::Update(char* tab, char* context, char* condition)
+{
+	char sqlStmt[128];
+
+	sprintf_s(sqlStmt, "UPDATE %s SET %s WHERE %s;", tab, context, condition);
+
+	if (!sqlite.DirectStatement(sqlStmt)) {
+		Print("Sql error:%s", sqlStmt);
+	}
+}
+
+
+
 SQLiteStatement* CDBHelper::Query(char* tab, char* target)
 {
 	char sqlStmt[128];

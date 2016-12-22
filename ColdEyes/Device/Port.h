@@ -3,6 +3,7 @@
 #include "stdafx.h"
 
 #include "Device\Camera.h"
+#include "Config\PortConfig.h"
 
 class CPort
 {
@@ -12,8 +13,12 @@ public:
 
 
 public:
+	CPortConfig mConfig;
+	UINT16      mPos;
 
 	void         BindCamera(CCamera* pCamera);
+
+	void         CommitUpdate();
 
 	CCamera*     GetBindedCamera();
 	UINT16		 GetId();
@@ -31,9 +36,11 @@ public:
 
 
 private:
-	UINT16     mId;
-	UINT16     mNameIndex;
-	char       mMac[20];
+	UINT16      mId;
 
-	CCamera*   mCamera;
+	UINT16      mNameIndex;
+	char        mMac[20];
+
+	CCamera*    mCamera;
+
 };

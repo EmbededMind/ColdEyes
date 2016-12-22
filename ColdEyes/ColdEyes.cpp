@@ -22,6 +22,8 @@
 
 #include "Config\SystemConfig.h"
 
+#include "Device\Port.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -107,8 +109,10 @@ BOOL CColdEyesApp::InitInstance()
 
 	CDBHelper& DBHelper  = CDBHelper::GetInstance();
 	if(DBHelper.OpenDatabase("cold_eyes.db")){
-		CSystemConfig& config  = CSystemConfig::GetInstance();
-		config.CommitUpdate();
+		CPort Port;	
+		Port.mPos  = 2;
+		Port.SetId(1);
+		Port.CommitUpdate();
 	}
 	
 	CSerialPort* pSerialPort  = CSerialPort::GetInstance(COM_103);

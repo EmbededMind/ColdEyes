@@ -20,6 +20,7 @@ public:
 	bool   Insert(char* tab, int n, ...);
 	bool   OpenDatabase(char * dbFileName);
 	void   Update(char* tab, char* context);
+	void   Update(char* tab, char* context, char* condition);
 	SQLiteStatement* Query(char* tab, char* target);
 	SQLiteStatement* Query(char* tab, char* target, char* condition);
 };
