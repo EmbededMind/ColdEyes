@@ -301,6 +301,7 @@ BOOL CSerialPort::InitPort(CWnd* pPortOwner,    // the owner (CWnd) of the port 
 {
 	//assert(portnr > 0 && portnr < 5);//Del by wl 20120612
 	m_pOwner  = pPortOwner;
+	m_pDataHandler = NULL;
 	return ConfigPort(portnr, baud, parity, databits, stopbits, dwCommEvents, writebuffersize, 
 	           ReadIntervalTimeout, ReadTotalTimeoutMultiplier, ReadTotalTimeoutConstant,
 			   WriteTotalTimeoutMultiplier, WriteTotalTimeoutConstant);
@@ -326,6 +327,7 @@ BOOL CSerialPort::InitPort(IDataHandler* pHandler,    // the owner (CWnd) of the
 {
 	//assert(portnr > 0 && portnr < 5);//Del by wl 20120612
 	m_pDataHandler  = pHandler;
+	m_pOwner = NULL;
 	return ConfigPort(portnr, baud, parity, databits, stopbits, dwCommEvents, writebuffersize,
 		ReadIntervalTimeout, ReadTotalTimeoutMultiplier, ReadTotalTimeoutConstant,
 		WriteTotalTimeoutMultiplier, WriteTotalTimeoutConstant);
@@ -476,24 +478,30 @@ UINT CSerialPort::CommThread(LPVOID pParam)
 						if (length == 0) break;
 						ReceiveData(port, comstat);
 						port->m_queuecom[port->m_queueth].num = length;
-
-						//::SendMessage((port->m_pOwner)->m_hWnd, WM_COMM_RXDATA, (WPARAM)(&(port->m_queuecom[port->m_queueth])), (LPARAM)port->m_nPortNr);
-						port->m_pDataHandler->HandleData( port->m_queuecom[port->m_queueth].ch, length);
+						if(port->m_pOwner)
+							::PostMessage((port->m_pOwner)->m_hWnd, WM_COMM_RXDATA, (WPARAM)(&(port->m_queuecom[port->m_queueth])), (LPARAM)port->m_nPortNr);
+						if(port->m_pDataHandler)
+							port->m_pDataHandler->HandleData( port->m_queuecom[port->m_queueth].ch, length);
 						length = 0;
 						break;
 					}
 				}
 			}
 			if (CommEvent & EV_CTS) //CTS�ź�״̬�����仯
-				::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_CTS_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
+				if (port->m_pOwner)
+					::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_CTS_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
 			if (CommEvent & EV_RXFLAG) //���յ��¼��ַ������������뻺������ 
-				::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_RXFLAG_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
+				if (port->m_pOwner)
+					::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_RXFLAG_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
 			if (CommEvent & EV_BREAK)  //�����з����ж�
-				::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_BREAK_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
+				if (port->m_pOwner)
+					::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_BREAK_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
 			if (CommEvent & EV_ERR) //������·״̬��������·״̬��������CE_FRAME,CE_OVERRUN��CE_RXPARITY 
-				::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_ERR_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
+				if (port->m_pOwner)
+					::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_ERR_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
 			if (CommEvent & EV_RING) //���⵽����ָʾ
-				::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_RING_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
+				if (port->m_pOwner)
+					::SendMessage(port->m_pOwner->m_hWnd, WM_COMM_RING_DETECTED, (WPARAM)0, (LPARAM)port->m_nPortNr);
 
 			break;
 		}

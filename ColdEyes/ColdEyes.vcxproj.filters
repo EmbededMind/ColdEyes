@@ -93,6 +93,12 @@
     <ClInclude Include="Com\SerialPort.h">
       <Filter>Com</Filter>
     </ClInclude>
+    <ClInclude Include="Talk\Talk.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Talk\IState.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp">
@@ -133,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="Com\SerialPort.cpp">
       <Filter>Com</Filter>
+    </ClCompile>
+    <ClCompile Include="Talk\Talk.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Talk\IState.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
