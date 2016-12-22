@@ -45,7 +45,9 @@ DECLARE_DUICONTROL(CKeyBoardUI)
 
 	void SetKeyElementFont(int font);
 
-	void SetShowStringControl(CControlUI* pControl);
+	void SetShowStringControlName(LPCTSTR sControlName);
+	LPCTSTR GetShowStringControlName();
+
 	void SetShowStringControlText(CDuiString text);
 
 	bool OnKeyClickedListener(void* param);
@@ -59,5 +61,5 @@ private:
 	vector<CButtonUI*> m_pKeyElement;
 	vector<CHorizontalLayoutUI*> m_pLineLayout;
 	UINT8 m_focusInx;
-	CControlUI* m_pShowControl;
+	CDuiString m_sShowControlName;
 };

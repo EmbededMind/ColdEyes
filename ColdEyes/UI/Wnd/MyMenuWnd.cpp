@@ -24,7 +24,41 @@ CDuiString CMyMenuWnd::GetSkinFile()
 
 void CMyMenuWnd::Notify(TNotifyUI& msg)
 {
+	if (msg.sType == DUI_MSGTYPE_KILLFOCUS) {
+		FocusedItemClassName = msg.pSender->GetClass();
+		pKillFocsedItem = msg.pSender;
 
+	}
+
+	if (msg.sType == DUI_MSGTYPE_SETFOCUS) {
+		if (FocusedItemClassName != msg.pSender->GetClass()) {
+			//焦点在一级模块
+			if (_tcsicmp(msg.pSender->GetClass(), _T("MenuItemUI")) == 0) {
+				Print("MenuItem");
+				if (pKillFocsedItem) {
+					((CMenuItemUI*)pKillFocsedItem)->SetStatus(0);
+				}
+				((CMenuItemUI*)msg.pSender)->SetStatus(0);
+				UpdataBkColor(0,LAYOUT_MENUITEM_FOCUSED, LAYOUT_SUB_NOFOCUS);
+			}
+			//焦点在二级模块
+			else if (_tcsicmp(msg.pSender->GetClass(), _T("SubMenuItemUI")) == 0) {
+				Print("SubMenuItem");
+				if (_tcsicmp(FocusedItemClassName, _T("MenuItemUI")) == 0) {
+					((CMenuItemUI*)pKillFocsedItem)->SetStatus(1);
+				}
+				((CSubMenuItemUI*)msg.pSender)->SetStatus(0);
+				UpdataBkColor(0,LAYOUT_SUB_NOFOCUS, LAYOUT_MENUITEM_FOCUSED);
+			}
+			//焦点在三级模块
+			else {
+				if (_tcsicmp(FocusedItemClassName, _T("SubMenuItemUI")) == 0) {
+					((CMenuItemUI*)pKillFocsedItem)->SetStatus(1);
+					UpdataBkColor(1, LAYOUT_BODY_FOCUSED, LAYOUT_SUB_SEL_NOFOCUS);
+				}
+			}
+		}
+	}
 }
 
 
@@ -37,64 +71,50 @@ LRESULT CMyMenuWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam,
 
 void CMyMenuWnd::InitWindow()
 {
-	//CKeyBoardUI* pLayout =static_cast<CKeyBoardUI*> (m_pm.FindControl(_T("keyboard")));
-	//pLayout->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnLayoutDoEventTest);
-	//LayoutInit();
-	InitMenuItem();
-
-	//绑定船名编辑框的输入键盘
-	static_cast<CKeyBoardUI*>(m_pm.FindControl(kKeyboardName))->SetShowStringControl(m_pm.FindControl(kEditCtlHostNameName)); 
-
 	MakeItemsDelegate();
 }
 
-void CMyMenuWnd::InitMenuItem()
-{
-	//Host Set
-	SetSubMenuParent(kSubMenuItemHostName, kMenuItemHostSetName);
-	SetSubMenuParent(kSubMenuItemSysSetName,kMenuItemHostSetName);
-
-	//Auot Watch
-	SetSubMenuParent(kSubMenuItemAwTimeName, kMenuItemAutoWatchName);
-	SetSubMenuParent(kSubMenuItemAlarmVoiceName, kMenuItemAutoWatchName);
-	SetSubMenuParent(kSubMenuItemAlarmLightName, kMenuItemAutoWatchName);
-	SetSubMenuParent(kSubMenuItemAwOnOffRecordName, kMenuItemAutoWatchName);
-}
-
-void CMyMenuWnd::LayoutInit()
-{
-	AddLayout(_T("HostName.xml"), (CContainerUI*)m_pm.FindControl(kBodyLayoutHostSetName));
-	AddLayout(_T("SysSet.xml"), (CContainerUI*)m_pm.FindControl(kBodyLayoutHostSetName));
-
-	AddLayout(_T("AwTime.xml"), (CContainerUI*)m_pm.FindControl(kBodyLayoutAwTime));
-	AddLayout(_T("AlarmVoice.xml"), (CContainerUI*)m_pm.FindControl(kBodyLayoutAwTime));
-	AddLayout(_T("AlarmLights.xml"), (CContainerUI*)m_pm.FindControl(kBodyLayoutAwTime));
-	AddLayout(_T("AwOnOffRecords.xml"), (CContainerUI*)m_pm.FindControl(kBodyLayoutAwTime));
-	//AddLayout(_T(""))
-}
-
-void CMyMenuWnd::AddLayout(LPCTSTR xmlName, CContainerUI* ParentLayout)
-{
-	CDialogBuilder Builder;
-	ParentLayout->Add((CContainerUI*)Builder.Create(xmlName, NULL, this, &m_pm, NULL));
-}
-
-void CMyMenuWnd::AddAtLayout(LPCTSTR xmlName, CContainerUI* ParentLayout, UINT8 inx)
-{
-	CDialogBuilder Builder;
-	ParentLayout->AddAt((CContainerUI*)Builder.Create(xmlName, NULL, this, &m_pm, NULL),inx);
-}
-
-void CMyMenuWnd::SetSubMenuParent(LPCTSTR sSubMenuName, LPCTSTR sParentName)
-{
+void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)
+{ 
+	int index;
+	CButtonUI* pItem;
+	CContainerUI* pLayout;	
 	
-	if (m_pm.FindControl(sSubMenuName)) {
-		static_cast<CSubMenuItemUI*>(m_pm.FindControl(sSubMenuName))->SetParentMenuItem(sParentName);
+	//二级模块
+	CTabLayoutUI* pTabLayout = static_cast<CTabLayoutUI*>(m_pm.FindControl(kLayoutChildrenMenuName));
+	pLayout = (CContainerUI*)pTabLayout->GetItemAt(pTabLayout->GetCurSel());	
+
+	pLayout = (CContainerUI*)pLayout->GetItemAt(0);
+	pLayout->SetBkColor(Color2);				//布局颜色
+	for (int i = 0; i < pLayout->GetCount(); i += 2) {		//控件颜色
+		pItem = (CButtonUI*)pLayout->GetItemAt(i);
+		pItem->SetBkColor(Color2);
 	}
+
+	//焦点在一级模块
+	if (focusLevel == 0) {
+		pLayout = (CContainerUI*)m_pm.FindControl(KLayoutParentMenuName);
+		pLayout->SetBkColor(Color1);			//布局颜色
+		for (int i = 0; i < pLayout->GetCount(); i += 2) {		//控件颜色
+			pItem = (CButtonUI*)pLayout->GetItemAt(i);
+			pItem->SetBkColor(Color1);
+		}
+	}	
+	//焦点在三级模块
+	else if (focusLevel == 1) {
+		pTabLayout = static_cast<CTabLayoutUI*>(m_pm.FindControl(kLayoutChildrenMenuName));
+		pLayout = (CContainerUI*)pTabLayout->GetItemAt(pTabLayout->GetCurSel());
+		pTabLayout = (CTabLayoutUI*)pLayout->GetItemAt(1);
+		pLayout = (CContainerUI*)pTabLayout->GetItemAt(pTabLayout->GetCurSel());
+		pLayout->SetBkColor(LAYOUT_BODY_FOCUSED);
+	}
+
 }
 
 void CMyMenuWnd::MakeItemsDelegate()
 {
+	MenuItemMakeDelegate(KMenuItemHomeWatchName);
+
 	SubMenuMakeDelegate(kSubMenuItemHostName);
 	SubMenuMakeDelegate(kSubMenuItemSysSetName);
 	SubMenuMakeDelegate(kSubMenuItemAwTimeName);
@@ -118,24 +138,46 @@ void CMyMenuWnd::MakeItemsDelegate()
 	m_pm.FindControl(kAlarmLightName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmLight);
 }
 
+void CMyMenuWnd::MenuItemMakeDelegate(const TCHAR* const Name)
+{
+	static_cast<CMenuItemUI*>(m_pm.FindControl(Name))->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnMenuItem);
+}
+
 void CMyMenuWnd::SubMenuMakeDelegate(const TCHAR* const Name)
 {
 	static_cast<CSubMenuItemUI*>(m_pm.FindControl(Name))->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnSubMenuItem);
 }
 
 
+bool CMyMenuWnd::OnMenuItem(void * param)
+{
+	TEventUI* pMsg = (TEventUI*)param;
+	CMenuItemUI* Item = (CMenuItemUI*)pMsg->pSender;
+
+	if (pMsg->Type == UIEVENT_KEYDOWN) {
+		if (pMsg->wParam == VK_RIGHT) {
+			if (_tcscmp(Item->GetName(), KMenuItemHomeWatchName) == 0) {
+
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 /*************** Delegate Functions*********************/
 bool CMyMenuWnd::OnSubMenuItem(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
-	CSubMenuItemUI* item = (CSubMenuItemUI*)pMsg->pSender;
-	CDuiString Name = item->GetName();
+	CSubMenuItemUI* pItem = (CSubMenuItemUI*)pMsg->pSender;
+	CDuiString Name = pItem->GetName();
 	switch (pMsg->Type) {
 	case UIEVENT_KEYDOWN:
 		switch (pMsg->wParam) {
 		case VK_BACK:
-			if (item->GetParentItem())
-				item->GetParentItem()->SetFocus();
+			if (pItem->GetOnwerMenuItemName()) {
+				m_pm.FindControl(pItem->GetOnwerMenuItemName())->SetFocus();
+			}
 			break;
 		//----------------------------------------------
 		case VK_RIGHT:
@@ -181,6 +223,7 @@ bool CMyMenuWnd::OnHostName(void * param)
 			Item->SetStatus(true);
 			m_pm.FindControl(kKeyboardName)->SetVisible(true);
 			m_pm.FindControl(kKeyboardName)->SetFocus();
+			m_pm.FindControl(kLayoutPromptName)->SetVisible(true);
 			break;
 		}
 		break;
@@ -189,6 +232,7 @@ bool CMyMenuWnd::OnHostName(void * param)
 		Item->SetStatus(false);
 		if (m_pm.FindControl(kKeyboardName)->IsVisible()) {
 			m_pm.FindControl(kKeyboardName)->SetVisible(false);
+			m_pm.FindControl(kLayoutPromptName)->SetVisible(false);
 		}
 		break;
 	}
@@ -856,44 +900,44 @@ bool CMyMenuWnd::OnAlarmLight(void * param)
 bool CMyMenuWnd::OnRecords(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
-	return false;
+	return true;
 }
 
 bool CMyMenuWnd::OnHome(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
-	return false;
+	return true;
 }
 
 
 // SubMenuItem Add Or Delete
-void CMyMenuWnd::AddAlarmMenuItem()
+void CMyMenuWnd::AddAlarmSubMenu()
 {
 
 }
 
-void CMyMenuWnd::AddVideoObtainMenuItem()
+void CMyMenuWnd::AddVideoObtainSubMenu()
 {
 
 }
 
-void CMyMenuWnd::AddPortConfigMenuItem()
+void CMyMenuWnd::AddPortConfigSubMenu()
 {
 
 }
 
-void CMyMenuWnd::DeleteAlarmMenuItem()
+void CMyMenuWnd::DeleteAlarmSubMenu()
 {
 }
 
-void CMyMenuWnd::DeleteVideoObtainMenuItem()
+void CMyMenuWnd::DeleteVideoObtainSubMenu()
 {
 }
 
-void CMyMenuWnd::DeletePortConfigMenuItem()
+void CMyMenuWnd::DeletePortConfigSubMenu()
 {
 }
-
+ 
 bool CMyMenuWnd::AlarmVoideIsChange()
 {
 	CStdPtrArray* aOptionGroup = m_pm.GetOptionGroup(kAlarmVoiceGroupName);

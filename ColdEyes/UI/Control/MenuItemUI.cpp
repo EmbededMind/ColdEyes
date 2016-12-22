@@ -3,7 +3,8 @@
 
 IMPLEMENT_DUICONTROL(CMenuItemUI)
 CMenuItemUI::CMenuItemUI()
-	:mFocusedBkColor(0xFFFFFFFF)
+	:mFocusedBkColor(0xFFFFFFFF),
+	mState(0)
 {
 }
 
@@ -26,13 +27,13 @@ void CMenuItemUI::DoEvent(TEventUI & event)
 			switch (event.wParam) {
 				case VK_UP:
 					if (index != 0) {
-						pParentLayout->GetItemAt(index - 1)->SetFocus();
+						pParentLayout->GetItemAt(index - 2)->SetFocus();
 					}
 					break;
 
 				case VK_DOWN:
-					if (index < pParentLayout->GetCount() - 1) {
-						pParentLayout->GetItemAt(index + 1)->SetFocus();
+					if (index < pParentLayout->GetCount() - 2) {
+						pParentLayout->GetItemAt(index + 2)->SetFocus();
 					}
 					break;
 
@@ -43,8 +44,9 @@ void CMenuItemUI::DoEvent(TEventUI & event)
 					CContainerUI* pLayout = (CContainerUI*)static_cast<CTabLayoutUI*>(m_pManager->FindControl(m_sBindTabLayoutName))->GetItemAt(m_iBindTabIndex);
 					CControlUI* pItem;
 					pItem = static_cast<CContainerUI*>(pLayout->GetItemAt(0))->GetItemAt(0);
-					if (pItem)
+					if (pItem) {
 						pItem->SetFocus();
+					}
 					break;
 			}
 		}
@@ -59,21 +61,62 @@ void CMenuItemUI::DoEvent(TEventUI & event)
 
 void CMenuItemUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 {
-	CButtonUI::SetAttribute(pstrName, pstrValue);
-	if (_tcscmp(pstrName, _T("focusedbkcolor"))==0) {
+	if (_tcsicmp(pstrName, _T("focusedbkcolor"))==0) {
 		if (*pstrValue == _T('#'))
 			pstrValue = ::CharNext(pstrValue);
 		LPTSTR pstr = NULL;
 		mFocusedBkColor = _tcstoul(pstrValue, &pstr, 16);
 	}
+	else if (_tcsicmp(pstrName, _T("nofocusedselbkcolor")) == 0) {
+		if (*pstrValue == _T('#'))
+			pstrValue = ::CharNext(pstrValue);
+		LPTSTR pstr = NULL;
+		mNoFocusedSelBkColor = _tcstoul(pstrValue, &pstr, 16);
+	}
+	__super::SetAttribute(pstrName, pstrValue);
 }
 
 void CMenuItemUI::PaintBkColor(HDC hDC)
 {
-	if(!m_bFocused){
-		CRenderEngine::DrawColor(hDC, m_rcItem, GetAdjustColor(m_dwBackColor));
+	if(m_bFocused){
+			CRenderEngine::DrawColor(hDC, m_rcItem, GetAdjustColor(mFocusedBkColor));
 	}
 	else {
-		CRenderEngine::DrawColor(hDC, m_rcItem, GetAdjustColor(mFocusedBkColor));
+		if (mState) {
+			CRenderEngine::DrawColor(hDC, m_rcItem, GetAdjustColor(mNoFocusedSelBkColor));
+		}
+		else {
+			CRenderEngine::DrawColor(hDC, m_rcItem, GetAdjustColor(m_dwBackColor));
+		}
+
 	}
+}
+
+void CMenuItemUI::PaintText(HDC hDC)
+{
+	if (mState) {
+		RECT rc = m_rcItem;
+		rc.left += m_rcTextPadding.left;
+		rc.right -= m_rcTextPadding.right;
+		rc.top += m_rcTextPadding.top;
+		rc.bottom -= m_rcTextPadding.bottom;
+		CRenderEngine::DrawText(hDC, m_pManager, rc, GetText(), GetFocusedTextColor(), \
+			m_iFont, GetTextStyle());
+		return;
+	}
+	__super::PaintText(hDC);
+}
+
+void CMenuItemUI::SetStatus(int status)
+{
+	mState = status;
+}
+
+void CMenuItemUI::PaintStatusImage(HDC hDC)
+{
+	if (mState) {
+		DrawImage(hDC, (LPCTSTR)m_sFocusedImage);
+		return;
+	}
+	__super::PaintStatusImage(hDC);
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Window>
-	<VerticalLayout>
+	<VerticalLayout bkcolor="#FFEFEFF4">
 		<List name="watch_record" itemvalign="vcenter" padding="24,25,30,0" itemtextpadding="45,0,0,0" itemfont="3" itemtextcolor="#FF666666" itemselectedtextcolor="#FFFFFFFF">
 				<ListHeader height="65" bkcolor="#FFF3F3F3">
 					<ListHeaderItem text="看船开关记录" align="center" textcolor="#FF333333" font="2"/>
