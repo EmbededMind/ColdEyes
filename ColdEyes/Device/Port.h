@@ -26,8 +26,7 @@ public:
 	void		 SetMac(char* mac);
 	void		 SetNameIndex(UINT16 inx);
 
-
-
+	CString&	 GetName();
 
 
 private:

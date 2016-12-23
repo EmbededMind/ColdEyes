@@ -11,6 +11,7 @@ class CSubMenuItemUI
 DECLARE_DUICONTROL(CSubMenuItemUI)
 public:
 	CSubMenuItemUI();
+	CSubMenuItemUI(CContainerUI* pParent, CString& text, int iInx);
 	~CSubMenuItemUI();
 
 	virtual LPCTSTR GetClass() const;

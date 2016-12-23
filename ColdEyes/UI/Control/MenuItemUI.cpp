@@ -53,7 +53,9 @@ void CMenuItemUI::DoEvent(TEventUI & event)
 		break;
 		
 	case UIEVENT_SETFOCUS:
-		static_cast<CTabLayoutUI*>(m_pManager->FindControl(m_sBindTabLayoutName))->SelectItem(m_iBindTabIndex);
+		if (m_pManager->FindControl(m_sBindTabLayoutName)) {
+			static_cast<CTabLayoutUI*>(m_pManager->FindControl(m_sBindTabLayoutName))->SelectItem(m_iBindTabIndex);
+		}
 		break;
 	}
 	__super::DoEvent(event);

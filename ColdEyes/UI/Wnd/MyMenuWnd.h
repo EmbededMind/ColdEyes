@@ -12,6 +12,8 @@
 #include "UI\Control\SwitchExUI.h"
 #include "UI\Control\OptionExUI.h"
 
+#include "Device\Port.h"
+
 //MenuItmLayout
 const TCHAR* const KLayoutParentMenuName = _T("layout_parent_menu");
 const TCHAR* const kLayoutChildrenMenuName = _T("layout_children_menu");
@@ -140,14 +142,19 @@ public:
 	bool OnHome(void* param);
 
 	//Add SubMenuItem
-	void  AddAlarmSubMenu();		//报警视频
-	void  AddVideoObtainSubMenu();	//视频调取
-	void  AddPortConfigSubMenu();	//摄像头设置
+	int InsertSubMenuAt(CContainerUI* pLayout,CPort* pPort);
+	CSubMenuItemUI* AddSubMenuItem(CDuiString layoutName, CPort* pPort);
+
+	void AddAlarmSubMenu(CPort* pPort);		//报警视频
+	void AddVideoObtainSubMenu(CPort* pPort);	//视频调取
+	void AddPortConfigSubMenu(CPort* pPort);	//摄像头设置
 
 	//Delete SubMenuItem
-	void  DeleteAlarmSubMenu();
-	void  DeleteVideoObtainSubMenu();
-	void  DeletePortConfigSubMenu();
+	void DeleteSubMenuItem(CDuiString layoutName, CPort* pPort);
+
+	void DeleteAlarmSubMenu(CPort* pPort);
+	void DeleteVideoObtainSubMenu(CPort* pPort);
+	void DeletePortConfigSubMenu(CPort* pPort);
 
 	//Sets is change
 	bool AlarmVoideIsChange();
@@ -157,12 +164,16 @@ public:
 	
 	//ShowVoiceOption
 	void ShowVoiceOption(bool isShow);
+
+	//ShowBody
 	void ShowBodyLayout(bool isShow);
+
 private:
 	int mDPI;
 
 	CControlUI* pKillFocsedItem ;
 	CDuiString FocusedItemClassName;
+	CPort*  testPort;
 };
 
 

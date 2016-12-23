@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MyMenuWnd.h"
 #include "conio.h"
+#include "Device\Port.h"
 
 
 CMyMenuWnd::CMyMenuWnd()
@@ -75,6 +76,18 @@ void CMyMenuWnd::InitWindow()
 {
 	MakeItemsDelegate();
 	ShowVoiceOption(false);
+
+	//CPort* port1 = new CPort();
+	//port1->SetId(2);
+	//port1->SetNameIndex(2);
+
+	//AddVideoObtainSubMenu(port1);
+
+	//testPort = new CPort;
+	//testPort->SetId(3);
+	//testPort->SetNameIndex(3);
+	//AddVideoObtainSubMenu(testPort);
+
 }
 
 void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)
@@ -159,6 +172,8 @@ bool CMyMenuWnd::OnMenuItem(void * param)
 	if (pMsg->Type == UIEVENT_KEYDOWN) {
 		if (pMsg->wParam == VK_RIGHT) {
 			if (_tcscmp(Item->GetName(), KMenuItemHomeWatchName) == 0) {
+				//test
+				DeleteVideoObtainSubMenu(testPort);
 
 				return false;
 			}
@@ -916,32 +931,92 @@ bool CMyMenuWnd::OnHome(void * param)
 }
 
 
+int CMyMenuWnd::InsertSubMenuAt(CContainerUI * pLayout, CPort * pPort)
+{
+	CSubMenuItemUI* pItem=NULL;
+	CPort* tagPort;
+	int index=0;
+	if (!pLayout->GetCount()) return 0;
+
+	for (index = 0; index < pLayout->GetCount(); index += 2) {
+		pItem = (CSubMenuItemUI*)pLayout->GetItemAt(index);
+		tagPort = (CPort*)pItem->GetTag();
+		if (!tagPort)	continue;
+		if (tagPort->GetId() > pPort->GetId()) {
+			return index;
+		}
+	}
+
+	if (_tcscmp(pItem->GetName(), kSubMenuItemSysSetName) == 0)
+		return index - 2;
+	return index;
+}
+
+CSubMenuItemUI * CMyMenuWnd::AddSubMenuItem(CDuiString layoutName, CPort * pPort)
+{
+	CSubMenuItemUI* pItem;
+	CContainerUI* pLayout = (CContainerUI*)(m_pm.FindControl(layoutName));
+	pItem = new CSubMenuItemUI(pLayout, pPort->GetName(), InsertSubMenuAt(pLayout, pPort));
+	pItem->SetTag((UINT_PTR)pPort);
+	pItem->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnSubMenuItem);
+	return pItem;
+}
+
 // SubMenuItem Add Or Delete
-void CMyMenuWnd::AddAlarmSubMenu()
+void CMyMenuWnd::AddAlarmSubMenu(CPort* pPort)
 {
+	CSubMenuItemUI* pItem = NULL;
+	pItem = AddSubMenuItem(kLayoutSubAlarmVideoName, pPort);
+	pItem->SetOnwerMenuItemName(kMenuItemAlarmVideoName);
 
 }
 
-void CMyMenuWnd::AddVideoObtainSubMenu()
+void CMyMenuWnd::AddVideoObtainSubMenu(CPort* pPort)
 {
-
+	CSubMenuItemUI* pItem = NULL;
+	pItem = AddSubMenuItem(kLayoutSubVideoObtainName, pPort);
+	pItem->SetOnwerMenuItemName(kMenuItemVideoObtainName);
 }
 
-void CMyMenuWnd::AddPortConfigSubMenu()
+void CMyMenuWnd::AddPortConfigSubMenu(CPort* pPort)
 {
-
+	CSubMenuItemUI* pItem = NULL;
+	pItem = AddSubMenuItem(kLayoutSubHostSetName, pPort);
+	pItem->SetOnwerMenuItemName(kMenuItemHostSetName);
 }
 
-void CMyMenuWnd::DeleteAlarmSubMenu()
+void CMyMenuWnd::DeleteSubMenuItem(CDuiString layoutName, CPort * pPort)
 {
+	int index = 0;
+	CSubMenuItemUI* pItem;
+	CPort* tagPort;
+	CContainerUI* pLayout = (CContainerUI*)(m_pm.FindControl(layoutName));
+	for (index = 0; index < pLayout->GetCount(); index += 2) {
+		pItem = (CSubMenuItemUI*)pLayout->GetItemAt(index);
+		tagPort = (CPort*)pItem->GetTag();
+
+		if (tagPort == pPort) {
+			int order = pLayout->GetItemIndex(pItem);
+			pLayout->RemoveAt(order);
+			pLayout->RemoveAt(order);
+			return;
+		}
+	}
 }
 
-void CMyMenuWnd::DeleteVideoObtainSubMenu()
+void CMyMenuWnd::DeleteAlarmSubMenu(CPort* pPort)
 {
+	DeleteSubMenuItem(kLayoutSubAlarmVideoName, pPort);
 }
 
-void CMyMenuWnd::DeletePortConfigSubMenu()
+void CMyMenuWnd::DeleteVideoObtainSubMenu(CPort* pPort)
 {
+	DeleteSubMenuItem(kLayoutSubVideoObtainName, pPort);
+}
+
+void CMyMenuWnd::DeletePortConfigSubMenu(CPort* pPort)
+{
+	DeleteSubMenuItem(kLayoutSubHostSetName, pPort);
 }
  
 bool CMyMenuWnd::AlarmVoideIsChange()
@@ -973,6 +1048,8 @@ void CMyMenuWnd::AddAlarmVoice()
 	pParentLayout = (CVerticalLayoutUI*)pLayout->GetParent();
 	pParentLayout->SetFixedHeight(pParentLayout->GetFixedHeight()+pItem->GetFixedHeight());
 }
+
+
 
 void CMyMenuWnd::ShowVoiceOption(bool isShow)
 {

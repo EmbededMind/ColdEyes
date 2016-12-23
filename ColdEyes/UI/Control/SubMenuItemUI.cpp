@@ -6,6 +6,17 @@ CSubMenuItemUI::CSubMenuItemUI()
 {
 }
 
+CSubMenuItemUI::CSubMenuItemUI(CContainerUI * pParent, CString & text, int iInx)
+{
+	SetText(text);
+	pParent->AddAt(this, iInx);
+	SetAttribute(_T("style"), _T("sytle_submenu"));
+
+	CControlUI* p = new CControlUI;
+	pParent->AddAt(p, iInx + 1);
+	p->SetAttribute(_T("style"), _T("control"));
+}
+
 CSubMenuItemUI::~CSubMenuItemUI()
 {
 }
