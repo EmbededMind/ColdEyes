@@ -179,8 +179,8 @@ void CDeviceDetecter::HandleData(UINT8* pData, size_t length)
 	}
 
 
-	int cmd  = pData[0];
-	int param  = pData[1];
+	int cmd  = pData[3];
+	int param  = pData[4];
 
 	// 
 	if (cmd == 0x05) {
