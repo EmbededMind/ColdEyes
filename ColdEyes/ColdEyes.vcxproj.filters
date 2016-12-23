@@ -143,9 +143,6 @@
     <ClCompile Include="Talk\Talk.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Talk\IState.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ColdEyes.rc">
