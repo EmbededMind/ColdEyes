@@ -32,6 +32,10 @@ void CMyMenuWnd::Notify(TNotifyUI& msg)
 	}
 
 	if (msg.sType == DUI_MSGTYPE_SETFOCUS) {
+		if (_tcscmp(msg.pSender->GetUserData(), _T("PortConfig")) == 0) {
+			FillCameraInfo(msg.pSender);
+		}
+
 		if (FocusedItemClassName != msg.pSender->GetClass()) {
 			//焦点在一级模块
 			if (_tcsicmp(msg.pSender->GetClass(), _T("MenuItemUI")) == 0) {
@@ -76,17 +80,17 @@ void CMyMenuWnd::InitWindow()
 {
 	MakeItemsDelegate();
 	ShowVoiceOption(false);
-
+	//m_pm.SetDPI(50);
 	//CPort* port1 = new CPort();
 	//port1->SetId(2);
 	//port1->SetNameIndex(2);
 
 	//AddVideoObtainSubMenu(port1);
 
-	//testPort = new CPort;
-	//testPort->SetId(3);
-	//testPort->SetNameIndex(3);
-	//AddVideoObtainSubMenu(testPort);
+	testPort = new CPort;
+	testPort->SetId(3);
+	testPort->SetNameIndex(3);
+	AddPortConfigSubMenu(testPort);
 
 }
 
@@ -172,8 +176,6 @@ bool CMyMenuWnd::OnMenuItem(void * param)
 	if (pMsg->Type == UIEVENT_KEYDOWN) {
 		if (pMsg->wParam == VK_RIGHT) {
 			if (_tcscmp(Item->GetName(), KMenuItemHomeWatchName) == 0) {
-				//test
-				DeleteVideoObtainSubMenu(testPort);
 
 				return false;
 			}
@@ -781,7 +783,8 @@ bool CMyMenuWnd::OnAlarmVoiceSwitch(void * param)
 			break;
 		//----------------------------------------------
 		case VK_DOWN:
-			m_pm.FindControl(kOptionAlarmVoiceDefaultName)->SetFocus();
+			if(pItem->GetValue())
+				m_pm.FindControl(kOptionAlarmVoiceDefaultName)->SetFocus();
 			break;
 		}
 		break;
@@ -968,7 +971,6 @@ void CMyMenuWnd::AddAlarmSubMenu(CPort* pPort)
 	CSubMenuItemUI* pItem = NULL;
 	pItem = AddSubMenuItem(kLayoutSubAlarmVideoName, pPort);
 	pItem->SetOnwerMenuItemName(kMenuItemAlarmVideoName);
-
 }
 
 void CMyMenuWnd::AddVideoObtainSubMenu(CPort* pPort)
@@ -983,6 +985,9 @@ void CMyMenuWnd::AddPortConfigSubMenu(CPort* pPort)
 	CSubMenuItemUI* pItem = NULL;
 	pItem = AddSubMenuItem(kLayoutSubHostSetName, pPort);
 	pItem->SetOnwerMenuItemName(kMenuItemHostSetName);
+	pItem->SetUserData(_T("PortConfig"));
+	pItem->BindTabLayoutName(kBodyLayoutHostSetName);
+	pItem->BindTabIndex(1);
 }
 
 void CMyMenuWnd::DeleteSubMenuItem(CDuiString layoutName, CPort * pPort)
@@ -1072,4 +1077,21 @@ void CMyMenuWnd::ShowBodyLayout(bool isShow)
 	m_pm.FindControl(kBodyLayoutAwTime)->SetVisible(isShow);
 	m_pm.FindControl(kBodyLayoutHostSetName)->SetVisible(isShow);
 	m_pm.FindControl(kBodyLayoutVideoObtain)->SetVisible(isShow);
+}
+
+void CMyMenuWnd::FillCameraInfo(CControlUI* pItem)
+{
+	//填充摄像头信息： 标题、摄像头名称、摄像头开关、语音音量、存储设置、自动看船设置
+	CDuiString text;
+	CPort* tagPort = (CPort*)pItem->GetTag();
+	if (tagPort) {
+		text.Format(_T("%s设置"), tagPort->GetName());
+		m_pm.FindControl(kCameraLayoutTitleName)->SetText(text);
+		m_pm.FindControl(kCameraNameEditName)->SetText(tagPort->GetName());
+		static_cast<CSwitchExUI*>(m_pm.FindControl(kCameraSwitchName))->SetValue(true);
+		static_cast<CSliderExUI*>(m_pm.FindControl(kCameraVolumeName))->SetValue(1);
+		static_cast<CLabelExUI*>(m_pm.FindControl(kCameraVideoSaveName))->SetValue(true);
+		static_cast<CLabelExUI*>(m_pm.FindControl(kCameraAwName))->SetValue(true);
+		m_pm.Invalidate();
+	}
 }

@@ -5,53 +5,53 @@
 	<Font share="true" id="2" name="方正兰亭中黑_GBK" size="30"/>
 	<Font share="true" id="3" name="方正兰亭中黑_GBK" size="28"/>
 
-	<VerticalLayout bkcolor="#FFEFEFF4">	
+	<VerticalLayout>	
 		<VerticalLayout float="true" bkcolor="#FFF3F3F3" pos="70,80,0,0" width="790" height="155">
-			<Label name ="title" bkcolor="#FFE5E3E3" height="80" font="3" textcolor="#FF333333" align="center"/>
+			<Label name ="camera_layout_title" bkcolor="#FFE5E3E3" height="80" font="3" textcolor="#FF333333" align="center"/>
 			<Text float="true" pos="45,111,0,0" width="155" height="39" font="3" textcolor="#FF666666" text="摄像头名称" />
-			<EditEx name="edit_cameraname" pos="245,105,0,0"/>
+			<EditEx name="camera_name_edit" float="true" pos="245,105,0,0" height="50" 	width="500" 	align="center"	bkcolor="#FFEBEBEB"		font="3"	borderround="4,4"	bordersize="1"	focusbordercolor="#FF4198FE"	textcolor="#FF333333"/>
 		</VerticalLayout>
 		<VerticalLayout	visible="false"  float="true" bkcolor="#FFF3F3F3" pos="70,235,0,0" width="790" height="204">
 			<VerticalLayout name="shipnamesel" padding="45,30,45,0" bkcolor="#FFD7E9FF" >
 				<HorizontalLayout height="33" padding="0,8,0,3" >
-					<ShipNameItem width="60" text="船头" 	userdata="0"/>
-					<ShipNameItem width="80" text="船甲板" padding="40,0,19,0," userdata="1"/>
-					<ShipNameItem width="80" text="船左舷" padding="20,0,19,0," userdata="2"/>
-					<ShipNameItem width="80" text="船右舷" padding="20,0,19,0,"	userdata="3"/>
-					<ShipNameItem width="80" text="船后方" padding="20,0,19,0,"	userdata="4"/>
-					<ShipNameItem width="80" text="船缆绳" padding="20,0,19,0,"	userdata="5"/>
+					<Button width="60" text="船头" 	userdata="0"/>
+					<Button width="80" text="船甲板" padding="40,0,19,0," userdata="1"/>
+					<Button width="80" text="船左舷" padding="20,0,19,0," userdata="2"/>
+					<Button width="80" text="船右舷" padding="20,0,19,0,"	userdata="3"/>
+					<Button width="80" text="船后方" padding="20,0,19,0,"	userdata="4"/>
+					<Button width="80" text="船缆绳" padding="20,0,19,0,"	userdata="5"/>
 				</HorizontalLayout>
 				<HorizontalLayout height="33" padding="0,3,0,3" >
-					<ShipNameItem width="80" text="集控台" 	userdata="10"/>
-					<ShipNameItem width="80" text="监控台" 	padding="20,0,19,0,"	userdata="11"/>
-					<ShipNameItem width="80" text="船长室"	padding="20,0,19,0,"	userdata="12"/>
-					<ShipNameItem width="80" text="船员室" 	padding="20,0,19,0," 	userdata="13"/>
-					<ShipNameItem width="80" text="主机舱" 	padding="20,0,19,0,"	userdata="14"/>
-					<ShipNameItem width="100" text="发电机舱" padding="20,0,19,0,"	userdata="15"/>
+					<Button width="80" text="集控台" 	userdata="10"/>
+					<Button width="80" text="监控台" 	padding="20,0,19,0,"	userdata="11"/>
+					<Button width="80" text="船长室"	padding="20,0,19,0,"	userdata="12"/>
+					<Button width="80" text="船员室" 	padding="20,0,19,0," 	userdata="13"/>
+					<Button width="80" text="主机舱" 	padding="20,0,19,0,"	userdata="14"/>
+					<Button width="100" text="发电机舱" padding="20,0,19,0,"	userdata="15"/>
 				</HorizontalLayout>
 				<HorizontalLayout height="33" padding="0,3,0,1" >
-					<ShipNameItem width="100" text="罗经甲板"	userdata="20"/>
-					<ShipNameItem width="100" text="一层甲板" padding="20,0,24,0," 	userdata="21"/>
-					<ShipNameItem width="100" text="二层甲板" padding="24,0,24,0," 	userdata="22"/>
-					<ShipNameItem width="100" text="三层甲板" padding="24,0,29,0,"	userdata="23"/>
-					<ShipNameItem width="100" text="四层甲板" padding="29,0,27,0," 	userdata="24"/>
+					<Button width="100" text="罗经甲板"	userdata="20"/>
+					<Button width="100" text="一层甲板" padding="20,0,24,0," 	userdata="21"/>
+					<Button width="100" text="二层甲板" padding="24,0,24,0," 	userdata="22"/>
+					<Button width="100" text="三层甲板" padding="24,0,29,0,"	userdata="23"/>
+					<Button width="100" text="四层甲板" padding="29,0,27,0," 	userdata="24"/>
 				</HorizontalLayout>
 				<HorizontalLayout height="33" padding="0,1,0,0" >
-					<ShipNameItem width="100" height="33" text="五层甲板"	userdata="30"/>
+					<Button width="100" height="33" text="五层甲板"	userdata="30"/>
 				</HorizontalLayout>
 			</VerticalLayout>
 		</VerticalLayout>
 		<VerticalLayout float="true" pos="70,235,0,0" width="790" height="495" bkcolor="#FFF3F3F3">
 			<Control float="true" pos="45,25,0,0" width="700" height="2"/>
-			<Switch name="camera_switch" float="true" pos="0,35,0,0" width="790" height="80" onimage="file='image/switch_on.png' dest='665,16,745,77'" offimage="file='image/switch_off.png' dest='665,16,745,77'" bkcolor="#FFF3F3F3" font="3" textcolor="#FF666666" focusedtextcolor="#FFFFFFFF" textpadding="45,0,605,0" text="摄像头开关" />
+			<SwitchEx name="camera_switch" float="true" pos="0,35,0,0" width="790" height="80" onimage="file='image/switch_on.png' dest='665,16,745,77'" offimage="file='image/switch_off.png' dest='665,16,745,77'" bkcolor="#FFF3F3F3" font="3" textcolor="#FF666666" focusedtextcolor="#FFFFFFFF" textpadding="45,0,605,0" text="摄像头开关" />
 			<Control float="true" pos="45,125,0,0" width="700" />
 			<Text float="true" pos="45,150,250,189" font="3" textcolor="#FF666666" text="喇叭声音音量" />
-			<Label name="bind_cameraset" float="true" pos="0,198,790,80" bkimage="file='image/slider_volum_bk.png'" height="80" /> 
-			<MySlider name="camera_set_volume" sendmove="true" float="true" pos="178,224,0,0" min="0" max="5" bindbkimage="file='image/slider_volum_bk.png'" focusedbkimage="file='image/slider_volum_focusedbk.png'" />
+			<Label name="bk_cameraset_volume" float="true" pos="0,198,790,80" bkimage="file='image/slider_volum_bk.png'" height="80" /> 
+			<SliderEx name="camera_volume"  float="true" pos="178,224,0,0"	 bindbk="bk_cameraset_volume"	min="0" max="5" bindbkimage="file='image/slider_volum_bk.png'" focusedbkimage="file='image/slider_volum_focusedbk.png'" />
 			<Control float="true" pos="45,296,0,0" width="700" />
-			<MyLabel name="camera_set_video_save" pos="0,306,0,0" width="790" height="80" text="是否储存该摄像机视频" stateenabletext="是" statedisabletext="否" />
+			<LabelEx name="camera_video_save" pos="0,306,0,0" width="790" height="80" text="是否储存该摄像机视频" stateenabletext="是" statedisabletext="否" />
 			<Control float="true" pos="45,396,0,0" width="700" />
-			<MyLabel name="camera_set_shipwatch" pos="0,406,0,0" width="790" height="80" text="设置自动看船" bkimage="file='image/radio_unsel.png' dest='707,21,745,59'" focusedimage="file='image/radio_focusunsel.png' dest='707,21,745,59'" selbkimage="file='image/radio_sel.png' dest='707,21,745,59'" focusedselbkimage="file='image/radio_focussel.png' dest='707,21,745,59'" />
+			<LabelEx name="camera_auto_watch" pos="0,406,0,0" width="790" height="80" text="设置自动看船" bkimage="file='image/radio_unsel.png' dest='707,21,745,59'" focusedimage="file='image/radio_focusunsel.png' dest='707,21,745,59'" selbkimage="file='image/radio_sel.png' dest='707,21,745,59'" focusedselbkimage="file='image/radio_focussel.png' dest='707,21,745,59'" />
 		</VerticalLayout>
 	</VerticalLayout>
 </Window>

@@ -53,6 +53,14 @@ const TCHAR* const kEditCtlHostNameName = _T("edit_host_name");
 const TCHAR* const kKeyboardName = _T("keyboard");
 const TCHAR* const kLayoutPromptName = _T("layout_prompt");
 
+//camera set
+const TCHAR* const kCameraLayoutTitleName = _T("camera_layout_title");
+const TCHAR* const kCameraNameEditName = _T("camera_name_edit");
+const TCHAR* const kCameraSwitchName = _T("camera_switch");
+const TCHAR* const kCameraVolumeName = _T("camera_volume");
+const TCHAR* const kCameraVideoSaveName = _T("camera_video_save");
+const TCHAR* const kCameraAwName = _T("camera_auto_watch");
+
 //auot time
 const TCHAR* const kTimeSpanPickerAwName = _T("time_span_picker_aw");
 
@@ -167,6 +175,9 @@ public:
 
 	//ShowBody
 	void ShowBodyLayout(bool isShow);
+
+	//Body Fill Camera Info
+	void FillCameraInfo(CControlUI* pItem);
 
 private:
 	int mDPI;
