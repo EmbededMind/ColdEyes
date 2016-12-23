@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Window>
-	<VerticalLayout bkcolor="#FFEFEFF4">	
+	<VerticalLayout bkcolor="#FFF3F3F3" padding="70,80,69,136">	
 		<Label text="系统设置" font="3" height="80" textpadding="339,21,339,20" bkcolor="#FFE5E3E3" textcolor="#FF333333" />
 		<Label text="亮度调节" font="3" height="68" textpadding="45,20,633,10" bkcolor="#FFF3F3F3" textcolor="#FF666666"/>
 		<Label name="bk_light" float="true" pos="0,148,790,80" bkimage="file='image/slider_light_bk.png'" height="80" /> 

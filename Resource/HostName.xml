@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Window>
-	<VerticalLayout bkcolor="#FFEFEFF4">
+	<VerticalLayout >
 		<Label text="船舶名称" float="true" pos="148,116,0,0" height="39" width="113" font="3" textcolor="#FF666666"/>
 		<EditEx name="edit_host_name" 	float="true"	pos="281,110,0,0"	height="50" 	width="500" 	bkcolor="#FFEBEBEB"		font="3"	align="left"	borderround="4,4"	bordersize="1"	focusbordercolor="#FF4198FE"	textcolor="#FF333333"	/>
 		<KeyBoard visible="false" name="keyboard" width="640" height="313" bkcolor="#FFECECEC" float="true"	pos="145,210,785,523"	borderround="10,10"	bordercolor="#FF979797"	bordersize="1" 

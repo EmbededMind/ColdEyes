@@ -46,9 +46,12 @@ void CMyMenuWnd::Notify(TNotifyUI& msg)
 				Print("SubMenuItem");
 				if (_tcsicmp(FocusedItemClassName, _T("MenuItemUI")) == 0) {
 					((CMenuItemUI*)pKillFocsedItem)->SetStatus(1);
+					UpdataBkColor(0,LAYOUT_MENUITEM_NOFOCUS, LAYOUT_SUB_FOCUSED);
 				}
-				((CSubMenuItemUI*)msg.pSender)->SetStatus(0);
-				UpdataBkColor(0,LAYOUT_SUB_NOFOCUS, LAYOUT_MENUITEM_FOCUSED);
+				else {
+					UpdataBkColor(1, LAYOUT_BODY_NOFOUCS, LAYOUT_SUB_FOCUSED);
+					((CSubMenuItemUI*)msg.pSender)->SetStatus(0);
+				}
 			}
 			//焦点在三级模块
 			else {
@@ -104,9 +107,8 @@ void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)
 	else if (focusLevel == 1) {
 		pTabLayout = static_cast<CTabLayoutUI*>(m_pm.FindControl(kLayoutChildrenMenuName));
 		pLayout = (CContainerUI*)pTabLayout->GetItemAt(pTabLayout->GetCurSel());
-		pTabLayout = (CTabLayoutUI*)pLayout->GetItemAt(1);
-		pLayout = (CContainerUI*)pTabLayout->GetItemAt(pTabLayout->GetCurSel());
-		pLayout->SetBkColor(LAYOUT_BODY_FOCUSED);
+		pTabLayout = (CTabLayoutUI*)pLayout->GetItemAt(1);  //Body Layout
+		pTabLayout->SetBkColor(Color1);
 	}
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Window>
-	<VerticalLayout bkcolor="#FFEFEFF4">
+	<VerticalLayout bkcolor="#FFF3F3F3" padding="70,80,69,0" height="530">
 		<VerticalLayout height="180">
 			<Label text="报警音" font="3" height="80" textpadding="353,21,353,20" bkcolor="#FFE5E3E3" textcolor="FF333333" />
 			<Control height="10" bkcolor="#FFF3F3F3"/>
