@@ -152,6 +152,11 @@ public:
 	//Sets is change
 	bool AlarmVoideIsChange();
 
+	//add alarm voice 
+	void AddAlarmVoice();
+	
+	//ShowVoiceOption
+	void ShowVoiceOption(bool isShow);
 
 private:
 	int mDPI;

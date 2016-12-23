@@ -75,6 +75,7 @@ LRESULT CMyMenuWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam,
 void CMyMenuWnd::InitWindow()
 {
 	MakeItemsDelegate();
+	ShowVoiceOption(false);
 }
 
 void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)
@@ -740,6 +741,8 @@ bool CMyMenuWnd::OnAlarmVoiceSwitch(void * param)
 			if (pItem->GetValue()) {
 				pItem->SetValue(false);
 				pItem->Invalidate();
+				
+				ShowVoiceOption(false);
 			}
 			break;
 		//----------------------------------------------
@@ -747,6 +750,8 @@ bool CMyMenuWnd::OnAlarmVoiceSwitch(void * param)
 			if (!pItem->GetValue()) {
 				pItem->SetValue(true);
 				pItem->Invalidate();
+
+				ShowVoiceOption(true);
 			}
 			break;
 		//----------------------------------------------
@@ -849,7 +854,7 @@ bool CMyMenuWnd::OnAlarmVoiceRecord(void * param)
 			break;
 		//----------------------------------------------
 		case VK_RETURN:
-
+			//AddAlarmVoice();
 			break;
 		}
 		break;
@@ -951,4 +956,36 @@ bool CMyMenuWnd::AlarmVoideIsChange()
 		}
 	}
 	return false;
+}
+
+void CMyMenuWnd::AddAlarmVoice()
+{
+	CVerticalLayoutUI* pParentLayout;
+	CVerticalLayoutUI* pLayout = (CVerticalLayoutUI*)m_pm.FindControl(_T("layout_alarm_voice"));
+	COptionExUI* pItem = new COptionExUI();
+
+	pItem->SetName(kOptionAlarmVoiceRecordName);
+	pLayout->AddAt(pItem, 3);
+	pItem->SetAttribute(_T("style"), _T("style_alarm_voice"));
+	pItem->SetText(_T("Â¼Òô1"));
+	pItem->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmVoiceOption);
+
+	pLayout->SetFixedHeight(pLayout->GetFixedHeight() + pItem->GetFixedHeight());
+	pParentLayout = (CVerticalLayoutUI*)pLayout->GetParent();
+	pParentLayout->SetFixedHeight(pParentLayout->GetFixedHeight()+pItem->GetFixedHeight());
+}
+
+void CMyMenuWnd::ShowVoiceOption(bool isShow)
+{
+	CContainerUI* pContain2 = (CContainerUI*)m_pm.FindControl(_T("layout_alarm_voice"));
+	CContainerUI* pParentLayout = (CContainerUI*)pContain2->GetParent();
+	CContainerUI* pContain1 = (CContainerUI*)pParentLayout->GetItemAt(0);
+	if (isShow) {
+		pContain2->SetVisible(isShow);
+		pParentLayout->SetFixedHeight(pContain1->GetFixedHeight()+ pContain2->GetFixedHeight());
+	}
+	else {
+		pContain2->SetVisible(isShow);
+		pParentLayout->SetFixedHeight(pContain1->GetFixedHeight());
+	}
 }
