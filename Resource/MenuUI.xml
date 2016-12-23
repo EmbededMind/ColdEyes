@@ -53,7 +53,7 @@
 						<!--动态添加-->
 					</VerticalLayout>
 					
-					<TabLayout name="body_alarm_video" bkcolor="#FFEFEFF4">				
+					<TabLayout name="body_alarm_video" bkcolor="#FFEFEFF4" visible="false">				
 						<VerticalLayout >
 							<Button	text="alarm_video_1"	bkcolor="#FF887766"/>
 						</VerticalLayout>
@@ -75,7 +75,7 @@
 						<Control />
 					</VerticalLayout>
 					
-					<TabLayout name="body_host_set" bkcolor="#FFEFEFF4">
+					<TabLayout name="body_host_set" bkcolor="#FFEFEFF4" visible="false">
 						<include source="HostName.xml"/>
 						<include source="CameraSet.xml" /> 
 						<include source="SysSet.xml"/>
@@ -95,7 +95,7 @@
 						<Control />
 					</VerticalLayout>
 					
-					<TabLayout name="body_auto_watch" bkcolor="#FFEFEFF4">
+					<TabLayout name="body_auto_watch" bkcolor="#FFEFEFF4" visible="false">
 						<include source="AwTime.xml"/>
 						<include source="AlarmVoice.xml"/>
 						<include source="AlarmLights.xml"/>
@@ -110,7 +110,7 @@
 					<!--动态添加-->
 					</VerticalLayout>
 					
-					<TabLayout name="body_video_obtain" bkcolor="#FEFEFF4">
+					<TabLayout name="body_video_obtain" bkcolor="#FEFEFF4" visible="false">
 						<VerticalLayout >
 							<Button text="video_obtain1" bkcolor="#FF887766"/>
 						</VerticalLayout>

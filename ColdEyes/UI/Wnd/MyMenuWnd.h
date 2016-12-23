@@ -157,7 +157,7 @@ public:
 	
 	//ShowVoiceOption
 	void ShowVoiceOption(bool isShow);
-
+	void ShowBodyLayout(bool isShow);
 private:
 	int mDPI;
 

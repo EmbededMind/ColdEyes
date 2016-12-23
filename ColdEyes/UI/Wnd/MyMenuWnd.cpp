@@ -34,19 +34,19 @@ void CMyMenuWnd::Notify(TNotifyUI& msg)
 		if (FocusedItemClassName != msg.pSender->GetClass()) {
 			//焦点在一级模块
 			if (_tcsicmp(msg.pSender->GetClass(), _T("MenuItemUI")) == 0) {
-				Print("MenuItem");
 				if (pKillFocsedItem) {
 					((CMenuItemUI*)pKillFocsedItem)->SetStatus(0);
 				}
 				((CMenuItemUI*)msg.pSender)->SetStatus(0);
 				UpdataBkColor(0,LAYOUT_MENUITEM_FOCUSED, LAYOUT_SUB_NOFOCUS);
+				ShowBodyLayout(false);
 			}
 			//焦点在二级模块
 			else if (_tcsicmp(msg.pSender->GetClass(), _T("SubMenuItemUI")) == 0) {
-				Print("SubMenuItem");
 				if (_tcsicmp(FocusedItemClassName, _T("MenuItemUI")) == 0) {
 					((CMenuItemUI*)pKillFocsedItem)->SetStatus(1);
 					UpdataBkColor(0,LAYOUT_MENUITEM_NOFOCUS, LAYOUT_SUB_FOCUSED);
+					ShowBodyLayout(true);
 				}
 				else {
 					UpdataBkColor(1, LAYOUT_BODY_NOFOUCS, LAYOUT_SUB_FOCUSED);
@@ -63,7 +63,6 @@ void CMyMenuWnd::Notify(TNotifyUI& msg)
 		}
 	}
 }
-
 
 
 LRESULT CMyMenuWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
@@ -83,7 +82,7 @@ void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)
 	int index;
 	CButtonUI* pItem;
 	CContainerUI* pLayout;	
-	
+
 	//二级模块
 	CTabLayoutUI* pTabLayout = static_cast<CTabLayoutUI*>(m_pm.FindControl(kLayoutChildrenMenuName));
 	pLayout = (CContainerUI*)pTabLayout->GetItemAt(pTabLayout->GetCurSel());	
@@ -95,7 +94,7 @@ void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)
 		pItem->SetBkColor(Color2);
 	}
 
-	//焦点在一级模块
+	//焦点在一二级模块
 	if (focusLevel == 0) {
 		pLayout = (CContainerUI*)m_pm.FindControl(KLayoutParentMenuName);
 		pLayout->SetBkColor(Color1);			//布局颜色
@@ -185,22 +184,22 @@ bool CMyMenuWnd::OnSubMenuItem(void * param)
 		//----------------------------------------------
 		case VK_RIGHT:
 			if (_tcsicmp(Name, kSubMenuItemHostName) == 0) {
-
+				m_pm.FindControl(kEditCtlHostNameName)->SetFocus();
 			}
 			else if (_tcsicmp(Name, kSubMenuItemSysSetName) == 0) {
-
+				m_pm.FindControl(kSysVolumeName)->SetFocus();
 			}
 			else if (_tcsicmp(Name, kSubMenuItemAwTimeName) == 0) {
-
+				((CTimeSpanPickerUI*)m_pm.FindControl(kTimeSpanPickerAwName))->GetItemAt(0)->SetFocus();
 			}
 			else if (_tcsicmp(Name, kSubMenuItemAlarmVoiceName) == 0) {
-
+				m_pm.FindControl(kSwitchAlarmVoiceName)->SetFocus();
 			}
 			else if (_tcsicmp(Name, kSubMenuItemAlarmLightName) == 0) {
-
+				m_pm.FindControl(kAlarmLightName)->SetFocus();
 			}
 			else if (_tcsicmp(Name, kSubMenuItemAwOnOffRecordName) == 0) {
-
+				
 			}
 			return false;
 			break;
@@ -988,4 +987,12 @@ void CMyMenuWnd::ShowVoiceOption(bool isShow)
 		pContain2->SetVisible(isShow);
 		pParentLayout->SetFixedHeight(pContain1->GetFixedHeight());
 	}
+}
+
+void CMyMenuWnd::ShowBodyLayout(bool isShow)
+{
+	m_pm.FindControl(kBodyLayoutAlarmVideo)->SetVisible(isShow);
+	m_pm.FindControl(kBodyLayoutAwTime)->SetVisible(isShow);
+	m_pm.FindControl(kBodyLayoutHostSetName)->SetVisible(isShow);
+	m_pm.FindControl(kBodyLayoutVideoObtain)->SetVisible(isShow);
 }
