@@ -5,7 +5,7 @@
 	<Font share="true" id="2" name="方正兰亭中黑_GBK" size="30"/>
 	<Font share="true" id="3" name="方正兰亭中黑_GBK" size="28"/>
 
-	<VerticalLayout>	
+	<VerticalLayout name="layout_camera_set">	
 		<VerticalLayout float="true" bkcolor="#FFF3F3F3" pos="70,80,0,0" width="790" height="155">
 			<Label name ="camera_layout_title" bkcolor="#FFE5E3E3" height="80" font="3" textcolor="#FF333333" align="center"/>
 			<Text float="true" pos="45,111,0,0" width="155" height="39" font="3" textcolor="#FF666666" text="摄像头名称" />

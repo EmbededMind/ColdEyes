@@ -87,10 +87,10 @@ void CMyMenuWnd::InitWindow()
 
 	//AddVideoObtainSubMenu(port1);
 
-	testPort = new CPort;
-	testPort->SetId(3);
-	testPort->SetNameIndex(3);
-	AddPortConfigSubMenu(testPort);
+	//testPort = new CPort;
+	//testPort->SetId(3);
+	//testPort->SetNameIndex(3);
+	//AddPortConfigSubMenu(testPort);
 
 }
 
@@ -142,6 +142,12 @@ void CMyMenuWnd::MakeItemsDelegate()
 	SubMenuMakeDelegate(kSubMenuItemAwOnOffRecordName);
 
 	m_pm.FindControl(kEditCtlHostNameName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnHostName);
+
+	m_pm.FindControl(kCameraNameEditName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnCameraName);
+	m_pm.FindControl(kCameraSwitchName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnCameraSwitch);
+	m_pm.FindControl(kCameraVolumeName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnCameraVolume);
+	m_pm.FindControl(kCameraVideoSaveName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnCameraStore);
+	m_pm.FindControl(kCameraAwName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnCameraAutoWatch);
 
 	m_pm.FindControl(kSysBrightName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnSysBrightness);
 	m_pm.FindControl(kSysVolumeName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnSysVolume);
@@ -293,12 +299,12 @@ bool CMyMenuWnd::OnCameraName(void * param)
 			break;
 		//----------------------------------------------
 		case VK_DOWN:
-			//SetFocus to camera switch
+			m_pm.FindControl(kCameraSwitchName)->SetFocus();
 			break;
 		}
 		break;
 	}
-	return false;
+	return true;
 }
 
 bool CMyMenuWnd::OnCameraVolume(void * param)
@@ -309,7 +315,7 @@ bool CMyMenuWnd::OnCameraVolume(void * param)
 	case UIEVENT_KEYDOWN:
 		switch (pMsg->wParam) {
 		case VK_UP:
-			//setfocus to camera switch
+			m_pm.FindControl(kCameraSwitchName)->SetFocus();
 			break;
 		//----------------------------------------------
 		case VK_LEFT:
@@ -327,7 +333,7 @@ bool CMyMenuWnd::OnCameraVolume(void * param)
 			break;
 		//----------------------------------------------
 		case VK_DOWN:
-			//setfocus to videoSave
+			m_pm.FindControl(kCameraVideoSaveName)->SetFocus();
 			break;
 		//----------------------------------------------
 		case VK_BACK:
@@ -360,11 +366,11 @@ bool CMyMenuWnd::OnCameraSwitch(void * param)
 	case UIEVENT_KEYDOWN:
 		switch (pMsg->wParam) {
 		case VK_UP:
-			//setfocus to cameraname
+			m_pm.FindControl(kCameraNameEditName)->SetFocus();
 			break;
 
 		case VK_DOWN:
-			//setfocus to camera volume
+			m_pm.FindControl(kCameraVolumeName)->SetFocus();
 			break;
 
 		case VK_BACK:
@@ -404,7 +410,7 @@ bool CMyMenuWnd::OnCameraSwitch(void * param)
 		return false;
 		break;
 	}
-	return false;
+	return true;
 }
 
 bool CMyMenuWnd::OnCameraStore(void * param)
@@ -414,12 +420,12 @@ bool CMyMenuWnd::OnCameraStore(void * param)
 	case UIEVENT_KEYDOWN:
 		switch (pMsg->wParam) {
 		case VK_UP:
-			//setfocus to camera volume
+			m_pm.FindControl(kCameraVolumeName)->SetFocus();
 			break;
 
 		//----------------------------------------------
 		case VK_DOWN:
-			//setfocus to camera aw
+			m_pm.FindControl(kCameraAwName)->SetFocus();
 			break;
 		//----------------------------------------------
 		case VK_BACK:
@@ -441,7 +447,7 @@ bool CMyMenuWnd::OnCameraStore(void * param)
 
 		break;
 	}
-	return false;
+	return true;
 }
 
 bool CMyMenuWnd::OnCameraAutoWatch(void * param)
@@ -452,7 +458,7 @@ bool CMyMenuWnd::OnCameraAutoWatch(void * param)
 	case UIEVENT_KEYDOWN:
 		switch (pMsg->wParam) {
 		case VK_UP:
-			//setfocus to video save
+			m_pm.FindControl(kCameraVideoSaveName)->SetFocus();
 			break;
 		//----------------------------------------------
 		case VK_RETURN:
@@ -491,7 +497,7 @@ bool CMyMenuWnd::OnCameraAutoWatch(void * param)
 
 		break;
 	}
-	return false;
+	return true;
 }
 
 
@@ -1085,6 +1091,7 @@ void CMyMenuWnd::FillCameraInfo(CControlUI* pItem)
 	CDuiString text;
 	CPort* tagPort = (CPort*)pItem->GetTag();
 	if (tagPort) {
+		m_pm.FindControl(kLayoutCameraSetName)->SetTag((UINT_PTR)tagPort);
 		text.Format(_T("%sÉèÖÃ"), tagPort->GetName());
 		m_pm.FindControl(kCameraLayoutTitleName)->SetText(text);
 		m_pm.FindControl(kCameraNameEditName)->SetText(tagPort->GetName());

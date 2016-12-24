@@ -46,7 +46,7 @@ const TCHAR* const kBodyLayoutAlarmVideo = _T("body_alarm_video");
 const TCHAR* const kBodyLayoutHostSetName = _T("body_host_set");
 const TCHAR* const kBodyLayoutAwTime = _T("body_auto_watch");
 const TCHAR* const kBodyLayoutVideoObtain = _T("body_video_obtain");
-
+const TCHAR* const kLayoutCameraSetName = _T("layout_camera_set");
 
 //host name
 const TCHAR* const kEditCtlHostNameName = _T("edit_host_name");
