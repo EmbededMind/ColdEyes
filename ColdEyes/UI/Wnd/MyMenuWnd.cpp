@@ -87,10 +87,10 @@ void CMyMenuWnd::InitWindow()
 
 	//AddVideoObtainSubMenu(port1);
 
-	//testPort = new CPort;
-	//testPort->SetId(3);
-	//testPort->SetNameIndex(3);
-	//AddPortConfigSubMenu(testPort);
+	testPort = new CPort;
+	testPort->SetId(3);
+	testPort->SetNameIndex(3);
+	AddPortConfigSubMenu(testPort);
 
 }
 
@@ -174,7 +174,7 @@ void CMyMenuWnd::SubMenuMakeDelegate(const TCHAR* const Name)
 }
 
 
-bool CMyMenuWnd::OnMenuItem(void * param)
+bool CMyMenuWnd::OnMenuItem(void * param) 
 {
 	TEventUI* pMsg = (TEventUI*)param;
 	CMenuItemUI* Item = (CMenuItemUI*)pMsg->pSender;
@@ -182,7 +182,11 @@ bool CMyMenuWnd::OnMenuItem(void * param)
 	if (pMsg->Type == UIEVENT_KEYDOWN) {
 		if (pMsg->wParam == VK_RIGHT) {
 			if (_tcscmp(Item->GetName(), KMenuItemHomeWatchName) == 0) {
-
+				//messagebox test
+				//COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_ok.xml"), NULL , _T("OkCancel TEXT2"), NULL, NULL);
+				//COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_shipname_input.xml"),NULL,NULL,NULL,NULL);
+				//COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_copyvideo_request.xml"), _T("TIME"), NULL, NULL, NULL);
+				//COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_update_request.xml"), _T("1.0.0"), _T("1.0.1"), NULL, NULL);
 				return false;
 			}
 		}
@@ -198,12 +202,26 @@ bool CMyMenuWnd::OnSubMenuItem(void * param)
 	CDuiString Name = pItem->GetName();
 	switch (pMsg->Type) {
 	case UIEVENT_KEYDOWN:
+		if (GetKeyState(VK_CONTROL) && !(pMsg->wParam & 0x20000000)) {
+			if (pMsg->wParam == 'U') {
+				if (_tcsicmp(pItem->GetUserData(), _T("AlarmVideo")) == 0) {
+					//copy 
+				}
+				else if (_tcsicmp(pItem->GetUserData(), _T("VideoObtain")) == 0) {
+					//copy
+				}
+			}
+			break;
+		}
+
 		switch (pMsg->wParam) {
 		case VK_BACK:
 			if (pItem->GetOnwerMenuItemName()) {
 				m_pm.FindControl(pItem->GetOnwerMenuItemName())->SetFocus();
 			}
 			break;
+		//----------------------------------------------
+
 		//----------------------------------------------
 		case VK_RIGHT:
 			if (_tcsicmp(Name, kSubMenuItemHostName) == 0) {
@@ -223,6 +241,11 @@ bool CMyMenuWnd::OnSubMenuItem(void * param)
 			}
 			else if (_tcsicmp(Name, kSubMenuItemAwOnOffRecordName) == 0) {
 				
+			}
+			else {
+				if (_tcsicmp(pItem->GetUserData(), _T("PortConfig")) == 0) {
+					m_pm.FindControl(kCameraNameEditName)->SetFocus();
+				}
 			}
 			return false;
 			break;
@@ -389,12 +412,11 @@ bool CMyMenuWnd::OnCameraSwitch(void * param)
 
 		case VK_LEFT:
 			if (pItem->GetValue() == true) {
-				/*if(id==messagebox()){
+				if(MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd,_T("mb_camera_switch.xml"),NULL,NULL,NULL,NULL)){
 					pItem->SetValue(false);
-					pItem->invalidate();
-					save();
+					pItem->Invalidate();
+					//save();
 				}
-				*/
 			}
 			break;
 
@@ -977,6 +999,7 @@ void CMyMenuWnd::AddAlarmSubMenu(CPort* pPort)
 	CSubMenuItemUI* pItem = NULL;
 	pItem = AddSubMenuItem(kLayoutSubAlarmVideoName, pPort);
 	pItem->SetOnwerMenuItemName(kMenuItemAlarmVideoName);
+	pItem->SetUserData(_T("AlarmVideo"));
 }
 
 void CMyMenuWnd::AddVideoObtainSubMenu(CPort* pPort)
@@ -984,6 +1007,7 @@ void CMyMenuWnd::AddVideoObtainSubMenu(CPort* pPort)
 	CSubMenuItemUI* pItem = NULL;
 	pItem = AddSubMenuItem(kLayoutSubVideoObtainName, pPort);
 	pItem->SetOnwerMenuItemName(kMenuItemVideoObtainName);
+	pItem->SetUserData(_T("VideoObtain"));
 }
 
 void CMyMenuWnd::AddPortConfigSubMenu(CPort* pPort)

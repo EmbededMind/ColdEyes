@@ -13,6 +13,7 @@
 #include "UI\Control\OptionExUI.h"
 
 #include "Device\Port.h"
+#include "OkCancelMsgWnd.h"
 
 //MenuItmLayout
 const TCHAR* const KLayoutParentMenuName = _T("layout_parent_menu");

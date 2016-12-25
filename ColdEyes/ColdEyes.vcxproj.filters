@@ -120,6 +120,9 @@
     <ClInclude Include="UI\Control\OptionExUI.h">
       <Filter>UI\Control</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Wnd\OkCancelMsgWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp">
@@ -190,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="UI\Control\OptionExUI.cpp">
       <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\OkCancelMsgWnd.cpp">
+      <Filter>UI\Wnd</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

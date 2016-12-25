@@ -228,6 +228,7 @@
     <ClInclude Include="UI\Wnd\MainWindow.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="UI\Wnd\OkCancelMsgWnd.h" />
     <ClInclude Include="UI\Wnd\MyMenuWnd.h" />
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +266,7 @@
     <ClCompile Include="UI\Wnd\MainWindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="UI\Wnd\OkCancelMsgWnd.cpp" />
     <ClCompile Include="UI\Wnd\MyMenuWnd.cpp" />
   </ItemGroup>
   <ItemGroup>
