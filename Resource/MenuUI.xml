@@ -76,9 +76,9 @@
 					</VerticalLayout>
 					
 					<TabLayout name="body_host_set" bkcolor="#FFEFEFF4" visible="false">
-						<include source="HostName.xml"/>
-						<include source="CameraSet.xml" /> 
-						<include source="SysSet.xml"/>
+						<include source="host_name.xml"/>
+						<include source="camera_set.xml" /> 
+						<include source="sys_set.xml"/>
 					</TabLayout>
 				</HorizontalLayout>
 				
@@ -96,10 +96,10 @@
 					</VerticalLayout>
 					
 					<TabLayout name="body_auto_watch" bkcolor="#FFEFEFF4" visible="false">
-						<include source="AwTime.xml"/>
-						<include source="AlarmVoice.xml"/>
-						<include source="AlarmLights.xml"/>
-						<include source="AwOnOffRecord.xml"/>
+						<include source="aw_time.xml"/>
+						<include source="alarm_voice.xml"/>
+						<include source="alarm_lights.xml"/>
+						<include source="aw_onoff_record.xml"/>
 					</TabLayout>
 				</HorizontalLayout>
 				

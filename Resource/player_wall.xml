@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="1600,1200">
+
+	<VerticalLayout name="root" bkcolor="FFEFEFF4">
+		<VerticalLayout height="1040">
+		</VerticalLayout>
+		
+		<VerticalLayout name="playercontrol" bkcolor="#FF3F3F3F" bkcolor2="#FF222222">
+			<Button name="bt_slow" float="true" pos="70,42,0,0" width="76" height="76" bkimage="file='image/slow.png'" focusedimage="file='image/slow_focused.png'" />
+			<Button name="bt_play" float="true" pos="175,30,0,0" width="101" height="101" bkimage="file='image/play.png'" focusedimage="file='image/play_focused.png'"/>
+			<Button name="bt_fast" float="true" pos="305,42,0,0" width="76" height="76" bkimage="file='image/fast.png'" focusedimage="file='image/fast_focused.png'" />
+			<Label name="time_begin" float="true" pos="450,66,0,0" width="168" height="28" font="0" textcolor="#FFFFFFFF" text="00:00:00"/>
+			<Label name="bind_progress" float="true" pos="649,58,0,0" width="719" height="41" bkimage="file='image/player_pro_bk.png' mask='#FFE97FFF'" />
+			<Slider name="progress" float="true" pos="649,60,0,0" width="800" height="42" thumbsize="38,38" thumbimage="file='image/player_thumb.png'" foreimage="file='image/player_pro_fore.png' mask='#FFE97FFF'"/>
+			<Label name="time_end" float="true" pos="1398,66,0,0" width="168" height="28" font="0" textcolor="#FFFFFFFF" text="00:00:00"/>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>
