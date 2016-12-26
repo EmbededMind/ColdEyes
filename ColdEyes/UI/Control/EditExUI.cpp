@@ -21,6 +21,7 @@ void CEditExUI::DoEvent(TEventUI &event)
 
 
 	if (event.Type == UIEVENT_SETFOCUS){
+		Print("Edit FOCUSED");
 		SetBkColor(0xFFD7E9FF);
 	}
 	else if (event.Type == UIEVENT_KILLFOCUS) {

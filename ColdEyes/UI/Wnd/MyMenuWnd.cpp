@@ -194,7 +194,7 @@ bool CMyMenuWnd::OnMenuItem(void * param)
 	return true;
 }
 
-/*************** Delegate Functions*********************/
+/*************** Delegate Functions *********************/
 bool CMyMenuWnd::OnSubMenuItem(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
@@ -244,6 +244,7 @@ bool CMyMenuWnd::OnSubMenuItem(void * param)
 			}
 			else {
 				if (_tcsicmp(pItem->GetUserData(), _T("PortConfig")) == 0) {
+					Print("PortConfig");
 					m_pm.FindControl(kCameraNameEditName)->SetFocus();
 				}
 			}
@@ -305,6 +306,9 @@ bool CMyMenuWnd::OnNormalFileList(void * param)
 bool CMyMenuWnd::OnCameraName(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
+	CEditExUI* pItem = (CEditExUI*)pMsg->pSender;
+	CContainerUI* pParentLayout = NULL;
+	CContainerUI* pLayout = NULL;
 	switch (pMsg->Type) {
 	case UIEVENT_KEYDOWN:
 		switch (pMsg->wParam){
@@ -324,11 +328,43 @@ bool CMyMenuWnd::OnCameraName(void * param)
 		case VK_DOWN:
 			m_pm.FindControl(kCameraSwitchName)->SetFocus();
 			break;
+		//----------------------------------------------
+		case VK_RETURN:
+			pParentLayout = (CContainerUI*)m_pm.FindControl(kLayoutCameraSetName);
+			if (!pItem->GetStatus()) {
+				pItem->SetStatus(true);
+				CContainerUI* pCameraNameLayout = (CContainerUI*)pParentLayout->GetItemAt(1);
+				CContainerUI* pLastLayout = (CContainerUI*)pParentLayout->GetItemAt(2);
+				SIZE size;
+				size.cx = pLastLayout->GetFixedXY().cx;
+				size.cy = pLastLayout->GetFixedXY().cy + pCameraNameLayout->GetFixedHeight();
+				pLastLayout->SetFixedXY(size);
+				pParentLayout->GetItemAt(1)->SetVisible(true);
+				((CContainerUI*)((CContainerUI*)pCameraNameLayout->GetItemAt(0))->GetItemAt(0))->GetItemAt(0)->SetFocus();
+			}
+			break;
+		}
+		return false;
+		break;
+
+	case UIEVENT_SETFOCUS:
+		if (m_pm.FindControl(_T("layout_camera_name"))->IsVisible()) {
+			pItem->SetStatus(false);
+			pParentLayout = (CContainerUI*)m_pm.FindControl(kLayoutCameraSetName);
+			CContainerUI* pCameraNameLayout = (CContainerUI*)pParentLayout->GetItemAt(1);
+			CContainerUI* pLastLayout = (CContainerUI*)pParentLayout->GetItemAt(2);
+			
+			SIZE size;
+			size.cx = pLastLayout->GetFixedXY().cx;
+			size.cy = pLastLayout->GetFixedXY().cy - pCameraNameLayout->GetFixedHeight();
+			pLastLayout->SetFixedXY(size);
+			pCameraNameLayout->SetVisible(false);
 		}
 		break;
 	}
 	return true;
 }
+
 
 bool CMyMenuWnd::OnCameraVolume(void * param)
 {

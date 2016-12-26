@@ -126,6 +126,7 @@ BOOL CColdEyesApp::InitInstance()
 	REGIST_DUICONTROL(CSwitchExUI);
 	REGIST_DUICONTROL(CEditExUI);
 	REGIST_DUICONTROL(COptionExUI);
+	REGIST_DUICONTROL(CCameraNameElementUI);
 
 	//CMainWindow* pMainWindow  = new CMainWindow();
 	//pMainWindow->Create(NULL, NULL, UI_WNDSTYLE_DIALOG, 0);

@@ -11,6 +11,7 @@
 #include "UI\Control\TimeSpanPickerUI.h"
 #include "UI\Control\SwitchExUI.h"
 #include "UI\Control\OptionExUI.h"
+#include "UI\Control\CameraNameELementUI.h"
 
 #include "Device\Port.h"
 #include "OkCancelMsgWnd.h"
