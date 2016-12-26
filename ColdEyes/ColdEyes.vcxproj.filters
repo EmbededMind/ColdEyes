@@ -126,6 +126,18 @@
     <ClInclude Include="UI\Control\CameraNameELementUI.h">
       <Filter>UI\Control</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Wnd\AlphaMarkWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\PlayerWallWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\SysSetIconsWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\VPlayer.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp">
@@ -202,6 +214,18 @@
     </ClCompile>
     <ClCompile Include="UI\Control\CameraNameELementUI.cpp">
       <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\AlphaMarkWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\PlayerWallWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\SysSetIconsWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\VPlayer.cpp">
+      <Filter>UI\Wnd</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -87,6 +87,9 @@
 #define USER_MSG_LOGOUT                  (WM_USER + 112)
 
 
+#define USER_MSG_SYS_VOLUME				 (WM_USER + 210) //系统音量
+#define USER_MSG_SYS_LIGHT				 (WM_USER + 211)	// 系统亮度
+
  /*****************************************
  *            Direction define            *
  ******************************************/

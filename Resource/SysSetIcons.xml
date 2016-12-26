@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Window caption="0,0,0,97" size="600,450" bktrans="true" > <!--  bktrans="true" layered="true"-->
+  
+  <Font shared="true" id="0" name="方正兰亭中黑_GBK" size="32"/>
+  
+  <Default shared="true" name="Button" value="float=&quot;true&quot; height=&quot;86&quot; pos=&quot;0,0,186,86&quot; font=&quot;0&quot; textpadding=&quot;110,20,20,21&quot; textcolor=&quot;#FFFFFFFF&quot; "/>
+  
+  <VerticalLayout name="root" bkimage="file='image/sysset_bk.png'" borderround="10,10">
+		<Label name="volume" float="true" pos="200,100,0,0" width="200" height="197" bkimage="file='image/sysset_volume.png'" />
+		<Label name="light" float="true" pos="200,100,0,0" width="200" height="197" bkimage="file='image/sysset_light.png'" />
+		<Label name="bind_progress" float="true" pos="204,367,0,0" width="233" height="18" bkcolor="#FF9B9B9B"  />
+		<Progress name="value" float="true" pos="204,367,0,0" width="233" height="18" min="0" max="100" foreimage="file='image/sysvolume_progress.png'" isstretchfore="false"/>
+  </VerticalLayout>
+</Window>
