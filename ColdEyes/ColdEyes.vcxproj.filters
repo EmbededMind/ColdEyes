@@ -111,6 +111,9 @@
     <ClInclude Include="Talk\Free.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ExHardDriver\ExHardDrive.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp">
@@ -165,6 +168,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Talk\Free.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ExHardDriver\ExHardDrive.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

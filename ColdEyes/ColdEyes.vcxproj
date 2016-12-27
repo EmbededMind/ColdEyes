@@ -195,6 +195,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ExHardDriver\ExHardDrive.h" />
     <ClInclude Include="Talk\Free.h" />
     <ClInclude Include="Talk\Alarm.h" />
     <ClInclude Include="Talk\CameraTalk.h" />
@@ -226,6 +227,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ExHardDriver\ExHardDrive.cpp" />
     <ClCompile Include="Talk\Free.cpp" />
     <ClCompile Include="Talk\Alarm.cpp" />
     <ClCompile Include="Talk\CameraTalk.cpp" />
