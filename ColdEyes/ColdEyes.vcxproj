@@ -195,6 +195,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Talk\Free.h" />
+    <ClInclude Include="Talk\Alarm.h" />
+    <ClInclude Include="Talk\CameraTalk.h" />
     <ClInclude Include="ColdEyes.h" />
     <ClInclude Include="ColdEyesDlg.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -207,6 +210,7 @@
     <ClInclude Include="Device\DeviceScanner.h" />
     <ClInclude Include="Device\Port.h" />
     <ClInclude Include="Device\PortManager.h" />
+    <ClInclude Include="Talk\HostTalk.h" />
     <ClInclude Include="Talk\IState.h" />
     <ClInclude Include="Layout.h" />
     <ClInclude Include="Pattern\IDataHandler.h" />
@@ -222,6 +226,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Talk\Free.cpp" />
+    <ClCompile Include="Talk\Alarm.cpp" />
+    <ClCompile Include="Talk\CameraTalk.cpp" />
     <ClCompile Include="ColdEyes.cpp" />
     <ClCompile Include="ColdEyesDlg.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -234,6 +241,7 @@
     <ClCompile Include="Device\DeviceScanner.cpp" />
     <ClCompile Include="Device\Port.cpp" />
     <ClCompile Include="Device\PortManager.cpp" />
+    <ClCompile Include="Talk\HostTalk.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

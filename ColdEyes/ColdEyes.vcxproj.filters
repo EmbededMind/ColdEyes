@@ -99,6 +99,18 @@
     <ClInclude Include="Talk\IState.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Talk\HostTalk.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Talk\CameraTalk.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Talk\Alarm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Talk\Free.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp">
@@ -141,6 +153,18 @@
       <Filter>Com</Filter>
     </ClCompile>
     <ClCompile Include="Talk\Talk.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Talk\HostTalk.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Talk\CameraTalk.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Talk\Alarm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Talk\Free.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
