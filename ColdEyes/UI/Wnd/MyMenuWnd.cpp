@@ -74,6 +74,7 @@ LRESULT CMyMenuWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam,
 
 void CMyMenuWnd::InitWindow()
 {
+	AdapTive();
 	MakeItemsDelegate();
 	ShowVoiceOption(false);
 
@@ -86,7 +87,7 @@ void CMyMenuWnd::InitWindow()
 	//testPort = new CPort;
 	//testPort->SetId(3);
 	//testPort->SetNameIndex(3);
-	//AddVideoObtainSubMenu(testPort);
+	//AddPortConfigSubMenu(testPort);
 
 }
 
@@ -1072,4 +1073,94 @@ void CMyMenuWnd::ShowBodyLayout(bool isShow)
 	m_pm.FindControl(kBodyLayoutAwTime)->SetVisible(isShow);
 	m_pm.FindControl(kBodyLayoutHostSetName)->SetVisible(isShow);
 	m_pm.FindControl(kBodyLayoutVideoObtain)->SetVisible(isShow);
+}
+
+void CMyMenuWnd::AdapTive()
+{
+	//ÊÊÅä·Ö±æÂÊ
+	m_dispSize = { 1600 ,1200 };
+
+	float scale;
+	float iWidth = GetSystemMetrics(SM_CXSCREEN);
+	float iHeight = GetSystemMetrics(SM_CYSCREEN);
+
+	//4:3
+	if (iWidth / 4 == iHeight / 3) {
+		scale = iHeight / m_dispSize.cy;
+		ScaleCalculate(scale);
+	}
+	////16:9  
+	//else if (iWidth / 16 == iHeight / 9) {
+
+	//}
+	//ÆäËû
+	else {
+		if (iWidth >= iHeight) {
+			scale = iHeight / m_dispSize.cy;
+			ScaleCalculate(scale);
+		}
+		else {
+			scale = iWidth / m_dispSize.cx;
+			ScaleCalculate(scale);
+		}
+	}
+}
+
+int CMyMenuWnd::ScaleCalculate(float scale)
+{
+	CDuiString Resource = _T(UI_RESOURCE_PATH);
+	CDPI* pDpi = m_pm.GetDPIObj();
+	m_dpi = pDpi->GetDPI();
+
+	m_dpi = 96 * scale;
+	m_pm.SetDPI(m_dpi);
+
+	m_scale = pDpi->GetScale();
+
+	_cprintf("m_scale:%d", m_scale);
+	Resource += _T("\\image");
+	ReNameImage(Resource);
+	return scale;
+}
+
+void CMyMenuWnd::ReNameImage(CDuiString strPathName)
+{
+	CString OldName;
+	CString  destName;
+	HANDLE hFile;
+	CString  sScale;
+	sScale.Format(_T("@%d"), m_scale);
+	CString lpFileName = strPathName;
+	strPathName += L"\\*.png";
+	WIN32_FIND_DATA pNextInfo;
+	int inx;
+
+	hFile = FindFirstFile(strPathName, &pNextInfo);
+
+	if (hFile == INVALID_HANDLE_VALUE) {
+		//ËÑË÷Ê§°Ü
+		exit(-1);
+	}
+
+	do {
+		if (pNextInfo.cFileName[0] == '.')
+			continue;
+		OldName = lpFileName + L"\\" + pNextInfo.cFileName;
+		destName = pNextInfo.cFileName;
+
+		inx = destName.Find('@');
+		if (inx != -1) {
+			while (destName.GetAt(inx) != '.') {
+				destName.Delete(inx, 1);
+			}
+		}
+
+		if (m_scale != 100)
+			destName.Insert(destName.GetLength() - 4, sScale);
+
+		if (destName.Compare(pNextInfo.cFileName) == 0)
+			continue;
+		destName = lpFileName + L"\\" + destName;
+		CFile::Rename(OldName, destName);
+	} while (FindNextFile(hFile, &pNextInfo));
 }

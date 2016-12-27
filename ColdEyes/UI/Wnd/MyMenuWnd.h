@@ -168,8 +168,15 @@ public:
 	//ShowBody
 	void ShowBodyLayout(bool isShow);
 
+	//Dpi
+	void AdapTive();
+	int ScaleCalculate(float scale);
+	void ReNameImage(CDuiString strPathName);
+
 private:
-	int mDPI;
+	SIZE m_dispSize;
+	int m_dpi;
+	int m_scale;
 
 	CControlUI* pKillFocsedItem ;
 	CDuiString FocusedItemClassName;
