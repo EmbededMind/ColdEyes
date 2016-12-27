@@ -178,11 +178,20 @@ public:
 	//ShowBody
 	void ShowBodyLayout(bool isShow);
 
+<<<<<<< HEAD
 	//Body Fill Camera Info
 	void FillCameraInfo(CControlUI* pItem);
+=======
+	//Dpi
+	void AdapTive();
+	int ScaleCalculate(float scale);
+	void ReNameImage(CDuiString strPathName);
+>>>>>>> branch_feature_dpi
 
 private:
-	int mDPI;
+	SIZE m_dispSize;
+	int m_dpi;
+	int m_scale;
 
 	CControlUI* pKillFocsedItem ;
 	CDuiString FocusedItemClassName;

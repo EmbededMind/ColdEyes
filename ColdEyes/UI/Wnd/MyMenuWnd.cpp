@@ -78,6 +78,7 @@ LRESULT CMyMenuWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam,
 
 void CMyMenuWnd::InitWindow()
 {
+	AdapTive();
 	MakeItemsDelegate();
 	ShowVoiceOption(false);
 	//m_pm.SetDPI(50);
@@ -87,10 +88,17 @@ void CMyMenuWnd::InitWindow()
 
 	//AddVideoObtainSubMenu(port1);
 
+<<<<<<< HEAD
 	testPort = new CPort;
 	testPort->SetId(3);
 	testPort->SetNameIndex(3);
 	AddPortConfigSubMenu(testPort);
+=======
+	//testPort = new CPort;
+	//testPort->SetId(3);
+	//testPort->SetNameIndex(3);
+	//AddPortConfigSubMenu(testPort);
+>>>>>>> branch_feature_dpi
 
 }
 
@@ -1145,6 +1153,7 @@ void CMyMenuWnd::ShowBodyLayout(bool isShow)
 	m_pm.FindControl(kBodyLayoutVideoObtain)->SetVisible(isShow);
 }
 
+<<<<<<< HEAD
 void CMyMenuWnd::FillCameraInfo(CControlUI* pItem)
 {
 	//填充摄像头信息： 标题、摄像头名称、摄像头开关、语音音量、存储设置、自动看船设置
@@ -1161,4 +1170,94 @@ void CMyMenuWnd::FillCameraInfo(CControlUI* pItem)
 		static_cast<CLabelExUI*>(m_pm.FindControl(kCameraAwName))->SetValue(true);
 		m_pm.Invalidate();
 	}
+=======
+void CMyMenuWnd::AdapTive()
+{
+	//适配分辨率
+	m_dispSize = { 1600 ,1200 };
+
+	float scale;
+	float iWidth = GetSystemMetrics(SM_CXSCREEN);
+	float iHeight = GetSystemMetrics(SM_CYSCREEN);
+
+	//4:3
+	if (iWidth / 4 == iHeight / 3) {
+		scale = iHeight / m_dispSize.cy;
+		ScaleCalculate(scale);
+	}
+	////16:9  
+	//else if (iWidth / 16 == iHeight / 9) {
+
+	//}
+	//其他
+	else {
+		if (iWidth >= iHeight) {
+			scale = iHeight / m_dispSize.cy;
+			ScaleCalculate(scale);
+		}
+		else {
+			scale = iWidth / m_dispSize.cx;
+			ScaleCalculate(scale);
+		}
+	}
+}
+
+int CMyMenuWnd::ScaleCalculate(float scale)
+{
+	CDuiString Resource = _T(UI_RESOURCE_PATH);
+	CDPI* pDpi = m_pm.GetDPIObj();
+	m_dpi = pDpi->GetDPI();
+
+	m_dpi = 96 * scale;
+	m_pm.SetDPI(m_dpi);
+
+	m_scale = pDpi->GetScale();
+
+	_cprintf("m_scale:%d", m_scale);
+	Resource += _T("\\image");
+	ReNameImage(Resource);
+	return scale;
+}
+
+void CMyMenuWnd::ReNameImage(CDuiString strPathName)
+{
+	CString OldName;
+	CString  destName;
+	HANDLE hFile;
+	CString  sScale;
+	sScale.Format(_T("@%d"), m_scale);
+	CString lpFileName = strPathName;
+	strPathName += L"\\*.png";
+	WIN32_FIND_DATA pNextInfo;
+	int inx;
+
+	hFile = FindFirstFile(strPathName, &pNextInfo);
+
+	if (hFile == INVALID_HANDLE_VALUE) {
+		//搜索失败
+		exit(-1);
+	}
+
+	do {
+		if (pNextInfo.cFileName[0] == '.')
+			continue;
+		OldName = lpFileName + L"\\" + pNextInfo.cFileName;
+		destName = pNextInfo.cFileName;
+
+		inx = destName.Find('@');
+		if (inx != -1) {
+			while (destName.GetAt(inx) != '.') {
+				destName.Delete(inx, 1);
+			}
+		}
+
+		if (m_scale != 100)
+			destName.Insert(destName.GetLength() - 4, sScale);
+
+		if (destName.Compare(pNextInfo.cFileName) == 0)
+			continue;
+		destName = lpFileName + L"\\" + destName;
+		CFile::Rename(OldName, destName);
+	} while (FindNextFile(hFile, &pNextInfo));
+>>>>>>> branch_feature_dpi
 }
