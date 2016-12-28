@@ -97,6 +97,9 @@ void CMenuItemUI::PaintBkColor(HDC hDC)
 void CMenuItemUI::PaintText(HDC hDC)
 {
 	if (mState) {
+		
+		RECT m_rcTextPadding = CButtonUI::m_rcTextPadding;
+		GetManager()->GetDPIObj()->Scale(&m_rcTextPadding);
 		RECT rc = m_rcItem;
 		rc.left += m_rcTextPadding.left;
 		rc.right -= m_rcTextPadding.right;

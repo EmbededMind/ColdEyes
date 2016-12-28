@@ -7,7 +7,7 @@
 		<VerticalLayout float="true" bkcolor="#FFF3F3F3" pos="70,80,0,0" width="790" height="155">
 			<Label name ="camera_layout_title" bkcolor="#FFE5E3E3" height="80" font="3" textcolor="#FF333333" align="center"/>
 			<Text float="true" pos="45,111,0,0" width="155" height="39" font="3" textcolor="#FF666666" text="摄像头名称" />
-			<EditEx name="camera_name_edit" float="true" pos="245,105,0,0" height="50" 	width="500" 	align="center"	bkcolor="#FFEBEBEB"		font="3"	borderround="4,4"	bordersize="1"	focusbordercolor="#FF4198FE"	textcolor="#FF333333"/>
+			<EditEx name="camera_name_edit" float="true" pos="245,105,0,0" height="50" 	width="500" 	align="center"	bkcolor="#FFEBEBEB"		font="3"	borderround="10,10"	bordersize="1"	bordercolor="#FF979797"	focusbordercolor="#FF4198FE"	textcolor="#FF333333"/>
 		</VerticalLayout>
 		<VerticalLayout	name="layout_camera_name"	 visible="false"  float="true" bkcolor="#FFF3F3F3" pos="70,235,0,0" width="790" height="270">
 			<VerticalLayout  padding="53,30,45,5" bkcolor="#FFD7E9FF" >

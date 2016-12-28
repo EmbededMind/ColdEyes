@@ -81,24 +81,16 @@ void CMyMenuWnd::InitWindow()
 	AdapTive();
 	MakeItemsDelegate();
 	ShowVoiceOption(false);
-	//m_pm.SetDPI(50);
 	//CPort* port1 = new CPort();
 	//port1->SetId(2);
 	//port1->SetNameIndex(2);
 
 	//AddVideoObtainSubMenu(port1);
 
-<<<<<<< HEAD
 	testPort = new CPort;
 	testPort->SetId(3);
 	testPort->SetNameIndex(3);
 	AddPortConfigSubMenu(testPort);
-=======
-	//testPort = new CPort;
-	//testPort->SetId(3);
-	//testPort->SetNameIndex(3);
-	//AddPortConfigSubMenu(testPort);
->>>>>>> branch_feature_dpi
 
 }
 
@@ -218,8 +210,8 @@ bool CMyMenuWnd::OnSubMenuItem(void * param)
 				else if (_tcsicmp(pItem->GetUserData(), _T("VideoObtain")) == 0) {
 					//copy
 				}
+				break;
 			}
-			break;
 		}
 
 		switch (pMsg->wParam) {
@@ -268,7 +260,7 @@ bool CMyMenuWnd::OnSubMenuItem(void * param)
 bool CMyMenuWnd::OnHostName(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
-	CEditExUI* Item = (CEditExUI*)pMsg->pSender;
+	CEditExUI* pItem = (CEditExUI*)pMsg->pSender;
 	switch (pMsg->Type){
 	case UIEVENT_KEYDOWN:
 		switch (pMsg->wParam) {
@@ -277,7 +269,7 @@ bool CMyMenuWnd::OnHostName(void * param)
 			break;
 		//------------------------------
 		case VK_RETURN:
-			Item->SetStatus(true);
+			pItem->SetStatus(true);
 			m_pm.FindControl(kKeyboardName)->SetVisible(true);
 			m_pm.FindControl(kKeyboardName)->SetFocus();
 			m_pm.FindControl(kLayoutPromptName)->SetVisible(true);
@@ -286,7 +278,7 @@ bool CMyMenuWnd::OnHostName(void * param)
 		break;
 	//----------------------------------------------
 	case UIEVENT_SETFOCUS:
-		Item->SetStatus(false);
+		pItem->SetStatus(false);
 		if (m_pm.FindControl(kKeyboardName)->IsVisible()) {
 			m_pm.FindControl(kKeyboardName)->SetVisible(false);
 			m_pm.FindControl(kLayoutPromptName)->SetVisible(false);
@@ -344,8 +336,8 @@ bool CMyMenuWnd::OnCameraName(void * param)
 				CContainerUI* pCameraNameLayout = (CContainerUI*)pParentLayout->GetItemAt(1);
 				CContainerUI* pLastLayout = (CContainerUI*)pParentLayout->GetItemAt(2);
 				SIZE size;
-				size.cx = pLastLayout->GetFixedXY().cx;
-				size.cy = pLastLayout->GetFixedXY().cy + pCameraNameLayout->GetFixedHeight();
+				size.cx = m_pm.GetDPIObj()->ScaleBack(pLastLayout->GetFixedXY().cx);
+				size.cy = m_pm.GetDPIObj()->ScaleBack(pLastLayout->GetFixedXY().cy + pCameraNameLayout->GetFixedHeight());
 				pLastLayout->SetFixedXY(size);
 				pParentLayout->GetItemAt(1)->SetVisible(true);
 				((CContainerUI*)((CContainerUI*)pCameraNameLayout->GetItemAt(0))->GetItemAt(0))->GetItemAt(0)->SetFocus();
@@ -363,8 +355,8 @@ bool CMyMenuWnd::OnCameraName(void * param)
 			CContainerUI* pLastLayout = (CContainerUI*)pParentLayout->GetItemAt(2);
 			
 			SIZE size;
-			size.cx = pLastLayout->GetFixedXY().cx;
-			size.cy = pLastLayout->GetFixedXY().cy - pCameraNameLayout->GetFixedHeight();
+			size.cx = m_pm.GetDPIObj()->ScaleBack(pLastLayout->GetFixedXY().cx);
+			size.cy = m_pm.GetDPIObj()->ScaleBack(pLastLayout->GetFixedXY().cy - pCameraNameLayout->GetFixedHeight());
 			pLastLayout->SetFixedXY(size);
 			pCameraNameLayout->SetVisible(false);
 		}
@@ -943,7 +935,7 @@ bool CMyMenuWnd::OnAlarmVoiceRecord(void * param)
 			break;
 		//----------------------------------------------
 		case VK_RETURN:
-			//AddAlarmVoice();
+			AddAlarmVoice();
 			break;
 		}
 		break;
@@ -1116,16 +1108,21 @@ void CMyMenuWnd::AddAlarmVoice()
 	CVerticalLayoutUI* pParentLayout;
 	CVerticalLayoutUI* pLayout = (CVerticalLayoutUI*)m_pm.FindControl(_T("layout_alarm_voice"));
 	COptionExUI* pItem = new COptionExUI();
-
+	int Height1, Height2;
 	pItem->SetName(kOptionAlarmVoiceRecordName);
 	pLayout->AddAt(pItem, 3);
 	pItem->SetAttribute(_T("style"), _T("style_alarm_voice"));
 	pItem->SetText(_T("录音1"));
 	pItem->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmVoiceOption);
 
-	pLayout->SetFixedHeight(pLayout->GetFixedHeight() + pItem->GetFixedHeight());
+	Height1 = m_pm.GetDPIObj()->ScaleBack(pLayout->GetFixedHeight());
+	Height2 = m_pm.GetDPIObj()->ScaleBack(pItem->GetFixedHeight());
+	pLayout->SetFixedHeight(Height1+Height2);
 	pParentLayout = (CVerticalLayoutUI*)pLayout->GetParent();
-	pParentLayout->SetFixedHeight(pParentLayout->GetFixedHeight()+pItem->GetFixedHeight());
+
+	Height1 = m_pm.GetDPIObj()->ScaleBack(pParentLayout->GetFixedHeight());
+	Height2 = m_pm.GetDPIObj()->ScaleBack(pItem->GetFixedHeight());
+	pParentLayout->SetFixedHeight(Height1 + Height2);
 }
 
 
@@ -1135,13 +1132,17 @@ void CMyMenuWnd::ShowVoiceOption(bool isShow)
 	CContainerUI* pContain2 = (CContainerUI*)m_pm.FindControl(_T("layout_alarm_voice"));
 	CContainerUI* pParentLayout = (CContainerUI*)pContain2->GetParent();
 	CContainerUI* pContain1 = (CContainerUI*)pParentLayout->GetItemAt(0);
+	int Height1,Height2;
 	if (isShow) {
 		pContain2->SetVisible(isShow);
-		pParentLayout->SetFixedHeight(pContain1->GetFixedHeight()+ pContain2->GetFixedHeight());
+		Height1 = m_pm.GetDPIObj()->ScaleBack(pContain1->GetFixedHeight());
+		Height2 = m_pm.GetDPIObj()->ScaleBack(pContain2->GetFixedHeight());
+		pParentLayout->SetFixedHeight(Height1 + Height2);
 	}
 	else {
 		pContain2->SetVisible(isShow);
-		pParentLayout->SetFixedHeight(pContain1->GetFixedHeight());
+		Height1 = m_pm.GetDPIObj()->ScaleBack(pContain1->GetFixedHeight());
+		pParentLayout->SetFixedHeight(Height1);
 	}
 }
 
@@ -1153,7 +1154,6 @@ void CMyMenuWnd::ShowBodyLayout(bool isShow)
 	m_pm.FindControl(kBodyLayoutVideoObtain)->SetVisible(isShow);
 }
 
-<<<<<<< HEAD
 void CMyMenuWnd::FillCameraInfo(CControlUI* pItem)
 {
 	//填充摄像头信息： 标题、摄像头名称、摄像头开关、语音音量、存储设置、自动看船设置
@@ -1170,7 +1170,8 @@ void CMyMenuWnd::FillCameraInfo(CControlUI* pItem)
 		static_cast<CLabelExUI*>(m_pm.FindControl(kCameraAwName))->SetValue(true);
 		m_pm.Invalidate();
 	}
-=======
+}
+
 void CMyMenuWnd::AdapTive()
 {
 	//适配分辨率
@@ -1259,5 +1260,5 @@ void CMyMenuWnd::ReNameImage(CDuiString strPathName)
 		destName = lpFileName + L"\\" + destName;
 		CFile::Rename(OldName, destName);
 	} while (FindNextFile(hFile, &pNextInfo));
->>>>>>> branch_feature_dpi
+
 }
