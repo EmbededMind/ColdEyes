@@ -59,10 +59,10 @@
     <ClInclude Include="UI\Control\XUIControl.h" />
     <ClInclude Include="UI\Wnd\MainWindow.h" />
     <ClInclude Include="UI\Wnd\WallWindow.h" />
-    <ClInclude Include="WallDlg.h" />
     <ClInclude Include="Database\DBHelper.h" />
     <ClInclude Include="Database\sqlitewrapper.h" />
     <ClInclude Include="Config\SystemConfig.h" />
+    <ClInclude Include="WallDlg.h" />
     <ClInclude Include="Config\PortConfig.h" />
   </ItemGroup>
   <ItemGroup>

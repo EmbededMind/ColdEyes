@@ -13,8 +13,8 @@ public:
 
 
 public:
-	CPortConfig mConfig;
-	UINT16      mPos;
+	CPortConfig  mConfig;
+	UINT16       mPos;
 
 	void         BindCamera(CCamera* pCamera);
 

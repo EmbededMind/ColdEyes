@@ -5,7 +5,7 @@
 !/ColdEyes/UI
 !/ColdEyes/*.cpp
 !/ColdEyes/*.h
-/Bin
+/Bin/*
 /Debug/*
 /ipch/*
 /Release/*
@@ -21,3 +21,8 @@
 /ColdEyes/ColdEyes.vcxproj
 /ColdEyes/ColdEyes.vcxproj.filters
 /ColdEyes/ColdEyes.vcxproj.user
+/Bin/ColdEyes.exe
+/Bin/ColdEyes.ilk
+/Bin/ColdEyes.iobj
+/Bin/ColdEyes.ipdb
+/Bin/ColdEyes.pdb
