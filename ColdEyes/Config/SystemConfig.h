@@ -89,7 +89,7 @@ public :
 
 	void         GetAlarmConfig(SystemAlarmConfig* pConfig);
 	void         GetAutoWatchConfig(SystemAutoWatchConfig* pConfig);
-	CString&     GetBoatName();
+	void         GetBoatName(CString& name);
 	UINT16       GetBrightness();
 	UINT16       GetVolumn();
 

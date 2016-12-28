@@ -128,7 +128,7 @@ BOOL CColdEyesApp::InitInstance()
 
 	CDeviceDetecter* pDD = CDeviceDetecter::GetInstance();
 	mRouter.RegisterHandler(pDD, 0x05);
-	pDD->StartDetect();
+	//pDD->StartDetect();
 
 
 

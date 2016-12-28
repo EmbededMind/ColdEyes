@@ -113,11 +113,9 @@ void CSystemConfig::GetAutoWatchConfig(SystemAutoWatchConfig* pConfig)
 
 
 
-CString& CSystemConfig::GetBoatName()
+void CSystemConfig::GetBoatName(CString& name)
 {
-	CString ret;
-	ret.Format(_T("%s"), mBoatName.c_str());
-	return ret;
+	name.Format(_T("%s"), mBoatName.c_str());
 }
 
 
