@@ -12,7 +12,7 @@
 		<VerticalLayout name="layout_alarm_voice" visible="false" bkcolor="#FFF3F3F3" height="348">
 			<Control padding="45,0,45,0" height="2"/>
 			<Text height="98" textpadding="45,31,0,0" text="报警音选择" font="3" textcolor="#FF666666"/>
-			<OptionEx name="voice_default" text="默认语音"  />
+			<OptionEx name="voice_default" text="默认语音" />
 			<Button name="record_btn" padding="270,37,0,0" height="94" width="250" font="0" bkcolor="#FFACACAC" textcolor="#FFFFFFFF" text="录制报警音" focusedimage="file='image/按钮-选中.png'" borderround="6,6"/>
 		</VerticalLayout>
 	</VerticalLayout>

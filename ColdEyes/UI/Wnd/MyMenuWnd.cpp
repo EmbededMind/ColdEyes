@@ -72,6 +72,9 @@ void CMyMenuWnd::Notify(TNotifyUI& msg)
 
 LRESULT CMyMenuWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
+	if (uMsg == WM_TIMER) {
+		Print("timer");
+	}
 	bHandled = FALSE;
 	return 0;
 }
@@ -91,7 +94,6 @@ void CMyMenuWnd::InitWindow()
 	testPort->SetId(3);
 	testPort->SetNameIndex(3);
 	AddPortConfigSubMenu(testPort);
-
 }
 
 void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)
@@ -427,11 +429,11 @@ bool CMyMenuWnd::OnCameraSwitch(void * param)
 		case VK_UP:
 			m_pm.FindControl(kCameraNameEditName)->SetFocus();
 			break;
-
+		//----------------------------------
 		case VK_DOWN:
 			m_pm.FindControl(kCameraVolumeName)->SetFocus();
 			break;
-
+		//----------------------------------
 		case VK_BACK:
 			/*
 			if(cameraname is change){
@@ -445,17 +447,18 @@ bool CMyMenuWnd::OnCameraSwitch(void * param)
 			setfocus to submenuitem
 			*/
 			break;
-
+		//----------------------------------
 		case VK_LEFT:
 			if (pItem->GetValue() == true) {
 				if(MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd,_T("mb_camera_switch.xml"),NULL,NULL,NULL,NULL)){
+				//if (MSGID_OK == CVoiceRecordMsgWnd::MessageBox(m_hWnd, _T("mb_voice_record.xml"), NULL, NULL, NULL, NULL)) {
 					pItem->SetValue(false);
 					pItem->Invalidate();
 					//save();
 				}
 			}
 			break;
-
+		//----------------------------------
 		case VK_RIGHT:
 			if (pItem->GetValue() == false) {
 				pItem->SetValue(true);
@@ -463,6 +466,7 @@ bool CMyMenuWnd::OnCameraSwitch(void * param)
 				//save();
 			}
 			break;
+
 		}
 		
 		return false;
@@ -851,8 +855,8 @@ bool CMyMenuWnd::OnAlarmVoiceSwitch(void * param)
 				m_pm.FindControl(kOptionAlarmVoiceDefaultName)->SetFocus();
 			break;
 		}
-		break;
 
+		break;
 		return false;
 	}
 	return true;
@@ -935,12 +939,14 @@ bool CMyMenuWnd::OnAlarmVoiceRecord(void * param)
 			break;
 		//----------------------------------------------
 		case VK_RETURN:
-			AddAlarmVoice();
+			CVoiceRecordMsgWnd::MessageBox(m_hWnd, _T("mb_voice_record.xml"), NULL, NULL, NULL, NULL);
+			CVoicePlayMsgWnd::MessageBox(m_hWnd, _T("mb_voice_play.xml"), NULL, NULL, NULL, NULL);
+			//AddAlarmVoice();mb_voice_record.xml
 			break;
 		}
-		break;
 
 		return false;
+		break;
 	}
 	return true;
 }
@@ -976,6 +982,7 @@ bool CMyMenuWnd::OnAlarmLight(void * param)
 			*/
 			m_pm.FindControl(kSubMenuItemAlarmLightName)->SetFocus();
 			break;
+
 		}
 		break;
 
@@ -1134,10 +1141,10 @@ void CMyMenuWnd::ShowVoiceOption(bool isShow)
 	CContainerUI* pContain1 = (CContainerUI*)pParentLayout->GetItemAt(0);
 	int Height1,Height2;
 	if (isShow) {
-		pContain2->SetVisible(isShow);
 		Height1 = m_pm.GetDPIObj()->ScaleBack(pContain1->GetFixedHeight());
 		Height2 = m_pm.GetDPIObj()->ScaleBack(pContain2->GetFixedHeight());
 		pParentLayout->SetFixedHeight(Height1 + Height2);
+		pContain2->SetVisible(isShow);
 	}
 	else {
 		pContain2->SetVisible(isShow);

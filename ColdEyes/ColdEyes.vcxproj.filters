@@ -138,6 +138,12 @@
     <ClInclude Include="UI\Wnd\VPlayer.h">
       <Filter>UI\Wnd</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Wnd\VoiceRecordMsgWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\VoicePlayMsgWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp">
@@ -225,6 +231,12 @@
       <Filter>UI\Wnd</Filter>
     </ClCompile>
     <ClCompile Include="UI\Wnd\VPlayer.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\VoiceRecordMsgWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\VoicePlayMsgWnd.cpp">
       <Filter>UI\Wnd</Filter>
     </ClCompile>
   </ItemGroup>

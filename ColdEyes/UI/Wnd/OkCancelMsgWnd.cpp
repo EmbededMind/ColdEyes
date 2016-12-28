@@ -56,6 +56,7 @@ void COkCancelMsgWnd::InitWindow()
 	pButton_cancel = (CButtonUI*)m_pm.FindControl(_T("cancel_btn"));
 	if (pButton_cancel)
 		pButton_cancel->OnEvent += MakeDelegate(this, &COkCancelMsgWnd::OnButtonCancel);
+
 }
 
 void COkCancelMsgWnd::OnTimer(UINT, WPARAM, LPARAM, BOOL & bHandled)
@@ -69,7 +70,11 @@ LRESULT COkCancelMsgWnd::OnSysCommand(UINT, WPARAM, LPARAM, BOOL & bHandled)
 
 LRESULT COkCancelMsgWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
 {
-	return LRESULT();
+	if (uMsg == WM_TIMER) {
+		Print("Timer");
+	}
+	bHandled = FALSE;
+	return 0;
 }
 
 void COkCancelMsgWnd::SetMsg(LPCTSTR text1, LPCTSTR text2)

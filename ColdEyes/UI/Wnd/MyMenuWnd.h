@@ -15,6 +15,8 @@
 
 #include "Device\Port.h"
 #include "OkCancelMsgWnd.h"
+#include "VoiceRecordMsgWnd.h"
+#include "VoicePlayMsgWnd.h"
 
 //MenuItmLayout
 const TCHAR* const KLayoutParentMenuName = _T("layout_parent_menu");

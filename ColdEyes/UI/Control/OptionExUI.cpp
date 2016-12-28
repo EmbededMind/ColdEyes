@@ -31,7 +31,7 @@ void COptionExUI::PaintBkImage(HDC hDC)
 			DrawImage(hDC, (LPCTSTR)m_sNoFocusedUnSelImage);
 		}
 	}
-	Invalidate();
+	//Invalidate();
 	//__super::PaintBkImage(hDC);
 }
 

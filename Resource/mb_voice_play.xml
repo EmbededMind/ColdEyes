@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="1600,1200" bktrans="true" >
+
+	<Default name="Button" value="float=&quot;true&quot; font=&quot;0&quot; bkcolor=&quot;#FFACACAC&quot; focusedimage=&quot;file='image/按钮-选中.png'&quot; borderround=&quot;6,6&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default name="Text" value="float=&quot;true&quot; font=&quot;2&quot; textcolor=&quot;#FF333333&quot; " />
+	
+	<VerticalLayout name="root" bkimage="file='image/mb_bk.png'" >
+		<VerticalLayout float="true" pos="320,430,0,0" borderround="10,10" bkcolor="#FFFFFFFF" width="960" height="469" > 
+			<Text name="title" 			text="录制报警音" 				pos="401,40,0,0" 	width="200" height="30"/>
+			<Text name="contain" 		text="是否确认创建该录音？" 	pos="330,100,0,0" 	width="400" height="42" />
+			<Button name="ok_btn" 		text="确定" 					pos="85,325,0,0" 	width="250" height="94"/>
+			<Button name="cancel_btn" 	text="取消" 					pos="355,325,0,0" 	width="250" height="94"/>
+			<Button name="rerecord_btn" text="重录" 					pos="625,325,0,0" 	width="250" height="94"/>
+			<Slider name="progress_slider" float="true" pos="121,202,0,0" width="719" height="41" bkimage="file='image/mb_bkimage.png' mask='#FFE97FFF'"	foreimage="file='image/mb_fore.png' mask='#FFE97FFF'" thumbsize="41,41" thumbimage="file='image/mb_thumb.png'" max="100" step="1" />
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

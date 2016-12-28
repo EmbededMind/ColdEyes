@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="1600,1200" bktrans="true">
+	
+	<VerticalLayout name="root" bkimage="file='image/mb_bk.png'">
+		<VerticalLayout float="true" pos="400,416,0,0" borderround="10,10" bkcolor="#FFFFFFFF" width="800" height="500" > <!--POS Y+=64 -->
+			<Text name="Text1" 		float="true"	text="录制报警音" font="2" pos="321,40,0,0" width="200" height="30"/>
+			<Text name="Text2" 		float="true"	text="按下          按键，开始录制。"	font="3" pos="221,411,0,0" width="400" height="39"/>
+			<Text name="Text3"		float="true" text="PPT" pos="285,411,0,0" width="200"	font="3"	 height="39" textcolor="#FF4198FE"/>
+			<Label name="bkimage" 	float="true" pos="325,115,0,0" width="150" height="250" bkimage="file='image/recordvoice.png'"/>
+			<Text name="recordtime" float="true"	font="2"	pos="370,198,0,0" width="71" height="42" align="center"/>
+			<Label name="redpoint" 	float="true" pos="390,148,0,0" width="20"	height="20"	bkimage="file='image/recording.png'" />
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

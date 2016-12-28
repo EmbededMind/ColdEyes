@@ -234,6 +234,8 @@
     <ClInclude Include="UI\Wnd\MyMenuWnd.h" />
     <ClInclude Include="UI\Wnd\PlayerWallWnd.h" />
     <ClInclude Include="UI\Wnd\SysSetIconsWnd.h" />
+    <ClInclude Include="UI\Wnd\VoicePlayMsgWnd.h" />
+    <ClInclude Include="UI\Wnd\VoiceRecordMsgWnd.h" />
     <ClInclude Include="UI\Wnd\VPlayer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +279,8 @@
     <ClCompile Include="UI\Wnd\MyMenuWnd.cpp" />
     <ClCompile Include="UI\Wnd\PlayerWallWnd.cpp" />
     <ClCompile Include="UI\Wnd\SysSetIconsWnd.cpp" />
+    <ClCompile Include="UI\Wnd\VoicePlayMsgWnd.cpp" />
+    <ClCompile Include="UI\Wnd\VoiceRecordMsgWnd.cpp" />
     <ClCompile Include="UI\Wnd\VPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
