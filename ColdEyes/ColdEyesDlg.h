@@ -6,6 +6,13 @@
 #include "MyMenuWnd.h"
 
 class CMyMenuWnd;
+#include "WallDlg.h"
+
+//#include "UI\Wnd\WallWindow.h"
+
+
+#define GetWallWnd      (&(((CColdEyesDlg*)AfxGetMainWnd())->mWall))
+
 // CColdEyesDlg ¶Ô»°¿ò
 class CColdEyesDlg : public CDialogEx
 {
@@ -18,6 +25,7 @@ public:
 	CMyMenuWnd* mMenu;
 
 
+	CWallDlg    mWall;
 
 	
 private:

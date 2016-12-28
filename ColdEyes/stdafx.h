@@ -36,14 +36,13 @@
 
 
 
-/// Load sqlite library
-#pragma comment(lib, "sqlite3.lib")
 
-/// Load Dui library
 #ifndef _DEBUG
 #pragma comment(lib, "Duilib.lib")
+#pragma comment(lib, "sqlite3.lib")
 #else
 #pragma comment(lib, "Duilib_d.lib")
+#pragma comment(lib, "sqlite3_d.lib")
 #endif
 
 

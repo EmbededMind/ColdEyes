@@ -36,6 +36,7 @@ public:
 	bool         CreateLoginThread();
 
 	SDK_CONFIG_NET_COMMON_V2*         FindDevice(char* mac);
+	UINT         GetLoginThreadPid();
 
 	virtual void HandleData(UINT8* pData, size_t length);
 

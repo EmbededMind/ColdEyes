@@ -6,6 +6,8 @@
 #include "ColdEyes.h"
 #include "ColdEyesDlg.h"
 
+#include "NetSdk\netsdk.h"
+
 #include "DuiLib\UIlib.h"
 
 #include "MainWindow.h"
@@ -14,6 +16,13 @@
 //#include "Com\Router.h"
 #include "Com\SerialPort.h"
 #include "Device\DeviceDetecter.h"
+
+
+#include "Database\DBHelper.h"
+
+#include "Config\SystemConfig.h"
+
+#include "Device\Port.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -29,6 +38,11 @@ void InitConsoleWindow()
 }
 #endif
 
+
+void NetSdkInit()
+{
+
+}
 
 // CColdEyesApp
 
@@ -93,6 +107,13 @@ BOOL CColdEyesApp::InitInstance()
 	InitConsoleWindow();
 #endif
 
+	CDBHelper& DBHelper  = CDBHelper::GetInstance();
+	if(DBHelper.OpenDatabase("cold_eyes.db")){
+		CPort Port;	
+		Port.mPos  = 2;
+		Port.SetId(1);
+		Port.CommitUpdate();
+	}
 	
 	CSerialPort* pSerialPort  = CSerialPort::GetInstance(COM_103);
 
@@ -127,14 +148,6 @@ BOOL CColdEyesApp::InitInstance()
 	REGIST_DUICONTROL(CEditExUI);
 	REGIST_DUICONTROL(COptionExUI);
 	REGIST_DUICONTROL(CCameraNameElementUI);
-
-	//CMainWindow* pMainWindow  = new CMainWindow();
-	//pMainWindow->Create(NULL, NULL, UI_WNDSTYLE_DIALOG, 0);
-	//pMainWindow->CenterWindow();
-	////pMainWindow->ShowWindow(SW_SHOW);
-	//pMainWindow->ShowModal();
-
-	//delete pMainWindow;
 
 	CColdEyesDlg dlg;
 	m_pMainWnd = &dlg;

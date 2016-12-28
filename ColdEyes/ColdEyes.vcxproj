@@ -94,13 +94,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Libs\;$(ProjectDir)UI\Wnd\;$(ProjectDir);</AdditionalIncludeDirectories>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Libs\;$(ProjectDir)UI\Wnd\;$(ProjectDir);$(ProjectDir)..\Libs\sqlite3</AdditionalIncludeDirectories>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)..\Libs\NetSdk\lib\;$(ProjectDir)..\Libs\DuiLib\lib;$(ProjectDir)..\Libs\sqlite3\lib;</AdditionalLibraryDirectories>
+      <AdditionalOptions>/NODEFAULTLIB:"library" %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -145,7 +147,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Libs\;$(ProjectDir)UI\Wnd\;$(ProjectDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Libs\;$(ProjectDir)UI\Wnd\;$(ProjectDir);$(ProjectDir)..\Libs\sqlite3\</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -153,6 +156,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)..\Libs\NetSdk\lib\;$(ProjectDir)..\Libs\DuiLib\lib;$(ProjectDir)..\Libs\sqlite3\lib;</AdditionalLibraryDirectories>
+      <AdditionalOptions>/NODEFAULTLIB:"library" %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -202,6 +206,10 @@
     </ClInclude>
     <ClInclude Include="Com\Router.h" />
     <ClInclude Include="Com\SerialPort.h" />
+    <ClInclude Include="Config\PortConfig.h" />
+    <ClInclude Include="Config\SystemConfig.h" />
+    <ClInclude Include="Database\DBHelper.h" />
+    <ClInclude Include="Database\sqlitewrapper.h" />
     <ClInclude Include="Device\Camera.h" />
     <ClInclude Include="Device\CameraManager.h" />
     <ClInclude Include="Device\DeviceDetecter.h" />
@@ -212,6 +220,9 @@
     <ClInclude Include="Pattern\IDataHandler.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Surface.h" />
+    <ClInclude Include="SurfaceFrame.h" />
+    <ClInclude Include="SurfaceWrapper.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UI\Control\CameraNameELementUI.h" />
     <ClInclude Include="UI\Control\EditExUI.h" />
@@ -237,6 +248,10 @@
     <ClInclude Include="UI\Wnd\VoicePlayMsgWnd.h" />
     <ClInclude Include="UI\Wnd\VoiceRecordMsgWnd.h" />
     <ClInclude Include="UI\Wnd\VPlayer.h" />
+    <ClInclude Include="UI\Wnd\WallWindow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="WallDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColdEyes.cpp" />
@@ -245,6 +260,12 @@
     </ClCompile>
     <ClCompile Include="Com\Router.cpp" />
     <ClCompile Include="Com\SerialPort.cpp" />
+    <ClCompile Include="Config\PortConfig.cpp" />
+    <ClCompile Include="Config\SystemConfig.cpp" />
+    <ClCompile Include="Database\DBHelper.cpp" />
+    <ClCompile Include="Database\SQLiteWrapper.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Device\Camera.cpp" />
     <ClCompile Include="Device\CameraManager.cpp" />
     <ClCompile Include="Device\DeviceDetecter.cpp" />
@@ -258,6 +279,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="UI\Control\CameraNameELementUI.cpp" />
+    <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="SurfaceFrame.cpp" />
     <ClCompile Include="UI\Control\EditExUI.cpp" />
     <ClCompile Include="UI\Control\KeyBoardUI.cpp" />
     <ClCompile Include="UI\Control\LabelExUI.cpp" />
@@ -282,6 +305,7 @@
     <ClCompile Include="UI\Wnd\VoicePlayMsgWnd.cpp" />
     <ClCompile Include="UI\Wnd\VoiceRecordMsgWnd.cpp" />
     <ClCompile Include="UI\Wnd\VPlayer.cpp" />
+    <ClCompile Include="WallDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ColdEyes.rc" />
