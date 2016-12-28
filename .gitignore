@@ -5,7 +5,7 @@
 !/ColdEyes/UI
 !/ColdEyes/*.cpp
 !/ColdEyes/*.h
-/Bin
+/Bin/*
 /Debug/*
 /ipch/*
 /Release/*
