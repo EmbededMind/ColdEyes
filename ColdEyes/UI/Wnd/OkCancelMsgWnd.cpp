@@ -48,6 +48,8 @@ void COkCancelMsgWnd::Notify(TNotifyUI & msg)
 
 void COkCancelMsgWnd::InitWindow()
 {
+	m_pm.SetDPI( ((CColdEyesDlg*)AfxGetMainWnd())->mMenu->GetDpi());
+
 	pButton_ok = (CButtonUI*)m_pm.FindControl(_T("ok_btn"));
 	if (pButton_ok)
 		pButton_ok->OnEvent += MakeDelegate(this, &COkCancelMsgWnd::OnButtonOk);

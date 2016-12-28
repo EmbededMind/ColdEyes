@@ -5,6 +5,7 @@
 #pragma once
 #include "MyMenuWnd.h"
 
+class CMyMenuWnd;
 // CColdEyesDlg ¶Ô»°¿ò
 class CColdEyesDlg : public CDialogEx
 {

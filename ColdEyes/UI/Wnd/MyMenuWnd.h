@@ -185,7 +185,8 @@ public:
 	void AdapTive();
 	int ScaleCalculate(float scale);
 	void ReNameImage(CDuiString strPathName);
-
+	int GetDpi();
+	int GetScale();
 
 private:
 	SIZE m_dispSize;

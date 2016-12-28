@@ -2,12 +2,17 @@
 
 #include "DuiLib\UIlib.h"
 
+#include "ColdEyes.h"
+#include "ColdEyesDlg.h"
+
 using namespace DuiLib;
 
 #define MSGID_CANCEL			0
 #define MSGID_OK				1
 #define MSGID_RECORD			2
 #define MSGID_EXHARDDRIVE_OUT	3
+
+
 
 class COkCancelMsgWnd
 	:public WindowImplBase
@@ -37,6 +42,7 @@ private:
 	CDuiString m_sSkinType;
 	CButtonUI* pButton_ok;
 	CButtonUI* pButton_cancel;
+
 
 public:
 	static int MessageBox(HWND hParent, LPCTSTR sSkinType, LPCTSTR text1, LPCTSTR text2, LPARAM lParam, WPARAM wParam) {

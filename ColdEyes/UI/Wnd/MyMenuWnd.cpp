@@ -1262,3 +1262,13 @@ void CMyMenuWnd::ReNameImage(CDuiString strPathName)
 	} while (FindNextFile(hFile, &pNextInfo));
 
 }
+
+int CMyMenuWnd::GetDpi()
+{
+	return m_dpi;
+}
+
+int CMyMenuWnd::GetScale()
+{
+	return m_scale;
+}
