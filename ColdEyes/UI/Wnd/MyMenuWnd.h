@@ -12,6 +12,7 @@
 #include "UI\Control\SwitchExUI.h"
 #include "UI\Control\OptionExUI.h"
 #include "UI\Control\CameraNameELementUI.h"
+#include "UI\Wnd\PlayerWallWnd.h"
 
 #include "Device\Port.h"
 #include "OkCancelMsgWnd.h"
@@ -186,7 +187,7 @@ public:
 	//Dpi
 	void AdapTive();
 	int ScaleCalculate(float scale);
-	void ReNameImage(CDuiString strPathName);
+	void ReNameImage(CString strPathName);
 	int GetDpi();
 	int GetScale();
 

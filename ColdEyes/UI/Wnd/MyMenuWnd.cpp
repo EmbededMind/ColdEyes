@@ -84,6 +84,10 @@ void CMyMenuWnd::InitWindow()
 	AdapTive();
 	MakeItemsDelegate();
 
+	CPlayerWallWnd* pPlayerWnd;
+	pPlayerWnd = new CPlayerWallWnd(_T("player_wall.xml"));
+	pPlayerWnd->Create(m_hWnd, _T("playerWnd"), UI_WNDSTYLE_DIALOG, WS_EX_WINDOWEDGE, { 0,0,0,0 });
+
 	//CSystemConfig& sysConfig = CSystemConfig::GetInstance();
 
 	
@@ -94,10 +98,10 @@ void CMyMenuWnd::InitWindow()
 
 	//AddVideoObtainSubMenu(port1);
 
-	testPort = new CPort;
-	testPort->SetId(3);
-	testPort->SetNameIndex(3);
-	AddPortConfigSubMenu(testPort);
+	//testPort = new CPort;
+	//testPort->SetId(3);
+	//testPort->SetNameIndex(3);
+	//AddPortConfigSubMenu(testPort);
 }
 
 void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)
@@ -1216,7 +1220,7 @@ void CMyMenuWnd::AdapTive()
 
 int CMyMenuWnd::ScaleCalculate(float scale)
 {
-	CDuiString Resource = _T(UI_RESOURCE_PATH);
+	CString Resource = _T(UI_RESOURCE_PATH);
 	CDPI* pDpi = m_pm.GetDPIObj();
 	m_dpi = pDpi->GetDPI();
 
@@ -1231,7 +1235,7 @@ int CMyMenuWnd::ScaleCalculate(float scale)
 	return scale;
 }
 
-void CMyMenuWnd::ReNameImage(CDuiString strPathName)
+void CMyMenuWnd::ReNameImage(CString strPathName)
 {
 	CString OldName;
 	CString  destName;
