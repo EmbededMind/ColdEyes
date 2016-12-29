@@ -14,6 +14,7 @@
 /ColdEyes/Release/*
 /ColdEyes/res/*
 /ColdEyes/ReadMe.txt
+/ColdEyes/cold_eyes.db
 
 /Libs/DuiLib/*
 !/Libs/DuiLib/lib

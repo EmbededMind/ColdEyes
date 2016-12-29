@@ -44,7 +44,10 @@ IMPLEMENT_DYNAMIC(CWallDlg, CDialogEx)
 CWallDlg::CWallDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_WALL, pParent)
 {
-
+	mSurfaceNumber  = 0;
+	for (int i = 0; i < PORT_MAX_NUM; i++) {
+		mSurfaces[i]  = NULL;
+	}
 }
 
 CWallDlg::~CWallDlg()
@@ -70,7 +73,6 @@ void CWallDlg::DesignSurfaceLayout()
 		}
 
 		mRows = mSurfaceNumber / mCols + ((mSurfaceNumber % mCols) > 0 ? 1 : 0);
-		Print("Rows:%d, Cols:%d", mRows, mCols);
 	}
 }
 
@@ -103,6 +105,7 @@ void CWallDlg::ExecuteSurfaceLayout()
 		if (mSurfaces[i] != NULL) {
 			int xPos  = xOrg + (cnt % mCols) * (width + grap *2);
 			int yPos  = yOrg + (cnt / mCols) * (height + grap *2);
+
 
 			r.left  = xPos + grap;
 			r.right = r.left + width;

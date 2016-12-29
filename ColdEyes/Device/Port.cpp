@@ -3,34 +3,6 @@
 #include "Database\DBHelper.h"
 
 
-CString PortName[24] = {  //¶ÔÓ¦Ãû×Öid
-	_T("ÉãÏñ»ú1"),
-	_T("ÉãÏñ»ú2"),
-	_T("ÉãÏñ»ú3"),
-	_T("ÉãÏñ»ú4"),
-	_T("ÉãÏñ»ú5"),
-	_T("ÉãÏñ»ú6"),
-	_T("´¬Í·ÉãÏñ»ú"),
-	_T("´¬¼×°åÉãÏñ»ú"),
-	_T("´¬×óÏÏÉãÏñ»ú"),
-	_T("´¬ÓÒÏÏÉãÏñ»ú"),
-	_T("´¬ºó·½ÉãÏñ»ú"),
-	_T("´¬ÀÂÉþÉãÏñ»ú"),
-	_T("¼¯¿ØÌ¨ÉãÏñ»ú"),
-	_T("¼à¿ØÌ¨ÉãÏñ»ú"),
-	_T("´¬³¤ÊÒÉãÏñ»ú"),
-	_T("´¬Ô±ÊÒÉãÏñ»ú"),
-	_T("Ö÷»ú²ÕÉãÏñ»ú"),
-	_T("·¢µç»ú²ÕÉãÏñ»ú"),
-	_T("ÂÞ¾­¼×°åÉãÏñ»ú"),
-	_T("Ò»²ã¼×°åÉãÏñ»ú"),
-	_T("¶þ²ã¼×°åÉãÏñ»ú"),
-	_T("Èý²ã¼×°åÉãÏñ»ú"),
-	_T("ËÄ²ã¼×°åÉãÏñ»ú"),
-	_T("Îå²ã¼×°åÉãÏñ»ú")
-};
-
-
 CPort::CPort()
 {
 
@@ -60,7 +32,7 @@ void CPort::CommitUpdate()
 	CDBHelper&  helper = CDBHelper::GetInstance();
 
 	sprintf_s(formatValues, "id = %d,name_id = %d, cam_on = %d, record_on = %d, aw_on = %d, vol = %d",
-		mId, mConfig.mNameId, mConfig.mIsCameraOn, mConfig.mIsRecordEnabled, 
+		mConfig.mId, mConfig.mNameId, mConfig.mIsCameraOn, mConfig.mIsRecordEnabled, 
 		mConfig.mIsAutoWatchEnabled, mConfig.mVol);
 	
 	sprintf_s(condition, "pos = %d", mPos);
@@ -78,7 +50,7 @@ CCamera* CPort::GetBindedCamera()
 
 UINT16 CPort::GetId()
 {
-	return this->mId;
+	return mConfig.mId;
 }
 
 
@@ -90,16 +62,58 @@ char* CPort::GetMac()
 
 
 
-UINT16 CPort::GetNameIndex()
+const CString& CPort :: GetName()
 {
-	return this->mNameIndex;
+	return PortNames[mConfig.mId];
 }
 
 
 
+UINT16 CPort::GetNameId()
+{
+	return mConfig.mNameId;
+}
+
+
+
+void CPort::GetConfig(CPortConfig* pConfig)
+{
+	pConfig->mIsAutoWatchEnabled  = mConfig.mIsAutoWatchEnabled;
+	pConfig->mIsCameraOn  = mConfig.mIsCameraOn;
+	pConfig->mIsRecordEnabled  = mConfig.mIsRecordEnabled;
+	pConfig->mNameId  = mConfig.mNameId;
+	pConfig->mVol  = mConfig.mVol;
+}
+
+
+
+void CPort::SetConfig(CPortConfig* pConfig, UINT16 mask)
+{
+	if (mask & PORT_CONFIG_AW) {
+		mConfig.mIsAutoWatchEnabled  = pConfig->mIsAutoWatchEnabled;
+	}
+
+	if (mask & PORT_CONFIG_CAM) {
+		mConfig.mIsCameraOn  = pConfig->mIsCameraOn;
+	}
+
+	if (mask & PORT_CONFIG_RD) {
+		mConfig.mIsRecordEnabled  = pConfig->mIsRecordEnabled;
+	}
+
+	if (mask & PORT_CONFIG_NAME) {
+		mConfig.mNameId  = pConfig->mNameId;
+	}
+
+	if (mask & PORT_CONFIG_VOL) {
+		mConfig.mVol  = pConfig->mVol;
+	}
+}
+
+
 void CPort::SetId(UINT16 id)
 {
-	this->mId   = id;
+	mConfig.mId   = id;
 }
 
 
@@ -111,13 +125,9 @@ void CPort::SetMac(char* mac)
 
 
 
-void CPort::SetNameIndex(UINT16 inx)
+void CPort::SetNameId(UINT16 inx)
 {
-	this->mNameIndex  = inx;
+	mConfig.mNameId  = inx;
 }
 
-CString & CPort::GetName()
-{
-	return PortName[mNameIndex - 1];
-}
 

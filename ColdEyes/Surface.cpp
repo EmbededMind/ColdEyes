@@ -26,6 +26,7 @@ IMPLEMENT_DYNAMIC(CSurface, CWnd)
 CSurface::CSurface()
 {
 	RegisterWindowClass();
+	mIsLargeMode  = false;
 	mClientInfo.nChannel  = 0;
 	mClientInfo.nMode     = 0;
 	mClientInfo.nStream   = 1;
@@ -207,4 +208,57 @@ bool CSurface::StopRealPlay()
 		Print("Stop real play failed:%d", H264_PLAY_GetLastError(mPlayPort));
 		return false;
 	}	
+}BEGIN_MESSAGE_MAP(CSurface, CWnd)
+ON_WM_TIMER()
+ON_WM_CREATE()
+ON_WM_SIZE()
+END_MESSAGE_MAP()
+
+
+void CSurface::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	Print("Surface OnTimer");
+	CWnd::OnTimer(nIDEvent);
+}
+
+
+int CSurface::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CWnd::OnCreate(lpCreateStruct) == -1)
+		return -1;
+
+	// TODO:  在此添加您专用的创建代码
+	//SetTimer(1, 2000, NULL);
+	mFrame.SetPaintWindow(GetParent());
+	return 0;
+}
+
+
+void CSurface::OnSize(UINT nType, int cx, int cy)
+{
+	CWnd::OnSize(nType, cx, cy);
+
+	// TODO: 在此处添加消息处理程序代码
+	CRect rParentWnd;
+	GetParent()->GetWindowRect(rParentWnd);
+
+
+
+	CRect rWndRect;
+	GetWindowRect(rWndRect);
+
+	CRect rRelativeRect  = rWndRect;
+	
+	rRelativeRect.left  = rWndRect.left - rParentWnd.left;
+	rRelativeRect.top   = rWndRect.top  - rParentWnd.top;
+	rRelativeRect.right = rRelativeRect.left + rWndRect.Width();
+	rRelativeRect.bottom= rRelativeRect.top + rWndRect.Height();
+
+	mFrame.left  = rRelativeRect.left - 10;
+	mFrame.top   = rRelativeRect.top  - 30;
+	mFrame.right = rRelativeRect.right + 10;
+	mFrame.bottom= rRelativeRect.bottom + 10;
+
+	mFrame.PaintBorder();
 }

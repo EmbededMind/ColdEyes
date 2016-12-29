@@ -94,10 +94,10 @@ void CMyMenuWnd::InitWindow()
 
 	//AddVideoObtainSubMenu(port1);
 
-	testPort = new CPort;
-	testPort->SetId(3);
-	testPort->SetNameIndex(3);
-	AddPortConfigSubMenu(testPort);
+	//testPort = new CPort;
+	//testPort->SetId(3);
+	//testPort->SetNameIndex(3);
+	//AddPortConfigSubMenu(testPort);
 }
 
 void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)

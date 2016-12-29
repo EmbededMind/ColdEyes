@@ -6,7 +6,7 @@ CSubMenuItemUI::CSubMenuItemUI()
 {
 }
 
-CSubMenuItemUI::CSubMenuItemUI(CContainerUI * pParent, CString & text, int iInx)
+CSubMenuItemUI::CSubMenuItemUI(CContainerUI * pParent,const CString & text, int iInx)
 {
 	SetText(text);
 	pParent->AddAt(this, iInx);
