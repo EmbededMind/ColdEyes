@@ -84,7 +84,7 @@ void CMyMenuWnd::InitWindow()
 	AdapTive();
 	MakeItemsDelegate();
 
-	//CSystemConfig& sysConfig = CSystemConfig::GetInstance();
+	CSystemConfig& sysConfig = CSystemConfig::GetInstance();
 
 	
 
