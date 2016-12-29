@@ -83,7 +83,11 @@ void CMyMenuWnd::InitWindow()
 {
 	AdapTive();
 	MakeItemsDelegate();
-	ShowVoiceOption(false);
+
+	//CSystemConfig& sysConfig = CSystemConfig::GetInstance();
+
+	
+
 	//CPort* port1 = new CPort();
 	//port1->SetId(2);
 	//port1->SetNameIndex(2);
@@ -1190,7 +1194,7 @@ void CMyMenuWnd::AdapTive()
 
 	//4:3
 	if (iWidth / 4 == iHeight / 3) {
-		scale = iHeight / m_dispSize.cy;
+		scale = iHeight / m_dispSize.cx;
 		ScaleCalculate(scale);
 	}
 	////16:9  
