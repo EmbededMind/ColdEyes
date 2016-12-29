@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Window>
+	<VerticalLayout >
+		<Label text="船舶名称" float="true" pos="148,116,0,0" height="39" width="113" font="3" textcolor="#FF666666"/>
+		<EditEx name="edit_host_name" 	float="true"	pos="281,110,0,0"	height="50" 	width="500" 	bkcolor="#FFEBEBEB"		font="3"	align="left"	borderround="10,10"	bordersize="1"	bordercolor="#FF979797"	focusbordercolor="#FF4198FE"	textcolor="#FF333333"	/>
+		<KeyBoard visible="false" name="keyboard" width="640" height="313" bkcolor="#FFECECEC" float="true"	pos="145,210,785,523"	borderround="10,10"	bordercolor="#FF979797"	bordersize="1" 
+		bindshowstring="edit_host_name" layoutsize="640,313" itembkimage="file='image/keyboard1.png'" itemfocusedimage="file='image/keyboard2.png'" itembkimage="#1,9 file='image/deleteall1.png'" 
+		itemfocusedimage="#1,9 file='image/deleteall2.png'" itembkimage="#2,9 file='image/deleteall1.png'" itemfocusedimage="#2,9 file='image/deleteall2.png'" itembkimage="#3,9 file='image/deleteall1.png'" 
+		itemfocusedimage="#3,9 file='image/deleteall2.png'" itembkimage="#3,8 file='image/delete1.png'" itemfocusedimage="#3,8 file='image/delete2.png'" itemfont="0"/> 			
+		
+		
+		<VerticalLayout name="layout_prompt" visible="false" >
+			<Text text="“    ” 表示回删一位，“    ” 表示全部清空。" 	float="true" font="3" pos="172,561,0,0" width="800"	height="39"		textcolor="#FF666666" />
+			<Text text="船舶名字最长为32个数字/字母。" 				float="true" font="3" pos="172,600,0,0"	width="584"	height="39" 	textcolor="#FF666666" align="center"/>
+			<Label float="true" pos="204,562,0,0"	width="26" height="22" bkimage="file='image/2.png'" />
+			<Label float="true" pos="497,565,0,0"	width="26" height="22" bkimage="file='image/1.png'" />
+		</VerticalLayout>
+		
+	</VerticalLayout>
+</Window>

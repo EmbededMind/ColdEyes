@@ -70,6 +70,10 @@ void CKeyBoardUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	else if (_tcsicmp(pstrName, _T("itemfont")) == 0){
 		SetKeyElementFont(_ttoi(pstrValue));
 	}
+	else if (_tcsicmp(pstrName, _T("bindshowstring")) == 0) {
+		m_sShowControlName = pstrValue;
+	}
+
 	__super::SetAttribute(pstrName, pstrValue);
 }
 
@@ -113,7 +117,12 @@ void CKeyBoardUI::DoEvent(TEventUI & event)
 		break;
 
 	case UIEVENT_SETFOCUS:
+		m_focusInx = 0;
 		m_pKeyElement[0]->SetFocus();
+		break;
+
+	case UIEVENT_KILLFOCUS:
+		Print("kill focus");
 		break;
 	}
 	__super::DoEvent(event);
@@ -126,7 +135,7 @@ void CKeyBoardUI::Layout()
 	Add(pHead);
 	for (int i = 0; i < m_line; i++) {
 		CHorizontalLayoutUI* pLayout = new CHorizontalLayoutUI;
-		pLayout->SetPadding({ 20,0,0,0 });
+		pLayout->SetPadding({ 20,0,20,0 });
 		pLayout->SetFixedHeight(67);
 		m_pLineLayout.push_back(pLayout);
 		Add(m_pLineLayout[i]);
@@ -255,18 +264,23 @@ void CKeyBoardUI::SetKeyElementFont(int font)
 	}
 }
 
-void CKeyBoardUI::SetShowStringControl(CControlUI * pControl)
+void CKeyBoardUI::SetShowStringControlName(LPCTSTR sControlName)
 {
-	m_pShowControl = pControl;
+	m_sShowControlName = sControlName;
+}
+
+LPCTSTR CKeyBoardUI::GetShowStringControlName()
+{
+	return m_sShowControlName;
 }
 
 void CKeyBoardUI::SetShowStringControlText(CDuiString text)
 {
 	CDuiString oldText;
-	oldText = m_pShowControl->GetText();
-	if ((m_pShowControl->GetText().GetLength()) < 32) {
+	oldText = m_pManager->FindControl(m_sShowControlName)->GetText();
+	if ((oldText.GetLength()) < 32) {
 		oldText.Append(text);
-		m_pShowControl->SetText(oldText);
+		m_pManager->FindControl(m_sShowControlName)->SetText(oldText);
 	}
 	else {
 		//CMsgWnd::MessageBox(m_pManager->GetPaintWindow(), _T("mb_shipname_input.xml"), NULL, NULL, NULL, NULL);
@@ -277,6 +291,7 @@ bool CKeyBoardUI::OnKeyClickedListener(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
 	CButtonUI* pSender = (CButtonUI*)pMsg->pSender;
+	if (!pSender) return false;
 	CDuiString text = pSender->GetText();
 	switch (pMsg->Type) {
 	case UIEVENT_BUTTONDOWN:
@@ -285,14 +300,14 @@ bool CKeyBoardUI::OnKeyClickedListener(void * param)
 		}
 		else {
 			if (pSender == m_pKeyElement[38]) {
-				CDuiString oldText = m_pShowControl->GetText();
+				CDuiString oldText = m_pManager->FindControl(m_sShowControlName)->GetText();
 				if (oldText.GetLength() > 0) {
 					oldText.Assign(oldText, oldText.GetLength() - 1);
-					m_pShowControl->SetText(oldText);
+					m_pManager->FindControl(m_sShowControlName)->SetText(oldText);
 				}
 			}
 			else {
-				m_pShowControl->SetText(_T(""));
+				m_pManager->FindControl(m_sShowControlName)->SetText(_T(""));
 			}
 		}
 		break;
@@ -316,18 +331,21 @@ bool CKeyBoardUI::OnKeyClickedListener(void * param)
 			}
 			else {
 				if (pSender == m_pKeyElement[38]) {
-					CDuiString oldText = m_pShowControl->GetText();
+					CDuiString oldText = m_pManager->FindControl(m_sShowControlName)->GetText();
 					if (oldText.GetLength() > 0) {
 						oldText.Assign(oldText, oldText.GetLength() - 1);
-						m_pShowControl->SetText(oldText);
+						m_pManager->FindControl(m_sShowControlName)->SetText(oldText);
 					}
 				}
 				else {
-					m_pShowControl->SetText(_T(""));
+					m_pManager->FindControl(m_sShowControlName)->SetText(_T(""));
 				}
 			}
 			break;
 		case VK_BACK:
+			m_pManager->FindControl(m_sShowControlName)->SetFocus();
+			SetVisible(false);
+			return false;
 			break;
 		default:
 			break;

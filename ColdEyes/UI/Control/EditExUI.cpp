@@ -31,6 +31,38 @@ void CEditExUI::DoEvent(TEventUI &event)
 	CButtonUI::DoEvent(event);
 }
 
+void CEditExUI::PaintBorder(HDC hDC)
+{
+	int nBorderSize;
+	SIZE cxyBorderRound;
+	RECT rcBorderSize;
+	if (m_pManager) {
+		nBorderSize = GetManager()->GetDPIObj()->Scale(m_nBorderSize);
+		cxyBorderRound = GetManager()->GetDPIObj()->Scale(m_cxyBorderRound);
+		rcBorderSize = GetManager()->GetDPIObj()->Scale(m_rcBorderSize);
+	}
+	else {
+		nBorderSize = m_nBorderSize;
+		cxyBorderRound = m_cxyBorderRound;
+		rcBorderSize = m_rcBorderSize;
+
+	}
+
+	if (m_dwBorderColor != 0 || m_dwFocusBorderColor != 0) {
+		//»­Ô²½Ç±ß¿ò
+		if (nBorderSize > 0 && (cxyBorderRound.cx > 0 || cxyBorderRound.cy > 0)) {
+			if (GetStatus()) {
+				CRenderEngine::DrawRoundRect(hDC, m_rcItem, nBorderSize, cxyBorderRound.cx, cxyBorderRound.cy, GetAdjustColor(m_dwFocusBorderColor), m_nBorderStyle);
+			}
+			else if (IsFocused() && m_dwFocusBorderColor != 0)
+				CRenderEngine::DrawRoundRect(hDC, m_rcItem, nBorderSize, cxyBorderRound.cx, cxyBorderRound.cy, GetAdjustColor(m_dwFocusBorderColor), m_nBorderStyle);
+			else
+				CRenderEngine::DrawRoundRect(hDC, m_rcItem, nBorderSize, cxyBorderRound.cx, cxyBorderRound.cy, GetAdjustColor(m_dwBorderColor), m_nBorderStyle);
+		}
+	}
+	//__super::PaintBorder(hDC);
+}
+
 void CEditExUI::SetName(CString name)
 {
 	SetUserData(name);

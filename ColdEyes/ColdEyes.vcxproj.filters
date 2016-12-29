@@ -31,6 +31,209 @@
     <ClCompile Include="Config\PortConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ColdEyes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ColdEyesDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\MainWindow.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\XUIControl.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\Camera.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\CameraManager.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Layout.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\DeviceScanner.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\DeviceDetecter.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Com\Router.h">
+      <Filter>Com</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\Port.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Device\PortManager.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Pattern\IDataHandler.h">
+      <Filter>Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Com\SerialPort.h">
+      <Filter>Com</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\KeyBoardUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\LabelExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\MenuItemUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\SliderExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\SubMenuItemUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\TimeSpanPickerUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\EditExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\MyMenuWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\SwitchExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\OptionExUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\OkCancelMsgWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Control\CameraNameELementUI.h">
+      <Filter>UI\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\AlphaMarkWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\PlayerWallWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\SysSetIconsWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\VPlayer.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\VoiceRecordMsgWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Wnd\VoicePlayMsgWnd.h">
+      <Filter>UI\Wnd</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ColdEyes.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ColdEyesDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\MainWindow.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\XUIControl.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\Camera.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\CameraManager.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\DeviceScanner.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\DeviceDetecter.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Com\Router.cpp">
+      <Filter>Com</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\Port.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Device\PortManager.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Com\SerialPort.cpp">
+      <Filter>Com</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\KeyBoardUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\LabelExUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\MenuItemUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\SliderExUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\SubMenuItemUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\TimeSpanPickerUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\EditExUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\MyMenuWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\SwitchExUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\OptionExUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\OkCancelMsgWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Control\CameraNameELementUI.cpp">
+      <Filter>UI\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\AlphaMarkWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\PlayerWallWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\SysSetIconsWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\VPlayer.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\VoiceRecordMsgWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\VoicePlayMsgWnd.cpp">
+      <Filter>UI\Wnd</Filter>
+    </ClCompile>
     <ClInclude Include="ColdEyes.h" />
     <ClInclude Include="ColdEyesDlg.h" />
     <ClInclude Include="Com\Router.h" />

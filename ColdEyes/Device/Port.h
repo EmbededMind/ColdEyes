@@ -70,10 +70,6 @@ public:
 	void		       SetId(UINT16 id);
 	void		       SetMac(char* mac);
 	void		       SetNameId(UINT16 inx);
-	
-
-
-
 
 private:
 	char        mMac[20];

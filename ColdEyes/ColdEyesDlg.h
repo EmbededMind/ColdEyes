@@ -3,7 +3,9 @@
 //
 
 #pragma once
+#include "MyMenuWnd.h"
 
+class CMyMenuWnd;
 #include "WallDlg.h"
 
 //#include "UI\Wnd\WallWindow.h"
@@ -20,6 +22,9 @@ public:
 
 
 public:
+	CMyMenuWnd* mMenu;
+
+
 	CWallDlg    mWall;
 
 	

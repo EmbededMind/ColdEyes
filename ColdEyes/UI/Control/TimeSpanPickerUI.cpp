@@ -108,6 +108,7 @@ void CTimeSpanPickerUI::DoEvent(TEventUI & event)
 			break;
 		}
 		break;
+
 	}
 
 	__super::DoEvent(event);
@@ -292,3 +293,4 @@ void CTimeSpanPickerUI::GetTime(DWORD * pBegining, DWORD * pEnd)
 	*pBegining = tBegin;
 	*pEnd = tEnd;
 }
+

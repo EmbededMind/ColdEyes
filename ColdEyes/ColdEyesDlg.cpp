@@ -258,6 +258,12 @@ BOOL CColdEyesDlg::OnInitDialog()
 	GetAdaptablePos(r);
 	SetWindowPos(NULL, r.left, r.top, r.Width(), r.Height(), 0);
 
+	if (!mMenu) {
+		mMenu = new CMyMenuWnd();
+		mMenu->Create(m_hWnd, _T("MenuWnd"), UI_WNDSTYLE_DIALOG, WS_EX_WINDOWEDGE, { 0,0,0,0 });
+		mMenu->ShowWindow(true);
+	}
+
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 

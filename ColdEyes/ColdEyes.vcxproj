@@ -30,7 +30,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -76,6 +76,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Bin\</OutDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -223,19 +224,30 @@
     <ClInclude Include="SurfaceFrame.h" />
     <ClInclude Include="SurfaceWrapper.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UI\Control\CameraNameELementUI.h" />
     <ClInclude Include="UI\Control\EditExUI.h" />
     <ClInclude Include="UI\Control\KeyBoardUI.h" />
     <ClInclude Include="UI\Control\LabelExUI.h" />
     <ClInclude Include="UI\Control\MenuItemUI.h" />
+    <ClInclude Include="UI\Control\OptionExUI.h" />
     <ClInclude Include="UI\Control\SliderExUI.h" />
     <ClInclude Include="UI\Control\SubMenuItemUI.h" />
+    <ClInclude Include="UI\Control\SwitchExUI.h" />
     <ClInclude Include="UI\Control\TimeSpanPickerUI.h" />
     <ClInclude Include="UI\Control\XUIControl.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="UI\Wnd\AlphaMarkWnd.h" />
     <ClInclude Include="UI\Wnd\MainWindow.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="UI\Wnd\OkCancelMsgWnd.h" />
+    <ClInclude Include="UI\Wnd\MyMenuWnd.h" />
+    <ClInclude Include="UI\Wnd\PlayerWallWnd.h" />
+    <ClInclude Include="UI\Wnd\SysSetIconsWnd.h" />
+    <ClInclude Include="UI\Wnd\VoicePlayMsgWnd.h" />
+    <ClInclude Include="UI\Wnd\VoiceRecordMsgWnd.h" />
+    <ClInclude Include="UI\Wnd\VPlayer.h" />
     <ClInclude Include="UI\Wnd\WallWindow.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -266,20 +278,33 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="UI\Control\CameraNameELementUI.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="SurfaceFrame.cpp" />
     <ClCompile Include="UI\Control\EditExUI.cpp" />
     <ClCompile Include="UI\Control\KeyBoardUI.cpp" />
     <ClCompile Include="UI\Control\LabelExUI.cpp" />
     <ClCompile Include="UI\Control\MenuItemUI.cpp" />
+    <ClCompile Include="UI\Control\OptionExUI.cpp" />
     <ClCompile Include="UI\Control\SliderExUI.cpp" />
     <ClCompile Include="UI\Control\SubMenuItemUI.cpp" />
+    <ClCompile Include="UI\Control\SwitchExUI.cpp" />
     <ClCompile Include="UI\Control\TimeSpanPickerUI.cpp" />
     <ClCompile Include="UI\Control\XUIControl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-
+    <ClCompile Include="UI\Wnd\AlphaMarkWnd.cpp" />
+    <ClCompile Include="UI\Wnd\MainWindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="UI\Wnd\OkCancelMsgWnd.cpp" />
+    <ClCompile Include="UI\Wnd\MyMenuWnd.cpp" />
+    <ClCompile Include="UI\Wnd\PlayerWallWnd.cpp" />
+    <ClCompile Include="UI\Wnd\SysSetIconsWnd.cpp" />
+    <ClCompile Include="UI\Wnd\VoicePlayMsgWnd.cpp" />
+    <ClCompile Include="UI\Wnd\VoiceRecordMsgWnd.cpp" />
+    <ClCompile Include="UI\Wnd\VPlayer.cpp" />
     <ClCompile Include="WallDlg.cpp" />
   </ItemGroup>
   <ItemGroup>

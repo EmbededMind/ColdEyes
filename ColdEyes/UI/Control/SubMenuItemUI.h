@@ -11,15 +11,16 @@ class CSubMenuItemUI
 DECLARE_DUICONTROL(CSubMenuItemUI)
 public:
 	CSubMenuItemUI();
+	CSubMenuItemUI(CContainerUI* pParent,const CString& text, int iInx);
 	~CSubMenuItemUI();
 
 	virtual LPCTSTR GetClass() const;
 	virtual void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
-	void SetParentMenuItem(LPCTSTR pstrValue);
-	CMenuItemUI* GetParentItem();
+	void SetOnwerMenuItemName(LPCTSTR pstrValue);
+	LPCTSTR GetOnwerMenuItemName();
 
 private:
-	LPCTSTR	m_sParentMenuName;
-	CMenuItemUI* m_pParentMenu;
+	CDuiString	m_sOnwerMenuName;
+	//CMenuItemUI* m_pOnwerMenu;
 };
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window >
+
+	<Default name="CameraNameElement" value="bindshow=&quot;camera_name_edit&quot; borderround=&quot;4,4&quot; focusedbkcolor=&quot;#FF4198FE&quot; nofocusedbkcolor=&quot;#FFD7E9FF&quot; focusedtextcolor=&quot;#FFFFFFFF&quot; textcolor=&quot;#FF666666&quot; font=&quot;1&quot; "/>
+	
+	<VerticalLayout name="layout_camera_set">	
+		<VerticalLayout float="true" bkcolor="#FFF3F3F3" pos="70,80,0,0" width="790" height="155">
+			<Label name ="camera_layout_title" bkcolor="#FFE5E3E3" height="80" font="3" textcolor="#FF333333" align="center"/>
+			<Text float="true" pos="45,111,0,0" width="155" height="39" font="3" textcolor="#FF666666" text="摄像头名称" />
+			<EditEx name="camera_name_edit" float="true" pos="245,105,0,0" height="50" 	width="500" 	align="center"	bkcolor="#FFEBEBEB"		font="3"	borderround="10,10"	bordersize="1"	bordercolor="#FF979797"	focusbordercolor="#FF4198FE"	textcolor="#FF333333"/>
+		</VerticalLayout>
+		<VerticalLayout	name="layout_camera_name"	 visible="false"  float="true" bkcolor="#FFF3F3F3" pos="70,235,0,0" width="790" height="270">
+			<VerticalLayout  padding="53,30,45,5" bkcolor="#FFD7E9FF" >
+				<HorizontalLayout height="33" padding="40,24,59,9" >
+					<CameraNameElement width="73" text="船头" 			padding="0,0,19,0"		userdata="6"	/>
+					<CameraNameElement width="92" text="船甲板" 		padding="18,0,19,0" 	userdata="7"	/>
+					<CameraNameElement width="92" text="船左舷" 		padding="18,0,19,0"	/>
+					<CameraNameElement width="92" text="船右舷" 		padding="18,0,19,0"	/>
+					<CameraNameElement width="92" text="船后方" 		padding="18,0,0,0"	/>
+				</HorizontalLayout>
+				<HorizontalLayout height="33" padding="40,9,59,9" >
+					<CameraNameElement width="92" text="船缆绳" 		padding="0,0,9,0"	/>
+					<CameraNameElement width="92" text="集控台" 		padding="9,0,19,0"	/>
+					<CameraNameElement width="92" text="监控台" 		padding="18,0,19,0"	/>
+					<CameraNameElement width="92" text="船长室"			padding="18,0,19,0"	/>
+					<CameraNameElement width="92" text="船员室" 		padding="18,0,0,0" 	/>
+				</HorizontalLayout>
+				<HorizontalLayout height="33" padding="40,8,39,12" >
+					<CameraNameElement width="112" text="一层甲板" 		padding="0,0,0,0" 	/>
+					<CameraNameElement width="112" text="二层甲板" 		padding="0,0,9,0" 	/>
+					<CameraNameElement width="112" text="三层甲板"	 	padding="9,0,9,0"	/>
+					<CameraNameElement width="112" text="四层甲板" 		padding="9,0,9,0" 	/>
+					<CameraNameElement width="112" text="五层甲板"		padding="9,0,0,0"	/>
+				</HorizontalLayout>
+				<HorizontalLayout height="33" padding="40,12,300,23" >
+					<CameraNameElement width="92" 	text="主机舱" 		padding="0,0,9,0"	/>
+					<CameraNameElement width="112" text="发电机舱" 		padding="9,0,9,0"	/>
+					<CameraNameElement width="112" text="罗经甲板"		padding="9,0,0,0"	/>
+				</HorizontalLayout>
+			</VerticalLayout>
+		</VerticalLayout>
+		<VerticalLayout visible="true" float="true" pos="70,235,0,0" width="790" height="495" bkcolor="#FFF3F3F3">
+			<Control float="true" pos="45,25,0,0" width="700" height="2"/>
+			<SwitchEx name="camera_switch" float="true" pos="0,35,0,0" width="790" height="80" onimage="file='image/switch_on.png' dest='665,16,745,77'" offimage="file='image/switch_off.png' dest='665,16,745,77'" bkcolor="#FFF3F3F3" font="3" textcolor="#FF666666" focusedtextcolor="#FFFFFFFF" textpadding="45,0,605,0" text="摄像头开关" />
+			<Control float="true" pos="45,125,0,0" width="700" />
+			<Text float="true" pos="45,150,250,189" font="3" textcolor="#FF666666" text="喇叭声音音量" />
+			<Label name="bk_cameraset_volume" float="true" pos="0,198,790,80" bkimage="file='image/slider_volum_bk.png'" height="80" /> 
+			<SliderEx name="camera_volume"  float="true" pos="178,224,0,0"	 bindbk="bk_cameraset_volume"	min="0" max="5" bindbkimage="file='image/slider_volum_bk.png'" focusedbkimage="file='image/slider_volum_focusedbk.png'" />
+			<Control float="true" pos="45,296,0,0" width="700" />
+			<LabelEx name="camera_video_save" pos="0,306,0,0" width="790" height="80" text="是否储存该摄像机视频" stateenabletext="是" statedisabletext="否" />
+			<Control float="true" pos="45,396,0,0" width="700" />
+			<LabelEx name="camera_auto_watch" pos="0,406,0,0" width="790" height="80" text="设置自动看船" bkimage="file='image/radio_unsel.png' dest='707,21,745,59'" focusedimage="file='image/radio_focusunsel.png' dest='707,21,745,59'" selbkimage="file='image/radio_sel.png' dest='707,21,745,59'" focusedselbkimage="file='image/radio_focussel.png' dest='707,21,745,59'" />
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

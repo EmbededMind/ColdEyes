@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window caption="0,0,0,97" size="1600,1200" bktrans="true">
+
+	<VerticalLayout name="root" bkimage="file='image/mb_bk.png'">
+		<VerticalLayout float="true" pos="494,476,0,0" borderround="10,10" bkcolor="#FFFFFFFF" width="610" height="375" > <!--POS Y+=64 -->
+			<Text name="Text1" pos="45,76,0,0" width="520" height="40"/>
+			<Text name="Text2" pos="45,116,0,0" width="520" height="40"/>
+			<Button name="ok_btn" text="确定" pos="180,231,0,0" width="250" height="94"/>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

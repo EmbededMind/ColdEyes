@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Window>
+	<VerticalLayout bkcolor="#FFFFFFFF" padding="70,80,69,0" height="180">
+		<Label text="开启警告灯光" font="3" height="80" bkcolor="#FFE5E3E3" textcolor="FF333333" align="center" />
+		<Control height="10" bkcolor="#FFF3F3F3"/>
+		<SwitchEx name="switch_alarm_light" text="开启警告灯光" height="80" font="3" textcolor="#FF666666" textpadding="45,0,577,0" onimage="file='image/switch_on.png' dest='665,16,745,77'" offimage="file='image/switch_off.png' dest='665,16,745,77'" bkcolor="#FFF3F3F3" focusedtextcolor="#FFFFFFFF"/>
+		<Control height="10" bkcolor="#FFF3F3F3"/>
+	</VerticalLayout>
+</Window>
