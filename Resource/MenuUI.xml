@@ -31,7 +31,7 @@
 			<Label  bkcolor="#FF53555D" height="62" align="center" text="菜单" font="0" textcolor="#FFFFFFFF"/>
 		</VerticalLayout>
 		
-		<HorizontalLayout>
+		<HorizontalLayout	bkcolor="#FFEFEFF4">
 			<VerticalLayout name="layout_parent_menu" width="328" bkcolor="#FFFFFFFF" >
 				<MenuItem 	name="parent_menu_alarm_video" 	text="报警视频"		bindtablayoutname="layout_children_menu"	bindtabindex="0" 	bkimage="file='image/alarm_video_bk.png'"	 focusedimage="file='image/alarm_video_focusedbk.png'"	/>
 				<Control />
@@ -46,10 +46,10 @@
 			</VerticalLayout>
 			
 			
-			<TabLayout	name="layout_children_menu"	width="1272"	bkcolor="#FFE6E6EF">
-				<HorizontalLayout  bkcolor="#FFE6E6EF">
+			<TabLayout	name="layout_children_menu"	width="1272"	bkcolor="#FFEFEFF4">
+				<HorizontalLayout  bkcolor="#FFEFEFF4">
 				
-					<VerticalLayout name="layout_submenu_alarm_video"	width="343" >
+					<VerticalLayout name="layout_submenu_alarm_video"	bkcolor="#FFE6E6EF"	width="343" >
 						<!--动态添加-->
 					</VerticalLayout>
 					
@@ -66,8 +66,8 @@
 				</HorizontalLayout>
 				
 				
-				<HorizontalLayout  bkcolor="#FFE6E6EF">
-					<VerticalLayout	 name="layout_submenu_host_set"	width="343">
+				<HorizontalLayout  bkcolor="#FFEFEFF4">
+					<VerticalLayout	 name="layout_submenu_host_set"	bkcolor="#FFE6E6EF"	width="343">
 						<SubMenuItem name="host_name"	text="主机名称" bindtablayoutname="body_host_set" bindtabindex="0" 	onwer="parent_menu_host_set" />
 						<Control />
 						<!--动态添加-->
@@ -83,8 +83,8 @@
 				</HorizontalLayout>
 				
 				
-				<HorizontalLayout  bkcolor="#FFE6E6EF">
-					<VerticalLayout	name="layout_submenu_auto_watch"	width="343" >
+				<HorizontalLayout  bkcolor="#FFEFEFF4">
+					<VerticalLayout	name="layout_submenu_auto_watch"	bkcolor="#FFE6E6EF"	width="343" >
 						<SubMenuItem name="aw_time"			text="看船时间"			bindtablayoutname="body_auto_watch" 	bindtabindex="0" 		onwer="parent_menu_auto_watch"/>
 						<Control />
 						<SubMenuItem name="alarm_voice"		text="报警音" 			bindtablayoutname="body_auto_watch" 	bindtabindex="1" 		onwer="parent_menu_auto_watch"/>
@@ -104,9 +104,9 @@
 				</HorizontalLayout>
 				
 				
-				<HorizontalLayout  bkcolor="#FFE6E6EF">
+				<HorizontalLayout  bkcolor="#FFEFEFF4">
 				
-					<VerticalLayout	name="layout_submenu_video_obtain"	width="343">
+					<VerticalLayout	name="layout_submenu_video_obtain"	bkcolor="#FFE6E6EF"	width="343">
 					<!--动态添加-->
 					</VerticalLayout>
 					
@@ -123,11 +123,11 @@
 				
 				
 				<HorizontalLayout name="layout_submenu_home_watch">
-					<TabLayout visible="false" name="home" float="true" pos="328,0,1600,1038" >
+					<TabLayout visible="true" name="home" float="true" pos="0,0,1272,1038" >
 						<HorizontalLayout name="layout_home_watch" bkcolor="#FFEFEFF4">
 							<Text 	float="true" pos="217,202,0,0" width="839" height="89" font="4" textcolor="#FF4198FE" text="渔船防盗利器   回家帮你看船"/>
 							<Text 	float="true" pos="217,312,0,0" width="839" height="200" font="5" textcolor="#FF666666" text="       回家看船开启后，有人上船偷盗，设备会发出报警声音并且发出警告灯光，吓退盗贼，同时向你的手机报警，拍摄盗贼照片到您手机上，存留证据，减少看船支出，全方面保障船舶的财产生命安全。"/>
-							<Button name="button_home" 	float="true" pos="511,562,0,0" width="250" height="94" borderround="6,6" bkcolor="#FFACACAC" textcolor="#FFFFFFFF" font="0" text="开启" focusedimage="file='image/按钮-选中.png'"/>
+							<Button name="button_enable" 	float="true" pos="511,562,0,0" width="250" height="94" borderround="6,6" bkcolor="#FFACACAC" textcolor="#FFFFFFFF" font="0" text="开启" focusedimage="file='image/按钮-选中.png'"/>
 						</HorizontalLayout>
 						<HorizontalLayout name="notice" bkcolor="#FFFFFFFF">
 							<Text float="true" pos="366,247,0,0" width="540" height="50" font="3" textcolor="#FF666666" text="未连接设备，请联系当地经销商！"/>

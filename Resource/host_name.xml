@@ -16,6 +16,12 @@
 			<Label float="true" pos="204,562,0,0"	width="26" height="22" bkimage="file='image/2.png'" />
 			<Label float="true" pos="497,565,0,0"	width="26" height="22" bkimage="file='image/1.png'" />
 		</VerticalLayout>
-		
+
+		<HorizontalLayout	float="true" pos="276,948,0,0" width="929" height="31">
+			<Text text="【确认】按键" 	font="2" textcolor="#FF666666" align="right"	width="188"/>
+			<Text text="弹出" 			font="2" textcolor="#FF4990E2" align="center"	width="68"/>
+			<Text text="输入键盘" 		font="2" textcolor="#FF666666" align="left"		width="129"/>
+		</HorizontalLayout>
+
 	</VerticalLayout>
 </Window>

@@ -27,6 +27,8 @@ DECLARE_DUICONTROL(CTimeSpanPickerUI)
 	int IncreaseMinute(CButtonUI*);
 	void UpdateTime();
 
+	void ShowOnwerLable();
+
 	void SetTime(DWORD beginTime, DWORD endTime);
 	void GetTime(DWORD* pBegining, DWORD* pEnd);
 
@@ -53,6 +55,7 @@ private:
 	CButtonUI* pEndMinute;
 
 	CLabelUI* pLabel[3];
+
 
 	LPCTSTR focusedImage;
 

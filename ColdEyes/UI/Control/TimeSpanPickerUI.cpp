@@ -293,6 +293,22 @@ void CTimeSpanPickerUI::UpdateTime()
 
 	tBegin = hour1 * 60 + minute1;
 	tEnd = hour2 * 60 + minute2;
+
+	ShowOnwerLable();
+}
+
+void CTimeSpanPickerUI::ShowOnwerLable()
+{
+	CLabelUI* pMorrow = (CLabelUI*)((CVerticalLayoutUI*)GetParent())->GetItemAt(4);
+	if (tBegin <= tEnd) {
+		if (pMorrow->IsVisible())
+			pMorrow->SetVisible(false);
+	}
+	else {
+		if (!pMorrow->IsVisible()) {
+			pMorrow->SetVisible(true);
+		}
+	}
 }
 
 void CTimeSpanPickerUI::SetTime(DWORD beginTime, DWORD endTime)
@@ -314,6 +330,7 @@ void CTimeSpanPickerUI::SetTime(DWORD beginTime, DWORD endTime)
 		text.Format(_T("%02d"), endTime % 60);
 		pEndMinute->SetText(text);
 	}
+	ShowOnwerLable();
 }
 
 void CTimeSpanPickerUI::GetTime(DWORD * pBegining, DWORD * pEnd)

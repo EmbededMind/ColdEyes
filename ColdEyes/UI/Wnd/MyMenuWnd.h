@@ -84,9 +84,14 @@ const TCHAR* const kOptionAlarmVoiceDefaultName = _T("voice_default");
 const TCHAR* const kOptionAlarmVoiceRecordName = _T("voice_record");
 const TCHAR* const kBtAlarmVoiceRecordName = _T("record_btn");
 const TCHAR* const kAlarmVoiceGroupName = _T("grop_alarm_voice");
+const TCHAR* const kLabelMorrawName = _T("morrow");
 
 //alarm light
 const TCHAR* const kSwitchAlarmLightName = _T("switch_alarm_light");
+
+//Home
+const TCHAR* const kButtonEnableName = _T("button_enable");
+
 
 //==============BkColor=====================
 #define LAYOUT_MENUITEM_FOCUSED		0xFFFFFFFF
@@ -118,10 +123,10 @@ public:
 	virtual CDuiString GetSkinFile();
 	void Notify(TNotifyUI& msg);
 	LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+	virtual LRESULT OnKeyDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
 	virtual void InitWindow();
-	void AlarmVoiceInit(SystemAlarmConfig& sysAlarmConfig);
+	void LoadData();
 	void UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2);
-
 
 	void MakeItemsDelegate();	//控件委托函数初始化
 	void MenuItemMakeDelegate(const TCHAR* const Name);
@@ -192,6 +197,9 @@ public:
 
 	//Body Fill Camera Info
 	void FillCameraInfo(CControlUI* pItem);
+
+	//Refresh AwRecords
+	void RefreshAwRecords();
 
 	//Dpi
 	void AdapTive();

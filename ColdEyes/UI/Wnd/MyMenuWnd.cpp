@@ -79,11 +79,30 @@ LRESULT CMyMenuWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam,
 	return 0;
 }
 
+LRESULT CMyMenuWnd::OnKeyDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL & bHandled)
+{
+	if (wParam == VK_BACK) {
+		CTabLayoutUI* pLayout = (CTabLayoutUI*)m_pm.FindControl(_T("home"));
+		if (pLayout->GetCurSel() == 1) {
+			pLayout->SelectItem(0);
+			m_pm.FindControl(kButtonEnableName)->SetFocus();
+			return LRESULT();
+		}
+	}
+
+	WindowImplBase::OnKeyDown(uMsg, wParam, lParam, bHandled);
+	return LRESULT();
+}
 void CMyMenuWnd::InitWindow()
 {
 	AdapTive();
 	MakeItemsDelegate();
 
+	LoadData();
+}
+
+void CMyMenuWnd::LoadData()
+{
 	//HostName
 	CString HostName;
 	CSystemConfig& sysConfig = CSystemConfig::GetInstance();
@@ -112,6 +131,10 @@ void CMyMenuWnd::InitWindow()
 	((CSwitchExUI*)m_pm.FindControl(kSwitchAlarmLightName))->SetValue(AlarmConfig.isAlarmLightOn);
 
 	//records
+
+	//Port Config
+	CPort* pPort;
+	CPortConfig PortConfig;
 
 }
 
@@ -184,6 +207,8 @@ void CMyMenuWnd::MakeItemsDelegate()
 	m_pm.FindControl(kOptionAlarmVoiceDefaultName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmVoiceOption);
 	m_pm.FindControl(kBtAlarmVoiceRecordName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmVoiceRecord);
 	m_pm.FindControl(kSwitchAlarmLightName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmLight);
+
+	m_pm.FindControl(kButtonEnableName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnHome);
 }
 
 void CMyMenuWnd::MenuItemMakeDelegate(const TCHAR* const Name)
@@ -201,15 +226,20 @@ bool CMyMenuWnd::OnMenuItem(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
 	CMenuItemUI* Item = (CMenuItemUI*)pMsg->pSender;
-
+	CContainerUI* pLayout;
 	if (pMsg->Type == UIEVENT_KEYDOWN) {
 		if (pMsg->wParam == VK_RIGHT) {
 			if (_tcscmp(Item->GetName(), KMenuItemHomeWatchName) == 0) {
-				//messagebox test
-				//COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_ok.xml"), NULL , _T("OkCancel TEXT2"), NULL, NULL);
-				//COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_shipname_input.xml"),NULL,NULL,NULL,NULL);
-				//COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_copyvideo_request.xml"), _T("TIME"), NULL, NULL, NULL);
-				//COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_update_request.xml"), _T("1.0.0"), _T("1.0.1"), NULL, NULL);
+				pLayout = (CContainerUI*)m_pm.FindControl(KLayoutParentMenuName);
+				pLayout->SetBkColor(LAYOUT_MENUITEM_NOFOCUS);			//布局颜色
+				CButtonUI* pItem;
+				for (int i = 0; i < pLayout->GetCount(); i += 2) {		//控件颜色
+					pItem = (CButtonUI*)pLayout->GetItemAt(i);
+					pItem->SetBkColor(LAYOUT_MENUITEM_NOFOCUS);
+				}
+				m_pm.FindControl(_T("layout_home_watch"))->SetBkColor(LAYOUT_MENUITEM_FOCUSED);
+				m_pm.FindControl(kButtonEnableName)->SetFocus();
+				Item->SetStatus(true);
 				return false;
 			}
 		}
@@ -1062,6 +1092,23 @@ bool CMyMenuWnd::OnRecords(void * param)
 bool CMyMenuWnd::OnHome(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
+	CButtonUI* pItem = (CButtonUI*)pMsg->pSender;
+	switch (pMsg->Type) {
+	case UIEVENT_KEYDOWN:
+		if (pMsg->wParam == VK_BACK) {
+			m_pm.FindControl(KMenuItemHomeWatchName)->SetFocus();
+		}
+		else if (pMsg->wParam == VK_RETURN) {
+			CTabLayoutUI* pTabLayout = (CTabLayoutUI*)m_pm.FindControl(_T("home"));
+			int sel = pTabLayout->GetCurSel();
+
+			pTabLayout->SelectItem(1);
+		}
+
+		return false;
+		break;
+	}
+
 	return true;
 }
 
@@ -1312,6 +1359,11 @@ void CMyMenuWnd::FillCameraInfo(CControlUI* pItem)
 		static_cast<CLabelExUI*>(m_pm.FindControl(kCameraAwName))->SetValue(true);
 		m_pm.Invalidate();
 	}
+}
+
+void CMyMenuWnd::RefreshAwRecords()
+{
+
 }
 
 void CMyMenuWnd::AdapTive()
