@@ -126,12 +126,16 @@ bool CTimeSpanPickerUI::OnBeginHourLister(void * param)
 			val = IncreaseHour(pBeginHour);
 			text.Format(_T("%02d"), val);
 			pBeginHour->SetText(text);
+
+			UpdateTime();
 			break;
 
 		case VK_DOWN:
 			val = DecreaseHour(pBeginHour);
 			text.Format(_T("%02d"), val);
 			pBeginHour->SetText(text);
+
+			UpdateTime();
 			break;
 		}
 	}
@@ -149,12 +153,16 @@ bool CTimeSpanPickerUI::OnBeginMinuteLister(void * param)
 			val = IncreaseMinute(pBeginMinute);
 			text.Format(_T("%02d"), val);
 			pBeginMinute->SetText(text);
+
+			UpdateTime();
 			break;
 
 		case VK_DOWN:
 			val = DecreaseMinute(pBeginMinute);
 			text.Format(_T("%02d"), val);
 			pBeginMinute->SetText(text);
+
+			UpdateTime();
 			break;
 		}
 	}
@@ -172,12 +180,16 @@ bool CTimeSpanPickerUI::OnEndHourLister(void * param)
 			val = IncreaseHour(pEndHour);
 			text.Format(_T("%02d"), val);
 			pEndHour->SetText(text);
+
+			UpdateTime();
 			break;
 
 		case VK_DOWN:
 			val = DecreaseHour(pEndHour);
 			text.Format(_T("%02d"), val);
 			pEndHour->SetText(text);
+
+			UpdateTime();
 			break;
 		}
 	}
@@ -195,12 +207,16 @@ bool CTimeSpanPickerUI::OnEndMinuteLister(void * param)
 			val = IncreaseMinute(pEndMinute);
 			text.Format(_T("%02d"), val);
 			pEndMinute->SetText(text);
+
+			UpdateTime();
 			break;
 
 		case VK_DOWN:
 			val = DecreaseMinute(pEndMinute);
 			text.Format(_T("%02d"), val);
 			pEndMinute->SetText(text);
+
+			UpdateTime();
 			break;
 		}
 	}
@@ -267,6 +283,18 @@ int CTimeSpanPickerUI::IncreaseMinute(CButtonUI* Item)
 	return val;
 }
 
+void CTimeSpanPickerUI::UpdateTime()
+{
+	int hour1, hour2, minute1, minute2;
+	hour1 = StrToInt(pBeginHour->GetText());
+	hour2 = StrToInt(pEndHour->GetText());
+	minute1 = StrToInt(pBeginMinute->GetText());
+	minute2 = StrToInt(pEndMinute->GetText());
+
+	tBegin = hour1 * 60 + minute1;
+	tEnd = hour2 * 60 + minute2;
+}
+
 void CTimeSpanPickerUI::SetTime(DWORD beginTime, DWORD endTime)
 {
 	tBegin = beginTime;
@@ -281,7 +309,7 @@ void CTimeSpanPickerUI::SetTime(DWORD beginTime, DWORD endTime)
 		pEndHour->SetText(text);
 
 		text.Format(_T("%02d"), beginTime % 60);
-		pBeginHour->SetText(text);
+		pBeginMinute->SetText(text);
 
 		text.Format(_T("%02d"), endTime % 60);
 		pEndMinute->SetText(text);

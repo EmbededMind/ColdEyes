@@ -99,6 +99,15 @@ void CSystemConfig::CommitSystemUpdate()
 
 
 
+void CSystemConfig::DumpConfig()
+{
+	Print("boat_name     %s", mBoatName.c_str());
+	Print("brightness    %d", mBrtness);
+	Print("volumn        %d", mVol);
+}
+
+
+
 void CSystemConfig::GetAlarmConfig(SystemAlarmConfig* pConfig)
 {
 	memcpy_s(pConfig, sizeof(SystemAlarmConfig), &mAlarmConfig, sizeof(SystemAlarmConfig));
@@ -115,7 +124,7 @@ void CSystemConfig::GetAutoWatchConfig(SystemAutoWatchConfig* pConfig)
 
 void CSystemConfig::GetBoatName(CString& name)
 {
-	name.Format(_T("%s"), mBoatName.c_str());
+	name = mBoatName.c_str();
 }
 
 
@@ -130,6 +139,30 @@ UINT16 CSystemConfig::GetBrightness()
 UINT16 CSystemConfig::GetVolumn()
 {
 	return mVol;
+}
+
+
+
+void CSystemConfig::LoadConfig()
+{
+	CDBHelper& helper = CDBHelper::GetInstance();
+	SQLiteStatement* stmt = helper.Query("sys_config", "*");
+	if (stmt->NextRow()) {
+		mBoatName = stmt->ValueString(0);
+		mBrtness = stmt->ValueInt(1);
+		mVol = stmt->ValueInt(2);
+		mAlarmConfig.isAlarmLightOn = stmt->ValueInt(3);
+		mAutoWatchConfig.isAutoWatchOn = stmt->ValueInt(4);
+		mAutoWatchConfig.autoWatchBeginTime = stmt->ValueInt(5);
+		mAutoWatchConfig.autoWatchEndTime = stmt->ValueInt(6);
+		mAlarmConfig.isAlarmSoundOn = stmt->ValueInt(7);
+		mAlarmConfig.alarmSoundId = stmt->ValueInt(8);
+		mAlarmConfig.defutAlarmSoundSec = stmt->ValueInt(9);
+		mAlarmConfig.alarmSoundSec = stmt->ValueInt(10);
+	}
+	else {
+		Print("Load system config error: Find none db stmt");
+	}
 }
 
 

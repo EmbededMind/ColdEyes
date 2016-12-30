@@ -109,10 +109,8 @@ BOOL CColdEyesApp::InitInstance()
 
 	CDBHelper& DBHelper  = CDBHelper::GetInstance();
 	if(DBHelper.OpenDatabase("cold_eyes.db")){
-		CPort Port;	
-		Port.mPos  = 2;
-		Port.SetId(1);
-		Port.CommitUpdate();
+		CSystemConfig::GetInstance().LoadConfig();
+		CSystemConfig::GetInstance().DumpConfig();
 	}
 	
 	CSerialPort* pSerialPort  = CSerialPort::GetInstance(COM_103);

@@ -87,11 +87,15 @@ public :
 	void         CommitSystemUpdate();
 	void         CommitUpdate();
 
+	void         DumpConfig();
+
 	void         GetAlarmConfig(SystemAlarmConfig* pConfig);
 	void         GetAutoWatchConfig(SystemAutoWatchConfig* pConfig);
 	void         GetBoatName(CString& name);
 	UINT16       GetBrightness();
 	UINT16       GetVolumn();
+
+	void         LoadConfig();
 
 	void         SetAlarmConfig(SystemAlarmConfig* pConfig, UINT16 mask);
 	void         SetAutoWatchConfig(SystemAutoWatchConfig* pConfig, UINT16 mask);

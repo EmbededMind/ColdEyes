@@ -25,6 +25,7 @@ DECLARE_DUICONTROL(CTimeSpanPickerUI)
 	int  DecreaseMinute(CButtonUI*);
 	int IncreaseHour(CButtonUI*);
 	int IncreaseMinute(CButtonUI*);
+	void UpdateTime();
 
 	void SetTime(DWORD beginTime, DWORD endTime);
 	void GetTime(DWORD* pBegining, DWORD* pEnd);

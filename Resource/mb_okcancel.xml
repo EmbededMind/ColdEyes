@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Window caption="0,0,0,97" size="1600,1200" bktrans="true" >
 
+	<Default name="Button" 	value="float=&quot;true&quot; font=&quot;0&quot; bkcolor=&quot;#FFACACAC&quot; focusedimage=&quot;file='image/按钮-选中.png'&quot; borderround=&quot;6,6&quot; textcolor=&quot;#FFFFFFFF&quot;"/>
+	<Default name="Text" 	value="float=&quot;true&quot; font=&quot;0&quot; textcolor=&quot;#FF333333&quot; " />
+	
 	<VerticalLayout name="root" bkimage="file='image/mb_bk.png'" > <!--bordercolor="#FF112233" bordersize="2"-->
 		<VerticalLayout float="true" pos="494,476,0,0" borderround="10,10" bkcolor="#FFFFFFFF" width="610" height="375" ><!--POS Y+=64 -->
 			<Text name="Text1" pos="45,91,0,0" width="520" height="40"/>

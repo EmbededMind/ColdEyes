@@ -18,7 +18,7 @@
 #include "VoiceRecordMsgWnd.h"
 #include "VoicePlayMsgWnd.h"
 #include "Config\SystemConfig.h"
-#include "Config\PortConfig.h"
+#include "Device\PortManager.h"
 
 //MenuItmLayout
 const TCHAR* const KLayoutParentMenuName = _T("layout_parent_menu");
@@ -86,7 +86,7 @@ const TCHAR* const kBtAlarmVoiceRecordName = _T("record_btn");
 const TCHAR* const kAlarmVoiceGroupName = _T("grop_alarm_voice");
 
 //alarm light
-const TCHAR* const kAlarmLightName = _T("switch_alarm_light");
+const TCHAR* const kSwitchAlarmLightName = _T("switch_alarm_light");
 
 //==============BkColor=====================
 #define LAYOUT_MENUITEM_FOCUSED		0xFFFFFFFF
@@ -119,6 +119,7 @@ public:
 	void Notify(TNotifyUI& msg);
 	LRESULT HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	virtual void InitWindow();
+	void AlarmVoiceInit(SystemAlarmConfig& sysAlarmConfig);
 	void UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2);
 
 
@@ -170,11 +171,18 @@ public:
 	void DeleteVideoObtainSubMenu(CPort* pPort);
 	void DeletePortConfigSubMenu(CPort* pPort);
 
-	//Sets is change
-	bool AlarmVoideIsChange();
+	//Config is change
+	bool HostNameConfigIsChange(CSystemConfig& config, CControlUI* pItem);
+	bool SysConfigIsChange(CSystemConfig& config);
+
+	bool AwTimeConfigIsChange(SystemAutoWatchConfig& config);
+	bool AlarmVoideConfigIsChange(SystemAlarmConfig& config);
+	bool AlarmLightConfigIsChange(SystemAlarmConfig& config, CControlUI* pItem);
 
 	//add alarm voice 
 	void AddAlarmVoice();
+	void SaveAlarmVoiceConfig(SystemAlarmConfig& config);
+	void InitAlarmVoiceConfig(SystemAlarmConfig& config);
 	
 	//ShowVoiceOption
 	void ShowVoiceOption(bool isShow);
@@ -200,6 +208,7 @@ private:
 	CControlUI* pKillFocsedItem ;
 	CDuiString FocusedItemClassName;
 	CPort*  testPort;
+
 };
 
 

@@ -84,21 +84,38 @@ void CMyMenuWnd::InitWindow()
 	AdapTive();
 	MakeItemsDelegate();
 
+	//HostName
+	CString HostName;
 	CSystemConfig& sysConfig = CSystemConfig::GetInstance();
+	sysConfig.GetBoatName(HostName);
+	m_pm.FindControl(kEditCtlHostNameName)->SetText(HostName);
 
-	
+	//sysset
+	((CSliderExUI*)m_pm.FindControl(kSysVolumeName))->SetValue(sysConfig.GetVolumn());
 
-	//CPort* port1 = new CPort();
-	//port1->SetId(2);
-	//port1->SetNameIndex(2);
+	//awtime
+	SystemAutoWatchConfig AwConfig;
+	sysConfig.GetAutoWatchConfig(&AwConfig);
+	((CTimeSpanPickerUI*)m_pm.FindControl(kTimeSpanPickerAwName))->SetTime(AwConfig.autoWatchBeginTime, AwConfig.autoWatchEndTime);
 
-	//AddVideoObtainSubMenu(port1);
+	//alarm voice
+	SystemAlarmConfig AlarmConfig;
+	sysConfig.GetAlarmConfig(&AlarmConfig);
+	//查找报警音文件
+	//if (true) {
+	//	AddAlarmVoice();
+	//}
+	InitAlarmVoiceConfig(AlarmConfig);
 
-	//testPort = new CPort;
-	//testPort->SetId(3);
-	//testPort->SetNameIndex(3);
-	//AddPortConfigSubMenu(testPort);
+
+	//alarm light
+	((CSwitchExUI*)m_pm.FindControl(kSwitchAlarmLightName))->SetValue(AlarmConfig.isAlarmLightOn);
+
+	//records
+
 }
+
+
 
 void CMyMenuWnd::UpdataBkColor(int focusLevel,DWORD Color1,DWORD Color2)
 { 
@@ -166,7 +183,7 @@ void CMyMenuWnd::MakeItemsDelegate()
 	m_pm.FindControl(kSwitchAlarmVoiceName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmVoiceSwitch);
 	m_pm.FindControl(kOptionAlarmVoiceDefaultName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmVoiceOption);
 	m_pm.FindControl(kBtAlarmVoiceRecordName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmVoiceRecord);
-	m_pm.FindControl(kAlarmLightName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmLight);
+	m_pm.FindControl(kSwitchAlarmLightName)->OnEvent += MakeDelegate(this, &CMyMenuWnd::OnAlarmLight);
 }
 
 void CMyMenuWnd::MenuItemMakeDelegate(const TCHAR* const Name)
@@ -243,7 +260,7 @@ bool CMyMenuWnd::OnSubMenuItem(void * param)
 				m_pm.FindControl(kSwitchAlarmVoiceName)->SetFocus();
 			}
 			else if (_tcsicmp(Name, kSubMenuItemAlarmLightName) == 0) {
-				m_pm.FindControl(kAlarmLightName)->SetFocus();
+				m_pm.FindControl(kSwitchAlarmLightName)->SetFocus();
 			}
 			else if (_tcsicmp(Name, kSubMenuItemAwOnOffRecordName) == 0) {
 				
@@ -267,10 +284,23 @@ bool CMyMenuWnd::OnHostName(void * param)
 {
 	TEventUI* pMsg = (TEventUI*)param;
 	CEditExUI* pItem = (CEditExUI*)pMsg->pSender;
+	CString name;
 	switch (pMsg->Type){
 	case UIEVENT_KEYDOWN:
 		switch (pMsg->wParam) {
 		case VK_BACK:
+			if (HostNameConfigIsChange(CSystemConfig::GetInstance(),pItem)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容?"), NULL, NULL)) {
+					name = pItem->GetText();
+					string sName = (CStringA)name;
+					CSystemConfig::GetInstance().SetBoatName(sName);
+					CSystemConfig::GetInstance().CommitSystemUpdate();
+				}
+				else {
+					CSystemConfig::GetInstance().GetBoatName(name);
+					pItem->SetText(name);
+				}
+			}
 			m_pm.FindControl(kSubMenuItemHostName)->SetFocus();
 			break;
 		//------------------------------
@@ -628,16 +658,16 @@ bool CMyMenuWnd::OnSysVolume(void * param)
 			break;
 		//----------------------------------------------
 		case VK_BACK:
-			/*
-			if(volume is change){
-				if(idok==messagebox()){
-					save()
+			CSystemConfig& config = CSystemConfig::GetInstance();
+			if (SysConfigIsChange(config)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容？"), NULL, NULL)) {
+					config.SetVolumn(pItem->GetValue());
+					config.CommitSystemUpdate();
 				}
-				else{
-
+				else {
+					pItem->SetValue(config.GetVolumn());
 				}
 			}
-			*/
 			m_pm.FindControl(kSubMenuItemSysSetName)->SetFocus();
 			break;
 		}
@@ -664,16 +694,16 @@ bool CMyMenuWnd::OnSysVersion(void * param)
 			break;
 		//----------------------------------------------
 		case VK_BACK:
-			/*
-			if(volume is change){
-			if(idok==messagebox()){
-			save()
+			CSystemConfig& config = CSystemConfig::GetInstance();
+			if (SysConfigIsChange(config)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容？"), NULL, NULL)) {
+					config.SetVolumn(((CSliderUI*)m_pm.FindControl(kSysVolumeName))->GetValue());
+					config.CommitSystemUpdate();
+				}
+				else {
+					((CSliderUI*)m_pm.FindControl(kSysVolumeName))->SetValue(config.GetVolumn());
+				}
 			}
-			else{
-
-			}
-			}
-			*/
 			m_pm.FindControl(kSubMenuItemSysSetName)->SetFocus();
 			break;
 		//----------------------------------------------
@@ -702,16 +732,16 @@ bool CMyMenuWnd::OnFactorySet(void * param)
 			break;
 			//----------------------------------------------
 		case VK_BACK:
-			/*
-			if(volume is change){
-				if(idok==messagebox()){
-					save()
+			CSystemConfig& config = CSystemConfig::GetInstance();
+			if (SysConfigIsChange(config)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容？"), NULL, NULL)) {
+					config.SetVolumn(((CSliderUI*)m_pm.FindControl(kSysVolumeName))->GetValue());
+					config.CommitSystemUpdate();
 				}
-				else{
-
+				else {
+					((CSliderUI*)m_pm.FindControl(kSysVolumeName))->SetValue(config.GetVolumn());
 				}
 			}
-			*/
 			m_pm.FindControl(kSubMenuItemSysSetName)->SetFocus();
 			break;
 			//----------------------------------------------
@@ -739,16 +769,16 @@ bool CMyMenuWnd::OnSysHostModel(void * param)
 			break;
 			//----------------------------------------------
 		case VK_BACK:
-			/*
-			if(volume is change){
-			if(idok==messagebox()){
-			save()
+			CSystemConfig& config = CSystemConfig::GetInstance();
+			if (SysConfigIsChange(config)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容？"), NULL, NULL)) {
+					config.SetVolumn(((CSliderUI*)m_pm.FindControl(kSysVolumeName))->GetValue());
+					config.CommitSystemUpdate();
+				}
+				else {
+					((CSliderUI*)m_pm.FindControl(kSysVolumeName))->SetValue(config.GetVolumn());
+				}
 			}
-			else{
-
-			}
-			}
-			*/
 			m_pm.FindControl(kSubMenuItemSysSetName)->SetFocus();
 			break;
 			//----------------------------------------------
@@ -772,16 +802,16 @@ bool CMyMenuWnd::OnSysSerialNumber(void * param)
 			break;
 			//----------------------------------------------
 		case VK_BACK:
-			/*
-			if(volume is change){
-			if(idok==messagebox()){
-			save()
+			CSystemConfig& config = CSystemConfig::GetInstance();
+			if (SysConfigIsChange(config)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容？"), NULL, NULL)) {
+					config.SetVolumn(((CSliderUI*)m_pm.FindControl(kSysVolumeName))->GetValue());
+					config.CommitSystemUpdate();
+				}
+				else {
+					((CSliderUI*)m_pm.FindControl(kSysVolumeName))->SetValue(config.GetVolumn());
+				}
 			}
-			else{
-
-			}
-			}
-			*/
 			m_pm.FindControl(kSubMenuItemSysSetName)->SetFocus();
 			break;
 			//----------------------------------------------
@@ -801,13 +831,24 @@ bool CMyMenuWnd::OnAwTime(void * param)
 	case UIEVENT_KEYDOWN:
 		switch (pMsg->wParam) {
 		case VK_BACK:
-			/*
-			if(time is change){
-				if(idok==messagebox()){
-					save();
+			SystemAutoWatchConfig AwConfig;
+			CSystemConfig::GetInstance().GetAutoWatchConfig(&AwConfig);
+			if (AwTimeConfigIsChange(AwConfig)) {
+				if(MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd,_T("mb_okcancel.xml"),NULL,_T("确定更改设置内容？"),NULL,NULL)){
+					
+
+					DWORD begine = 0, end = 0;
+					((CTimeSpanPickerUI*)m_pm.FindControl(kTimeSpanPickerAwName))->GetTime(&begine, &end);
+
+					AwConfig.autoWatchBeginTime = begine;
+					AwConfig.autoWatchEndTime = end;
+					CSystemConfig::GetInstance().SetAutoWatchConfig(&AwConfig, SYS_CONFIG_AW_ALL);
+					CSystemConfig::GetInstance().CommitAutoWatchUpdate();
+				}
+				else {
+					((CTimeSpanPickerUI*)m_pm.FindControl(kTimeSpanPickerAwName))->SetTime(AwConfig.autoWatchBeginTime, AwConfig.autoWatchEndTime);
 				}
 			}
-			*/
 			m_pm.FindControl(kSubMenuItemAwTimeName)->SetFocus();
 			break;
 		}
@@ -817,6 +858,7 @@ bool CMyMenuWnd::OnAwTime(void * param)
 	}
 	return true;
 }
+
 
 bool CMyMenuWnd::OnAlarmVoiceSwitch(void * param)
 {
@@ -844,13 +886,16 @@ bool CMyMenuWnd::OnAlarmVoiceSwitch(void * param)
 			break;
 		//----------------------------------------------
 		case VK_BACK:
-			/*
-			if(voice Sets is change){
-				if(idok==messagebox()){
-					save();
+			SystemAlarmConfig AlarmConfig;
+			CSystemConfig::GetInstance().GetAlarmConfig(&AlarmConfig);
+			if (AlarmVoideConfigIsChange(AlarmConfig)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容？"), NULL, NULL)) {
+					SaveAlarmVoiceConfig(AlarmConfig);
+				}
+				else {
+					InitAlarmVoiceConfig(AlarmConfig);
 				}
 			}
-			*/
 			m_pm.FindControl(kSubMenuItemAlarmVoiceName)->SetFocus();
 			break;
 		//----------------------------------------------
@@ -897,13 +942,16 @@ bool CMyMenuWnd::OnAlarmVoiceOption(void * param)
 			break;
 
 		case VK_BACK:
-			/*
-			if(voice Sets is change){
-				if(idok==messagebox()){
-					save();
+			SystemAlarmConfig AlarmConfig;
+			CSystemConfig::GetInstance().GetAlarmConfig(&AlarmConfig);
+			if (AlarmVoideConfigIsChange(AlarmConfig)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容？"), NULL, NULL)) {
+					SaveAlarmVoiceConfig(AlarmConfig);
+				}
+				else {
+					InitAlarmVoiceConfig(AlarmConfig);
 				}
 			}
-			*/
 			m_pm.FindControl(kSubMenuItemAlarmVoiceName)->SetFocus();
 			break;
 		}
@@ -932,13 +980,16 @@ bool CMyMenuWnd::OnAlarmVoiceRecord(void * param)
 
 		//----------------------------------------------
 		case VK_BACK:
-			/*
-			if(voice Sets is change){
-			if(idok==messagebox()){
-			save();
+			SystemAlarmConfig AlarmConfig;
+			CSystemConfig::GetInstance().GetAlarmConfig(&AlarmConfig);
+			if (AlarmVoideConfigIsChange(AlarmConfig)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容？"), NULL, NULL)) {
+					SaveAlarmVoiceConfig(AlarmConfig);
+				}
+				else {
+					InitAlarmVoiceConfig(AlarmConfig);
+				}
 			}
-			}
-			*/
 			m_pm.FindControl(kSubMenuItemAlarmVoiceName)->SetFocus();
 			break;
 		//----------------------------------------------
@@ -954,6 +1005,7 @@ bool CMyMenuWnd::OnAlarmVoiceRecord(void * param)
 	}
 	return true;
 }
+
 
 bool CMyMenuWnd::OnAlarmLight(void * param)
 {
@@ -976,14 +1028,19 @@ bool CMyMenuWnd::OnAlarmLight(void * param)
 			}
 			break;
 		//----------------------------------------------
-		case VK_BACK:
-			/*
-			if(Sets is change){
-				if(idok==messagebox()){
-					save();
+		case VK_BACK:	
+			SystemAlarmConfig AlarmConfig;
+			CSystemConfig::GetInstance().GetAlarmConfig(&AlarmConfig);
+			if (AlarmLightConfigIsChange(AlarmConfig,pItem)) {
+				if (MSGID_OK == COkCancelMsgWnd::MessageBox(m_hWnd, _T("mb_okcancel.xml"), NULL, _T("确定更改设置内容？"), NULL, NULL)) {
+					AlarmConfig.isAlarmLightOn = pItem->GetValue();
+					CSystemConfig::GetInstance().SetAlarmConfig(&AlarmConfig, SYS_CONFIG_AL);
+					CSystemConfig::GetInstance().CommitAlarmUpdate();
+				}
+				else {
+					pItem->SetValue(AlarmConfig.isAlarmLightOn);
 				}
 			}
-			*/
 			m_pm.FindControl(kSubMenuItemAlarmLightName)->SetFocus();
 			break;
 
@@ -1101,16 +1158,62 @@ void CMyMenuWnd::DeletePortConfigSubMenu(CPort* pPort)
 	DeleteSubMenuItem(kLayoutSubHostSetName, pPort);
 }
  
-bool CMyMenuWnd::AlarmVoideIsChange()
+bool CMyMenuWnd::HostNameConfigIsChange(CSystemConfig& config, CControlUI* pItem)
 {
+	CString NewHostName;
+	CString OldHostName;
+	NewHostName = pItem->GetText();
+	config.GetBoatName(OldHostName);
+	if (OldHostName == NewHostName)
+		return false;
+	else
+		return true;
+}
+
+bool CMyMenuWnd::SysConfigIsChange(CSystemConfig & config)
+{
+	CSliderUI* pItem = (CSliderUI*)m_pm.FindControl(kSysVolumeName);
+	if (pItem->GetValue() != config.GetVolumn())
+		return true;
+	return false;
+}
+
+bool CMyMenuWnd::AlarmVoideConfigIsChange(SystemAlarmConfig& config)
+{
+	SystemAlarmConfig AlarmConfig;
+	CSystemConfig::GetInstance().GetAlarmConfig(&AlarmConfig);
+	CSwitchExUI* pSwitch = static_cast<CSwitchExUI*>(m_pm.FindControl(kSwitchAlarmVoiceName));
+	if (pSwitch->GetValue() != AlarmConfig.isAlarmSoundOn)
+		return true;
+
 	CStdPtrArray* aOptionGroup = m_pm.GetOptionGroup(kAlarmVoiceGroupName);
 	int sel = 0;
 	for (; sel < aOptionGroup->GetSize(); sel++) {
 		COptionUI* pControl = static_cast<COptionUI*>(aOptionGroup->GetAt(sel));
 		if (pControl->IsSelected()) {
+			if (AlarmConfig.alarmSoundId != sel + 1)
+				return true;
 			break;
 		}
 	}
+	return false;
+}
+
+bool CMyMenuWnd::AlarmLightConfigIsChange(SystemAlarmConfig& config, CControlUI* pItem)
+{
+	if (((CSwitchExUI*)pItem)->GetValue() != config.isAlarmLightOn)
+		return true;
+	return false;
+}
+
+bool CMyMenuWnd::AwTimeConfigIsChange(SystemAutoWatchConfig& config)
+{
+	DWORD begine = 0, end = 0;
+	((CTimeSpanPickerUI*)m_pm.FindControl(kTimeSpanPickerAwName))->GetTime(&begine, &end);
+	if (begine != config.autoWatchBeginTime)
+		return true;
+	if (end != config.autoWatchEndTime)
+		return true;
 	return false;
 }
 
@@ -1134,6 +1237,34 @@ void CMyMenuWnd::AddAlarmVoice()
 	Height1 = m_pm.GetDPIObj()->ScaleBack(pParentLayout->GetFixedHeight());
 	Height2 = m_pm.GetDPIObj()->ScaleBack(pItem->GetFixedHeight());
 	pParentLayout->SetFixedHeight(Height1 + Height2);
+}
+
+void CMyMenuWnd::SaveAlarmVoiceConfig(SystemAlarmConfig& sysAlarmConfig)
+{
+	if (((COptionExUI*)(m_pm.FindControl(kOptionAlarmVoiceDefaultName)))->IsSelected())
+		sysAlarmConfig.alarmSoundId = 1;
+	else
+		sysAlarmConfig.alarmSoundId = 2;
+
+	sysAlarmConfig.isAlarmSoundOn = ((CSwitchExUI*)m_pm.FindControl(kSwitchAlarmVoiceName))->GetValue();
+	
+
+	CSystemConfig::GetInstance().SetAlarmConfig(&sysAlarmConfig, SYS_CONFIG_AS | SYS_CONFIG_ASID);
+	CSystemConfig::GetInstance().CommitAlarmUpdate();
+}
+
+void CMyMenuWnd::InitAlarmVoiceConfig(SystemAlarmConfig & config)
+{
+	((CSwitchExUI*)m_pm.FindControl(kSwitchAlarmVoiceName))->SetValue(config.isAlarmSoundOn);
+	ShowVoiceOption(config.isAlarmSoundOn);
+	if (config.alarmSoundId == 1) {
+		((COptionExUI*)m_pm.FindControl(kOptionAlarmVoiceDefaultName))->Selected(true);
+	}
+	else if (config.alarmSoundId == 2) {
+		if (m_pm.FindControl(kOptionAlarmVoiceRecordName)) {
+			((COptionExUI*)m_pm.FindControl(kOptionAlarmVoiceRecordName))->Selected(true);
+		}
+	}
 }
 
 
