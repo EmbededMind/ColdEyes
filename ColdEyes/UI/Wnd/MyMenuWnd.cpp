@@ -258,10 +258,13 @@ bool CMyMenuWnd::OnSubMenuItem(void * param)
 		if (GetKeyState(VK_CONTROL) && !(pMsg->wParam & 0x20000000)) {
 			if (pMsg->wParam == 'U') {
 				if (_tcsicmp(pItem->GetUserData(), _T("AlarmVideo")) == 0) {
-					//copy 
+					//copy  
+					CPort* pPort = (CPort*)pItem->GetTag();
+					//sengmessage(nPort);
 				}
 				else if (_tcsicmp(pItem->GetUserData(), _T("VideoObtain")) == 0) {
 					//copy
+
 				}
 				break;
 			}

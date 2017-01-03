@@ -208,6 +208,8 @@ public:
 	int GetDpi();
 	int GetScale();
 
+	
+
 private:
 	SIZE m_dispSize;
 	int m_dpi;
@@ -215,7 +217,6 @@ private:
 
 	CControlUI* pKillFocsedItem ;
 	CDuiString FocusedItemClassName;
-	CPort*  testPort;
 
 };
 
