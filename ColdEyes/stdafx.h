@@ -89,6 +89,11 @@
 #define USER_MSG_SYS_VOLUME				 (WM_USER + 210) //系统音量
 #define USER_MSG_SYS_LIGHT				 (WM_USER + 211)	// 系统亮度
 
+#define USER_MSG_COPY_PRO				 (WM_USER + 220)
+#define USER_MSG_COPY_END                (WM_USER + 221)
+#define USER_MSG_COPY_NOSPACE            (WM_USER + 222)
+#define USER_MSG_COPY_DISKOUT            (WM_USER + 223)
+
  /*****************************************
  *            Direction define            *
  ******************************************/

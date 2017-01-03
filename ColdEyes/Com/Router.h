@@ -3,6 +3,12 @@
 #include "Pattern\IDataHandler.h"
 #include "Com\SerialPort.h"
 
+typedef struct ComDataPacket 
+{
+	UINT8 data[20];
+	UINT8 length;
+	bool isUsed;
+}ComDataPacket;
 
 class CRouter : public IDataHandler
 {
@@ -19,13 +25,27 @@ public:
 
 	void    AttachSender(CSerialPort* pSender);
 
+	uint32_t CRC32Software(uint8_t *pData, uint16_t Length);
+	bool CheckCRC32(uint8_t *pData, uint16_t Length);
+
+	bool Init();
+	bool StartThread();
 private:	
     CSerialPort*    mSender;
 	IDataHandler*   mHandleres[10];
 
-	UINT8   mTxCache[10][20];
-	UINT8   mRxCache[10][20];
+	ComDataPacket   mTxCache[10];
+	ComDataPacket   mRxCache[10];
 
-	UINT16  mTxCursor;
-	UINT16  mRxCursor;
+	CRITICAL_SECTION mCSSend;
+	CRITICAL_SECTION mCSReceive;
+
+	CWinThread *mRouterThread;
+	static UINT RouterThread(LPVOID pParam);
+	bool mIsThreadAlive;
+
+	HANDLE mEndThreadEvent;
+	HANDLE mSendEvent;
+	HANDLE mReceiveEvent;
+	HANDLE mEventArray[3];
 };
