@@ -209,6 +209,7 @@ BEGIN_MESSAGE_MAP(CColdEyesDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_WM_SIZE()
 	ON_MESSAGE(USER_MSG_FIND_DEV, &CColdEyesDlg::OnUserMsgFindDev)
+	ON_MESSAGE(USER_MSG_SYS_VOLUME, &CColdEyesDlg::OnUserMsgSysVolume)
 END_MESSAGE_MAP()
 
 
@@ -261,7 +262,15 @@ BOOL CColdEyesDlg::OnInitDialog()
 	if (!mMenu) {
 		mMenu = new CMyMenuWnd();
 		mMenu->Create(m_hWnd, _T("MenuWnd"), UI_WNDSTYLE_DIALOG, WS_EX_WINDOWEDGE, { 0,0,0,0 });
-		mMenu->ShowWindow(true);
+		mMenu->ShowWindow(SW_SHOW);
+	}
+
+	if (!mSysSetIconsWnd) {
+		mSysSetIconsWnd = new CSysSetIconsWnd(_T("SysSetIcons.xml"));
+		mSysSetIconsWnd->SetDpi(mMenu->GetDpi());
+		mSysSetIconsWnd->Create(m_hWnd, _T("MenuWnd"), UI_WNDSTYLE_DIALOG, WS_EX_WINDOWEDGE, { 0,0,0,0 });
+		mSysSetIconsWnd->CenterWindow();
+		mSysSetIconsWnd->ShowWindow(SW_HIDE);
 	}
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
@@ -339,4 +348,113 @@ afx_msg LRESULT CColdEyesDlg::OnUserMsgFindDev(WPARAM wParam, LPARAM lParam)
 		Print("OnFindDevice false");
 	}
 	return 0;
+}
+
+afx_msg LRESULT CColdEyesDlg::OnUserMsgSysVolume(WPARAM wParam, LPARAM lParam)
+{
+	UINT8 volume;
+	volume = this->SetVolumeLevel(wParam);
+	::SendMessage(mSysSetIconsWnd->GetHWND(), USER_MSG_SYS_VOLUME, volume, (LPARAM)GetFocus());
+	return 0;
+}
+
+
+int CColdEyesDlg::SetVolumeLevel(int type)
+{
+	HRESULT hr;
+	IMMDeviceEnumerator* pDeviceEnumerator = 0;
+	IMMDevice *pDevice = 0;
+	IAudioEndpointVolume* pAudioEndpointVolume = 0;
+	IAudioClient* pAudioClient = 0;
+
+	try {
+		hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_ALL, __uuidof(IMMDeviceEnumerator), (void**)&pDeviceEnumerator);
+		if (FAILED(hr)) throw "CoCreateInstance";
+		hr = pDeviceEnumerator->GetDefaultAudioEndpoint(eRender, eMultimedia, &pDevice);
+		if (FAILED(hr)) throw "GetDefaultAudioEndpoint";
+		hr = pDevice->Activate(__uuidof(IAudioEndpointVolume), CLSCTX_ALL, NULL, (void**)&pAudioEndpointVolume);
+		if (FAILED(hr)) throw "pDevice->Active";
+		hr = pDevice->Activate(__uuidof(IAudioClient), CLSCTX_ALL, NULL, (void**)&pAudioClient);
+		if (FAILED(hr)) throw "pDevice->Active";
+
+		if (type == HOST_VOICE_NOMUTE) {
+			hr = pAudioEndpointVolume->SetMute(FALSE, NULL);
+			if (FAILED(hr)) throw "SetMute";
+		}
+		else if (type == HOST_VOICE_MUTE) {
+			hr = pAudioEndpointVolume->SetMute(TRUE, NULL);
+			if (FAILED(hr)) throw "SetMute";
+		}
+		else if (type == HOST_VOICE_LEVEL_UP)
+		{
+			float fVolume;
+			hr = pAudioEndpointVolume->GetMasterVolumeLevelScalar(&fVolume);
+			if (FAILED(hr)) throw "GetMasterVolumeLevelScalar";
+
+			fVolume += 0.1;
+			if (fVolume > 1) fVolume = 1.0;
+
+			hr = pAudioEndpointVolume->SetMasterVolumeLevelScalar(fVolume, &GUID_NULL);
+			if (FAILED(hr)) throw "GetMasterVolumeLevelScalar";
+
+			hr = pAudioEndpointVolume->GetMasterVolumeLevelScalar(&fVolume);
+			if (FAILED(hr)) throw "GetMasterVolumeLevelScalar";
+			::MessageBeep(0xffffffff);
+			pAudioClient->Release();
+			pAudioEndpointVolume->Release();
+			pDevice->Release();
+			pDeviceEnumerator->Release();
+			return (int)(10.0 * fVolume + 0.01);
+		}
+		else if (type == HOST_VOICE_LEVEL_DOWN)
+		{
+			float fVolume;
+			hr = pAudioEndpointVolume->GetMasterVolumeLevelScalar(&fVolume);
+			if (FAILED(hr)) throw "GetMasterVolumeLevelScalar";
+
+			fVolume -= 0.1;
+			if (fVolume < 0) fVolume = 0;
+
+			hr = pAudioEndpointVolume->SetMasterVolumeLevelScalar(fVolume, &GUID_NULL);
+			if (FAILED(hr)) throw "GetMasterVolumeLevelScalar";
+
+			hr = pAudioEndpointVolume->GetMasterVolumeLevelScalar(&fVolume);
+			if (FAILED(hr)) throw "GetMasterVolumeLevelScalar";
+			::MessageBeep(0xffffffff);
+			pAudioClient->Release();
+			pAudioEndpointVolume->Release();
+			pDevice->Release();
+			pDeviceEnumerator->Release();
+			return (int)(10.0 * fVolume + 0.01);
+		}
+		else if (type >= HOST_VOICE_LEVEL_0 || type <= HOST_VOICE_LEVEL_10) {
+
+			float fVolume;
+			fVolume = type / 10.0f;
+
+			if (fVolume >= 0 && fVolume <= 1)
+			{
+				hr = pAudioEndpointVolume->SetMasterVolumeLevelScalar(fVolume, &GUID_NULL);
+				if (FAILED(hr)) throw "SetMasterVolumeLevelScalar";
+
+				hr = pAudioEndpointVolume->GetMasterVolumeLevelScalar(&fVolume);
+				if (FAILED(hr)) throw "GetMasterVolumeLevelScalar";
+
+				::MessageBeep(0xffffffff);
+				pAudioClient->Release();
+				pAudioEndpointVolume->Release();
+				pDevice->Release();
+				pDeviceEnumerator->Release();
+				return (int)(10.0 * fVolume + 0.01);
+			}
+		}
+	}
+	catch (...) {
+		if (pAudioClient) pAudioClient->Release();
+		if (pAudioEndpointVolume) pAudioEndpointVolume->Release();
+		if (pDevice) pDevice->Release();
+		if (pDeviceEnumerator) pDeviceEnumerator->Release();
+		throw;
+	}
+	return -1;
 }

@@ -85,7 +85,7 @@ void CSysSetIconsWnd::Notify(TNotifyUI & msg)
 
 void CSysSetIconsWnd::InitWindow()
 {
-	//m_pm.SetDPI(mDpi);
+	m_pm.SetDPI(mDpi);
 	pVolume = static_cast<CLabelUI*>(m_pm.FindControl(_T("volume")));
 	pLight = static_cast<CLabelUI*>(m_pm.FindControl(_T("light")));
 	pProgress = static_cast<CProgressUI*>(m_pm.FindControl(_T("value")));

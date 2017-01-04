@@ -4,6 +4,12 @@
 
 #pragma once
 #include "MyMenuWnd.h"
+#include "SysSetIconsWnd.h"
+
+//控制音量头文件
+#include <mmdeviceapi.h> 
+#include <endpointvolume.h>
+#include <audioclient.h>
 
 class CMyMenuWnd;
 #include "WallDlg.h"
@@ -23,7 +29,7 @@ public:
 
 public:
 	CMyMenuWnd* mMenu;
-
+	CSysSetIconsWnd* mSysSetIconsWnd;
 
 	CWallDlg    mWall;
 
@@ -69,4 +75,6 @@ public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 protected:
 	afx_msg LRESULT OnUserMsgFindDev(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnUserMsgSysVolume(WPARAM wParam, LPARAM lParam);
+	int SetVolumeLevel(int type);
 };

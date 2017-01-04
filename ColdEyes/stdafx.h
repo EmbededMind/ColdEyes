@@ -100,6 +100,24 @@
 #define UI_RESOURCE_PATH           "..\\Resource"
 
 
+
+ //系统音量设置
+#define HOST_VOICE_LEVEL_0          0
+#define HOST_VOICE_LEVEL_1          1
+#define HOST_VOICE_LEVEL_2          2
+#define HOST_VOICE_LEVEL_3          3
+#define HOST_VOICE_LEVEL_4          4
+#define HOST_VOICE_LEVEL_5          5
+#define HOST_VOICE_LEVEL_6          6
+#define HOST_VOICE_LEVEL_7          7
+#define HOST_VOICE_LEVEL_8          8
+#define HOST_VOICE_LEVEL_9          9
+#define HOST_VOICE_LEVEL_10         10
+#define HOST_VOICE_MUTE             11
+#define HOST_VOICE_NOMUTE           12
+#define HOST_VOICE_LEVEL_UP         13
+#define HOST_VOICE_LEVEL_DOWN       14
+
 // Function declartion
 void IPNumberToStr(UINT8* pData, char* ip);
 void MacNumberToStr(UINT8* pNumber, char* pMac);

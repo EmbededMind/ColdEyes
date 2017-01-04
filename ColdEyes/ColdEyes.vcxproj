@@ -219,7 +219,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="SurfaceFrame.h" />
-    <ClInclude Include="SurfaceWrapper.h" />
     <ClInclude Include="Talk\Alarm.h" />
     <ClInclude Include="Talk\CameraTalk.h" />
     <ClInclude Include="Talk\Free.h" />

@@ -72,8 +72,17 @@ void CMyMenuWnd::Notify(TNotifyUI& msg)
 
 LRESULT CMyMenuWnd::HandleCustomMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	if (uMsg == WM_TIMER) {
-		Print("timer");
+	switch (uMsg) {
+	case USER_MSG_SYS_VOLUME: 
+		{
+			CSystemConfig& config = CSystemConfig::GetInstance();
+			static_cast<CSliderUI*>(m_pm.FindControl(kSysVolumeName))->SetValue(wParam);
+			config.SetVolumn(wParam);
+			config.CommitSystemUpdate();
+			//::SendMessage(((CColdEyesDlg*)AfxGetMainWnd())->m_hWnd, USER_MSG_SYS_VOLUME, msg.wParam, NULL);
+			//::PostMessage(((CColdEyesDlg*)AfxGetMainWnd())->mMenu->GetHWND(),USER_MSG_SYS_VOLUME,  ) 
+		}
+		break;
 	}
 	bHandled = FALSE;
 	return 0;
@@ -677,12 +686,14 @@ bool CMyMenuWnd::OnSysVolume(void * param)
 		case VK_LEFT:
 			if (pItem->GetValue() > pItem->GetMinValue()) {
 				pItem->SetValue(pItem->GetValue() - 1);
+				::SendMessage(((CColdEyesDlg*)AfxGetMainWnd())->m_hWnd, USER_MSG_SYS_VOLUME, pItem->GetValue(), NULL);
 			}
 			break;
 		//----------------------------------------------
 		case VK_RIGHT:
 			if (pItem->GetValue() < pItem->GetMaxValue()) {
 				pItem->SetValue(pItem->GetValue() + 1);
+				::SendMessage(((CColdEyesDlg*)AfxGetMainWnd())->m_hWnd, USER_MSG_SYS_VOLUME, pItem->GetValue(), NULL);
 			}
 			break;
 		//----------------------------------------------

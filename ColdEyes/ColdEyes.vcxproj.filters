@@ -171,7 +171,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="SurfaceFrame.h" />
-    <ClInclude Include="SurfaceWrapper.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WallDlg.h" />
   </ItemGroup>
