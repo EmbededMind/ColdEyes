@@ -19,11 +19,15 @@ public:
 	virtual void PaintText(HDC hDC);
 	void SetStatus(int status);
 	void PaintStatusImage(HDC hDC);
+	void PaintSuperScript(HDC hDC);
+	void SetMark(bool isMark);
 
 protected:
 	DWORD mFocusedBkColor;
 	DWORD mNoFocusedSelBkColor;
 
 	UINT  mState;
+
+	bool IsMark;
 
 };

@@ -4,7 +4,8 @@
 IMPLEMENT_DUICONTROL(CMenuItemUI)
 CMenuItemUI::CMenuItemUI()
 	:mFocusedBkColor(0xFFFFFFFF),
-	mState(0)
+	mState(0),
+	IsMark(0)
 {
 }
 
@@ -75,6 +76,12 @@ void CMenuItemUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 		LPTSTR pstr = NULL;
 		mNoFocusedSelBkColor = _tcstoul(pstrValue, &pstr, 16);
 	}
+	else if (_tcsicmp(pstrName, _T("mark")) == 0) {
+		if (_tcsicmp(pstrValue, _T("true")) == 0) {
+			IsMark = true;
+		}
+	}
+
 	__super::SetAttribute(pstrName, pstrValue);
 }
 
@@ -119,9 +126,38 @@ void CMenuItemUI::SetStatus(int status)
 
 void CMenuItemUI::PaintStatusImage(HDC hDC)
 {
+	__super::PaintStatusImage(hDC);
+
 	if (mState) {
 		DrawImage(hDC, (LPCTSTR)m_sFocusedImage);
-		return;
 	}
-	__super::PaintStatusImage(hDC);
+	if (IsMark) {
+		PaintSuperScript(hDC);
+	}
+}
+
+void CMenuItemUI::PaintSuperScript(HDC hDC)
+{
+	RECT textPos = GetPos();
+	RECT rcPos = { 259, 10, 294, 45 };
+	CDuiString dest;
+	CDuiString text = _T("99");
+	dest.Format(_T("file='image\\ÍÖÔ²ÐÎ.png' dest='%d,%d,%d,%d'"), rcPos.left, rcPos.top, rcPos.right, rcPos.bottom);
+	DrawImage(hDC, dest);
+	
+	textPos.left += m_pManager->GetDPIObj()->Scale(rcPos.left);
+	textPos.top += m_pManager->GetDPIObj()->Scale(rcPos.top);
+	textPos.right = textPos.left + m_pManager->GetDPIObj()->Scale(35);
+	textPos.bottom = textPos.top + m_pManager->GetDPIObj()->Scale(38);
+
+	m_uTextStyle &= ~(DT_LEFT | DT_RIGHT);
+	m_uTextStyle |= DT_CENTER;
+	m_uTextStyle &= ~(DT_TOP | DT_BOTTOM | DT_WORDBREAK);
+	m_uTextStyle |= (DT_VCENTER | DT_SINGLELINE);
+	CRenderEngine::DrawText(hDC, m_pManager, textPos, text, 0xFFFFFFFF, 1, m_uTextStyle);
+}
+
+void CMenuItemUI::SetMark(bool isMark)
+{
+	IsMark = isMark;
 }

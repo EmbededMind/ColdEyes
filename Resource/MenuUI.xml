@@ -33,7 +33,7 @@
 		
 		<HorizontalLayout	bkcolor="#FFEFEFF4">
 			<VerticalLayout name="layout_parent_menu" width="328" bkcolor="#FFFFFFFF" >
-				<MenuItem 	name="parent_menu_alarm_video" 	text="报警视频"		bindtablayoutname="layout_children_menu"	bindtabindex="0" 	bkimage="file='image/alarm_video_bk.png'"	 focusedimage="file='image/alarm_video_focusedbk.png'"	/>
+				<MenuItem 	name="parent_menu_alarm_video" 	text="报警视频"		bindtablayoutname="layout_children_menu"	bindtabindex="0" 	bkimage="file='image/alarm_video_bk.png'"	 focusedimage="file='image/alarm_video_focusedbk.png'"	mark="true"/>
 				<Control />
 				<MenuItem 	name="parent_menu_host_set" 	text="主机设置"		bindtablayoutname="layout_children_menu" 	bindtabindex="1" 	bkimage="file='image/host_set_bk.png'"		 focusedimage="file='image/host_set_focusedbk.png' " 	/>
 				<Control />

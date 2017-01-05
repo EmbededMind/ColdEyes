@@ -1165,6 +1165,7 @@ void CMyMenuWnd::AddAlarmSubMenu(CPort* pPort)
 	pItem = AddSubMenuItem(kLayoutSubAlarmVideoName, pPort);
 	pItem->SetOnwerMenuItemName(kMenuItemAlarmVideoName);
 	pItem->SetUserData(_T("AlarmVideo"));
+	pItem->SetMark(true);
 }
 
 void CMyMenuWnd::AddVideoObtainSubMenu(CPort* pPort)
